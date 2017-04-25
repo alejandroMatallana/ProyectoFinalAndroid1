@@ -5,4 +5,8 @@ package matallana.alejandro.proyectofinalandroid1;
  */
 
 public class ClassMiguel {
+
+    public void saludar(){
+
+    }
 }
