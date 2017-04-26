@@ -1,5 +1,6 @@
 package matallana.alejandro.proyectofinalandroid1.Vista;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login(View view){
-
+        Intent intenet = new Intent(this,UsuarioActivity.class);
+        startActivity(intenet);
     }
 
 }

@@ -28,7 +28,7 @@ public class UsuarioActivity extends AppCompatActivity {
         numeroDoc = (EditText)findViewById(R.id.numDocumento);
         nombre = (EditText)findViewById(R.id.nombreUSu);
         apellido = (EditText)findViewById(R.id.apellidoUsu);
-        fechaNacimiento = (EditText)findViewById(R.id.fechaNacimientoUsu);
+        //Aca va la fecha
         correo = (EditText)findViewById(R.id.correoUsu);
         password = (EditText)findViewById(R.id.password);
         tipoUsuario = (Spinner) findViewById(R.id.tipoUsu);
