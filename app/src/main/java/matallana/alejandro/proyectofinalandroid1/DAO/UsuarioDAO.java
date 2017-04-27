@@ -36,7 +36,7 @@ public class UsuarioDAO {
         registro.put("nombre", usuario.getNombre());
         registro.put("apellido", usuario.getApellido());
         registro.put("edad", usuario.getEdad());
-        return conex.ejecutarInsert("usuario", registro);
+        return conex.insert("usuario", registro);
     }
 
     /**
@@ -52,7 +52,7 @@ public class UsuarioDAO {
         registro.put("nombre", usuario.getNombre());
         registro.put("apellido", usuario.getApellido());
         registro.put("edad", usuario.getEdad());
-        return conex.ejecutarUpdate(tabla,condicion,registro);
+        return conex.update(tabla,condicion,registro);
     }
 
     /**
@@ -62,15 +62,16 @@ public class UsuarioDAO {
      */
     public Usuario buscar (String cedula){
         Usuario usuario = null;
-        String consulta = "select nombre, apellido, edad " + "from usuario where" + " cedula= " + cedula + "";
+        String consulta = "select id, nombres from Usuarios where numeroDocumento='" + cedula + "'";
 
-        Cursor temp = conex.ejecutarSearch(consulta);
-
+        Cursor temp = conex.search(consulta);
+        temp.moveToFirst();
+        System.out.println(temp.getString(0));
         //El resultado tiene mas de un registro
-        if (temp.getCount()>0){
-            temp.moveToFirst();
-            usuario = new Usuario(cedula, temp.getString(0), temp.getString(1), Integer.parseInt(temp.getString(2)));
-        }
+//        if (temp.getCount()>0){
+//            temp.moveToFirst();
+//            usuario = new Usuario(cedula, temp.getString(0), temp.getString(1), Integer.parseInt(temp.getString(2)));
+//        }
         conex.cerrarConexion();
         return usuario;
 
@@ -79,13 +80,13 @@ public class UsuarioDAO {
     public boolean eliminar (Usuario usuario){
         String tabla = "usuario";
         String condicion = "cedula="  +  usuario.getCedula() + "";
-        return conex.ejecutarDelete(tabla,condicion);
+        return conex.delete(tabla,condicion);
     }
 
     public List<Usuario> listar(){
         List<Usuario> listaUsuarios = new ArrayList<Usuario>();
         String consulta = "select cedula,nombre,apellido,edad from usuario";
-        Cursor temp = conex.ejecutarSearch(consulta);
+        Cursor temp = conex.search(consulta);
 
         if (temp.moveToFirst()){
             do {

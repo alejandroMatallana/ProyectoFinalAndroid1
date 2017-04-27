@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import matallana.alejandro.proyectofinalandroid1.DAO.UsuarioDAO;
 import matallana.alejandro.proyectofinalandroid1.R;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    UsuarioDAO dao;
     EditText userName;
     EditText password;
 
@@ -20,11 +21,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         userName = (EditText) findViewById(R.id.usuario);
         password = (EditText)findViewById(R.id.password);
+        dao = new UsuarioDAO(this);
     }
 
     public void login(View view){
-        Intent intenet = new Intent(this,UsuarioActivity.class);
-        startActivity(intenet);
+
+        Intent intent = new Intent(this,UsuarioActivity.class);
+        startActivity(intent);
     }
 
 }
