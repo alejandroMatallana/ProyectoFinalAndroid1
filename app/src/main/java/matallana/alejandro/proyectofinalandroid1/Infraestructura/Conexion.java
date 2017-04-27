@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Created by Johnny on 13/01/2017.
+ * Created by Sebastia,Matallana,Miguel on 26/04/2017.
  */
 public class Conexion extends SQLiteOpenHelper {
 
@@ -79,8 +79,13 @@ public class Conexion extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int versionAnte, int versionNue) {
-        db.execSQL("drop table if exists usuario");
-        db.execSQL("drop table if exists genero");
+        db.execSQL("drop table if exists Usuarios");
+        db.execSQL("drop table if exists Tareas");
+        db.execSQL("drop table if exists Reuniones");
+        db.execSQL("drop table if exists Recursos");
+        db.execSQL("drop table if exists Proyectos");
+        db.execSQL("drop table if exists Cargos");
+        db.execSQL("drop table if exists Actividades");
         onCreate(db);
     }
 
@@ -101,7 +106,6 @@ public class Conexion extends SQLiteOpenHelper {
             } else {
                 return false;
             }
-
         } catch (Exception e) {
             return false;
         }
@@ -111,7 +115,6 @@ public class Conexion extends SQLiteOpenHelper {
         bd = this.getWritableDatabase();
         int cant = bd.delete(tabla, condicion, null);
         cerrarConexion();
-
         if (cant >= 1) {
             return true;
         } else {
@@ -125,19 +128,14 @@ public class Conexion extends SQLiteOpenHelper {
     public boolean update(String tabla, String condicion,
                           ContentValues registro) {
         try {
-
             bd = this.getWritableDatabase();
-
             int cant = bd.update(tabla, registro, condicion, null);
-
             cerrarConexion();
-
             if (cant == 1) {
                 return true;
             } else {
                 return false;
             }
-
         } catch (Exception e) {
             return false;
         }
@@ -147,13 +145,10 @@ public class Conexion extends SQLiteOpenHelper {
         try {
             // Objeto para lectura y escritura en la base de datos
             bd = this.getWritableDatabase();
-
             // Definimos un objeto de tipo cursor que almacena la info de la
             // base de datos, ademas ejecutamos una consulta sql
             Cursor fila = bd.rawQuery(consulta, null);
-
             return fila;
-
         } catch (Exception e) {
             cerrarConexion();
             return null;
