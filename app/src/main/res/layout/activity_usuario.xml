@@ -11,9 +11,9 @@
     tools:context="matallana.alejandro.proyectofinalandroid1.Vista.UsuarioActivity">
 
     <Spinner
+        android:id="@+id/tipoDocumento"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tipoDocumento" />
+        android:layout_height="wrap_content" />
 
     <EditText
         android:layout_width="match_parent"
@@ -51,11 +51,19 @@
         android:hint="Correo" />
 
     <EditText
+        android:id="@+id/usernameUsu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Nombre Usuario"
+        android:inputType="textPersonName" />
+
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/contraseñaUsu"
+        android:id="@+id/contrasenaUsu"
         android:hint="Contraseña" />
 
     <Spinner

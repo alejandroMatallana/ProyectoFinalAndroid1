@@ -4,7 +4,10 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import java.util.ArrayList;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import matallana.alejandro.proyectofinalandroid1.Infraestructura.Conexion;
@@ -14,7 +17,6 @@ import matallana.alejandro.proyectofinalandroid1.Modelo.Usuario;
  * Created by AlejandroM on 26/04/2017.
  */
 public class UsuarioDAO {
-
 
     Conexion conex;
 
@@ -31,12 +33,20 @@ public class UsuarioDAO {
      */
     public  boolean guardar (Usuario usuario){
         //Objeto que cotendra la informacion a almacenar
+        Date fecha = usuario.getFechaNacimiento();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
         ContentValues registro= new ContentValues();
-        registro.put("cedula", usuario.getCedula());
-        registro.put("nombre", usuario.getNombre());
-        registro.put("apellido", usuario.getApellido());
-        registro.put("edad", usuario.getEdad());
-        return conex.insert("usuario", registro);
+        registro.put("tipoDocumento", usuario.getTipoDocumento());
+        registro.put("numeroDocumento", usuario.getNumeroDocumento());
+        registro.put("nombres", usuario.getNombres());
+        registro.put("apellidos", usuario.getApellidos());
+        registro.put("fechaNacimiento", format.format(fecha));
+        registro.put("pass", usuario.getPass());
+        registro.put("usuario", usuario.getUsuario());
+        registro.put("correoElectronico", usuario.getCorreoElectronico());
+        registro.put("tipoUsuario", usuario.getTipoUsuario());
+        //registro.put("cargo", usuario.getCargo().getId());
+        return conex.insert("Usuarios", registro);
     }
 
     /**
@@ -45,46 +55,87 @@ public class UsuarioDAO {
      * @return
      */
     public  boolean modificar (Usuario usuario){
-        String tabla = "usuario";
-        String condicion = "cedula= " + usuario.getCedula();
+        String tabla = "Usuarios";
+        String condicion = "numeroDocumento=" + usuario.getNumeroDocumento();
 
         ContentValues registro = new ContentValues();
-        registro.put("nombre", usuario.getNombre());
-        registro.put("apellido", usuario.getApellido());
-        registro.put("edad", usuario.getEdad());
+        registro.put("tipoDocumento", usuario.getTipoDocumento());
+        registro.put("numeroDocumento", usuario.getNumeroDocumento());
+        registro.put("nombres", usuario.getNombres());
+        registro.put("apellidos", usuario.getApellidos());
+        registro.put("fechaNacimiento", usuario.getFechaNacimiento().toString());
+        registro.put("pass", usuario.getPass());
+        registro.put("usuario", usuario.getUsuario());
+        registro.put("correoElectronico", usuario.getCorreoElectronico());
+        registro.put("tipoUsuario", usuario.getTipoUsuario());
+        registro.put("cargo", usuario.getCargo().getId());
+
         return conex.update(tabla,condicion,registro);
     }
 
     /**
      * Metodo para buscar un usuario con la colsulta
-     * @param cedula
+     * @param numeroDocumento
      * @return
      */
-    public Usuario buscar (String cedula){
+    public Usuario buscar (String numeroDocumento) {
         Usuario usuario = null;
-        String consulta = "select id, nombres from Usuarios where numeroDocumento='" + cedula + "'";
+        String consulta = "select tipoDocumento,nombres,apellidos,fechaNacimiento,pass,usuario," +
+                "correoElectronico,tipoUsuario from Usuarios where numeroDocumento=" + numeroDocumento;
 
         Cursor temp = conex.search(consulta);
-        temp.moveToFirst();
-        System.out.println(temp.getString(0));
-        //El resultado tiene mas de un registro
-//        if (temp.getCount()>0){
-//            temp.moveToFirst();
-//            usuario = new Usuario(cedula, temp.getString(0), temp.getString(1), Integer.parseInt(temp.getString(2)));
-//        }
+        if (temp.getCount()>0){
+            usuario = new Usuario();
+            temp.moveToFirst();
+            usuario.setTipoDocumento(temp.getString(0));
+            usuario.setNombres(temp.getString(1));
+            usuario.setApellidos(temp.getString(2));
+            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+            try {
+                usuario.setFechaNacimiento(format.parse(temp.getString(3)));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            usuario.setPass(temp.getString(4));
+            usuario.setUsuario(temp.getString(5));
+            usuario.setCorreoElectronico(temp.getString(6));
+            usuario.setTipoUsuario(temp.getString(7));
+        }
         conex.cerrarConexion();
         return usuario;
+    }
 
+    public String buscarLogin(String username, String password) {
+        String consulta = "select tipoUsuario from Usuarios where usuario='" + username + "' and pass='" + password + "'";
+        Cursor temp = conex.search(consulta);
+        if (temp.getCount() > 0) {
+            temp.moveToFirst();
+            conex.cerrarConexion();
+            return temp.getString(0);
+        }
+        conex.cerrarConexion();
+        return null;
+    }
+
+    public boolean verificarUsername(String username) {
+        String consulta = "select tipoUsuario from Usuarios where usuario='" + username + "'";
+        Cursor temp = conex.search(consulta);
+        if (temp.getCount() > 0) {
+            conex.cerrarConexion();
+            return true;
+        }
+        conex.cerrarConexion();
+        return false;
     }
 
     public boolean eliminar (Usuario usuario){
-        String tabla = "usuario";
-        String condicion = "cedula="  +  usuario.getCedula() + "";
+        String tabla = "Usuarios";
+        String condicion = "numeroDocumento=" + usuario.getNumeroDocumento();
         return conex.delete(tabla,condicion);
     }
 
     public List<Usuario> listar(){
-        List<Usuario> listaUsuarios = new ArrayList<Usuario>();
+        /*List<Usuario> listaUsuarios = new ArrayList<Usuario>();
         String consulta = "select cedula,nombre,apellido,edad from usuario";
         Cursor temp = conex.search(consulta);
 
@@ -98,7 +149,8 @@ public class UsuarioDAO {
 
 
         }
-        return listaUsuarios;
+        return listaUsuarios;*/
+        return null;
     }
 
 

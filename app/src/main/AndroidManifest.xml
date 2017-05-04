@@ -15,7 +15,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Vista.UsuarioActivity"></activity>
+        <activity android:name=".Vista.UsuarioActivity" />
+        <activity android:name=".Vista.IntegranteActivity" />
+        <activity android:name=".Vista.DirectorActivity"></activity>
     </application>
 
 </manifest>
