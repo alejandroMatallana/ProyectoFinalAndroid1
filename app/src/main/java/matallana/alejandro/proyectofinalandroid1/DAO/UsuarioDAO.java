@@ -6,7 +6,6 @@ import android.database.Cursor;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -57,19 +56,20 @@ public class UsuarioDAO {
     public  boolean modificar (Usuario usuario){
         String tabla = "Usuarios";
         String condicion = "numeroDocumento=" + usuario.getNumeroDocumento();
+        Date fecha = usuario.getFechaNacimiento();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 
         ContentValues registro = new ContentValues();
         registro.put("tipoDocumento", usuario.getTipoDocumento());
         registro.put("numeroDocumento", usuario.getNumeroDocumento());
         registro.put("nombres", usuario.getNombres());
         registro.put("apellidos", usuario.getApellidos());
-        registro.put("fechaNacimiento", usuario.getFechaNacimiento().toString());
+        registro.put("fechaNacimiento", format.format(fecha));
         registro.put("pass", usuario.getPass());
         registro.put("usuario", usuario.getUsuario());
         registro.put("correoElectronico", usuario.getCorreoElectronico());
         registro.put("tipoUsuario", usuario.getTipoUsuario());
-        registro.put("cargo", usuario.getCargo().getId());
-
+        //registro.put("cargo", usuario.getCargo().getId());
         return conex.update(tabla,condicion,registro);
     }
 
@@ -100,6 +100,7 @@ public class UsuarioDAO {
             usuario.setUsuario(temp.getString(5));
             usuario.setCorreoElectronico(temp.getString(6));
             usuario.setTipoUsuario(temp.getString(7));
+            usuario.setNumeroDocumento(Integer.parseInt(numeroDocumento));
         }
         conex.cerrarConexion();
         return usuario;

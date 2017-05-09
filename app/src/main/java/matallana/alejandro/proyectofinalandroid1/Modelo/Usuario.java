@@ -13,8 +13,8 @@ public class Usuario {
     private String nombres;
     private String apellidos;
     private Date fechaNacimiento;
-    private String pass;
     private String usuario;
+    private String pass;
     private String correoElectronico;
     private String tipoUsuario;
     private Cargo cargo;

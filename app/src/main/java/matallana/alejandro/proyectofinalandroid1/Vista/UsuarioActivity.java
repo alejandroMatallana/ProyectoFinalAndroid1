@@ -104,28 +104,32 @@ public class UsuarioActivity extends AppCompatActivity {
             Toast.makeText(this,"Debe ingresar la cedula del usuario que va a buscar",Toast.LENGTH_SHORT).show();
         } else {
             usuario = dao.buscar(numeroDoc.getText().toString());
-            if (usuario.getTipoDocumento().equalsIgnoreCase("Cedula")) {
-                tipoDocumento.setSelection(1);
-            } else if(usuario.getTipoDocumento().equalsIgnoreCase("Cedula Extranjera")) {
-                tipoDocumento.setSelection(2);
-            } else if(usuario.getTipoDocumento().equalsIgnoreCase("Tarjeta Identidad")) {
-                tipoDocumento.setSelection(3);
-            } else if(usuario.getTipoDocumento().equalsIgnoreCase("Pasaporte")) {
-                tipoDocumento.setSelection(4);
-            }
-            nombre.setText(usuario.getNombres());
-            apellido.setText(usuario.getApellidos());
-            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-            System.out.println();
-            fechaNacimiento.setText(format.format(usuario.getFechaNacimiento()));
-            correo.setText(usuario.getCorreoElectronico());
-            password.setText(usuario.getPass());
-            if (usuario.getTipoUsuario().equalsIgnoreCase("Director de proyecto")) {
-                tipoUsuario.setSelection(1);
+            if (usuario != null) {
+                if (usuario.getTipoDocumento().equalsIgnoreCase("Cedula")) {
+                    tipoDocumento.setSelection(1);
+                } else if (usuario.getTipoDocumento().equalsIgnoreCase("Cedula Extranjera")) {
+                    tipoDocumento.setSelection(2);
+                } else if (usuario.getTipoDocumento().equalsIgnoreCase("Tarjeta Identidad")) {
+                    tipoDocumento.setSelection(3);
+                } else if (usuario.getTipoDocumento().equalsIgnoreCase("Pasaporte")) {
+                    tipoDocumento.setSelection(4);
+                }
+                nombre.setText(usuario.getNombres());
+                apellido.setText(usuario.getApellidos());
+                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+                fechaNacimiento.setText(format.format(usuario.getFechaNacimiento()));
+                correo.setText(usuario.getCorreoElectronico());
+                password.setText(usuario.getPass());
+                if (usuario.getTipoUsuario().equalsIgnoreCase("Director de proyecto")) {
+                    tipoUsuario.setSelection(1);
+                } else {
+                    tipoUsuario.setSelection(2);
+                }
+                username.setText(usuario.getUsuario());
             } else {
-                tipoUsuario.setSelection(2);
+                Toast.makeText(this,"El usuario que busca por la cedula " + numeroDoc.getText().toString() +
+                        " no existe",Toast.LENGTH_SHORT).show();
             }
-            username.setText(usuario.getUsuario());
         }
     }
 
@@ -133,6 +137,7 @@ public class UsuarioActivity extends AppCompatActivity {
         if(usuario != null) {
             if(dao.eliminar(usuario)) {
                 Toast.makeText(this, "Se elimino el usuario correctamente", Toast.LENGTH_SHORT).show();
+                limpiarCampos();
             } else {
                 Toast.makeText(this, "No se puedo eliminar el usuario", Toast.LENGTH_SHORT).show();
             }
@@ -144,10 +149,10 @@ public class UsuarioActivity extends AppCompatActivity {
     public void editar(View view){
         if(usuario != null) {
             if((!username.getText().toString().equals(usuario.getUsuario()) && !dao.verificarUsername(username.getText().toString())) || username.getText().toString().equals(usuario.getUsuario())) {
-                if((!numeroDoc.getText().toString().equals(usuario.getNumeroDocumento()) && dao.buscar(numeroDoc.getText().toString()) == null) || numeroDoc.getText().toString().equals(usuario.getNumeroDocumento())) {
+                if(Integer.parseInt(numeroDoc.getText().toString()) == usuario.getNumeroDocumento() /*|| (!numeroDoc.getText().toString().equals(usuario.getNumeroDocumento()) && dao.buscar(numeroDoc.getText().toString()) == null) */) {
                     Calendar fechaNaci = Calendar.getInstance();
                     String[] datos = fechaNacimiento.getText().toString().split("/");
-                    fechaNaci.set(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]));
+                    fechaNaci.set(Integer.parseInt(datos[0]), (Integer.parseInt(datos[1]))-1, Integer.parseInt(datos[2]));
                     usuario.setTipoDocumento(tipoDocumento.getSelectedItem().toString());
                     usuario.setNumeroDocumento(Integer.parseInt(numeroDoc.getText().toString()));
                     usuario.setNombres(nombre.getText().toString());
@@ -158,6 +163,8 @@ public class UsuarioActivity extends AppCompatActivity {
                     usuario.setCorreoElectronico(correo.getText().toString());
                     usuario.setTipoUsuario(tipoUsuario.getSelectedItem().toString());
                     dao.modificar(usuario);
+                    Toast.makeText(this, "Se modifico el usuario con exito", Toast.LENGTH_SHORT).show();
+                    limpiarCampos();
                 } else {
                     Toast.makeText(this, "La cedula ingresada ya existe", Toast.LENGTH_SHORT).show();
                 }
