@@ -40,8 +40,7 @@ public class ControllerProyecto {
             boolean res = proyectoDAO.guardar(proyecto);
             //si retorna true, osea si guardó correctamente
             if (res){
-                Proyecto proyectoGuardado = proyectoDAO.buscarIdProyecto(proyecto.getNombre());
-                System.out.println(proyectoGuardado);
+                Proyecto proyectoGuardado = proyectoDAO.obtenerIdUltimoProyecto();
                 ProyectosIntegrantesDAO piDAO = new ProyectosIntegrantesDAO(activity);
                 //guarda la respuesta del guardar, es true si se guardo el registro o false si no
                 boolean res2 = piDAO.guardar(1,proyectoGuardado.getId(), UsuarioDAO.IDUsuarioLogueado);

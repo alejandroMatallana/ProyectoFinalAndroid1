@@ -71,7 +71,7 @@ public class ProyectoDAO {
     public Proyecto buscar (String nombre){
         Proyecto p = null;
         String consulta = "select p.id,p.nombre,p.fechaInicio,p.fechaFinal,p.etapa " +
-                "from Proyectos p JOIN ProyectosIntegrantes pi on p.id=pi.idProyecto" +
+                "from Proyectos p JOIN ProyectosIntegrantes pi on p.id=pi.idProyecto " +
                 "where p.nombre=" + nombre + " and pi.idUsuario="+UsuarioDAO.IDUsuarioLogueado;
 
         Cursor temp = conex.search(consulta);
@@ -89,6 +89,26 @@ public class ProyectoDAO {
                 e.printStackTrace();
             }
             p.setEtapa(temp.getDouble(4));
+        }
+        return p;
+    }
+
+    /**
+     * metodo para buscar el id y solo el id del ultimo proyecto registrado
+     * @param nombre, nombre del proyecto que se va a buscar
+     * @return el id de un proyecto encontrado por ese nombre
+     */
+    public Proyecto obtenerIdUltimoProyecto (){
+        Proyecto p = null;
+        String consulta = "SELECT max(id) FROM Proyectos";
+
+        Cursor temp = conex.search(consulta);
+
+        if (temp.getCount()>0){
+            p = new Proyecto();
+            temp.moveToFirst();
+            p.setId(temp.getInt(0));
+            System.out.println(temp.getInt(0));
         }
         return p;
     }
