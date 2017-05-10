@@ -19,7 +19,6 @@ public class ControllerProyecto {
         proyectoDAO = new ProyectoDAO(activity);
     }
 
-
     public boolean modificarProyecto(String nombre, Date fechaInicion, Date fechaFin, double estado){
       //  Proyecto proyecto = new Proyecto(nombre,fechaInicion,fechaFin,estado);
        // return proyectoDAO.modificar(proyecto);

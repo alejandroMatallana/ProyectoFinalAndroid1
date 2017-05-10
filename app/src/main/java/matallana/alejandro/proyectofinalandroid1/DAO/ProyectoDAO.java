@@ -94,6 +94,29 @@ public class ProyectoDAO {
     }
 
     /**
+     * metodo para buscar el id y solo el id de un proyecto por su nombre
+     * @param nombre, nombre del proyecto que se va a buscar
+     * @return el id de un proyecto encontrado por ese nombre
+     */
+    public Proyecto buscarIdProyecto (String nombre){
+        Proyecto p = null;
+        String consulta = "select p.id " +
+                "from Proyectos p JOIN ProyectosIntegrantes pi on p.id=pi.idProyecto" +
+                "where p.nombre=" + nombre + " and pi.idUsuario="+UsuarioDAO.IDUsuarioLogueado;
+
+        Cursor temp = conex.search(consulta);
+
+        if (temp.getCount()>0){
+            p = new Proyecto();
+            temp.moveToFirst();
+            p.setId(temp.getInt(0));
+        }
+
+        conex.cerrarConexion();
+        return p;
+    }
+
+    /**
      * metodo para eliminar un proyecto
      * @param p, proyecto que será eliminado
      * @return true si el proyecto fue eliminado

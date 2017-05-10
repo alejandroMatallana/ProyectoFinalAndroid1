@@ -35,6 +35,20 @@ public class Proyecto {
     }
 
     /**
+     * Constructor sin id...
+     * @param nombre
+     * @param fechaInicio
+     * @param fechaFin
+     * @param etapa
+     */
+    public Proyecto(String nombre, Date fechaInicio, Date fechaFin, double etapa) {
+        this.nombre = nombre;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
+        this.etapa = etapa;
+    }
+
+    /**
      * constructor...
      * @param nombre
      * @param fechaInicio
