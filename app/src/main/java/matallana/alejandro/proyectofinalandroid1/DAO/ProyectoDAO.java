@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -73,8 +74,32 @@ public class ProyectoDAO {
 
         Cursor temp = conex.search(consulta);
 
+        if (temp.getCount()>0){
+            p = new Proyecto();
+            temp.moveToFirst();
+            p.setId(temp.getInt(0));
+            p.setNombre(temp.getString(1));
+            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+            try {
+                p.setFechaInicio(format.parse(temp.getString(2)));
+                p.setFechaFin(format.parse(temp.getString(3)));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            p.setEtapa(temp.getDouble(4));
+        }
 
+        conex.cerrarConexion();
         return p;
+    }
+
+    /**
+     * metodo para eliminar un proyecto
+     * @param p, proyecto que será eliminado
+     * @return true si el proyecto fue eliminado
+     */
+    public boolean eliminar (Proyecto p){
+        return true;
     }
 
 }
