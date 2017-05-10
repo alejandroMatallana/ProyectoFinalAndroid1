@@ -42,7 +42,6 @@ public class ControllerCargo {
 
     }
 
-
     /**
      * Metodo para modificar un cargo
      * @param nombre
