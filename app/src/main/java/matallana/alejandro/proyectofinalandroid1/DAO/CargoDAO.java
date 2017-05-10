@@ -2,6 +2,7 @@ package matallana.alejandro.proyectofinalandroid1.DAO;
 
 import android.app.Activity;
 import android.content.ContentValues;
+import android.database.Cursor;
 
 import matallana.alejandro.proyectofinalandroid1.Infraestructura.Conexion;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Cargo;
@@ -46,7 +47,22 @@ public class CargoDAO {
     }
 
     public Cargo buscar(String nombreCargo, int idProyecto) {
+        String consulta = "select descripcion,horario,salario " +
+                "where nombre='" + nombreCargo + "' and idProyecto=" + idProyecto;
 
+        Cursor temp = conex.search(consulta);
+        if (temp.getCount()>0){
+            Cargo cargo = new Cargo();
+            temp.moveToFirst();
+            cargo.setNombre(nombreCargo);
+            cargo.setDescripcion(temp.getString(0));
+            cargo.setHorario(temp.getString(1));
+            cargo.setSalario(temp.getDouble(2));
+            //cargo.setProyecto();
+            conex.cerrarConexion();
+            return cargo;
+        }
+        conex.cerrarConexion();
         return null;
     }
 

@@ -79,7 +79,7 @@ public class Conexion extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE \"TareasRecursos\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"idTarea\" INTEGER REFERENCES Tareas, \"idRecurso\" INTEGER REFERENCES Recursos)");
 
-        //db.execSQL("INSERT INTO Usuarios VALUES ('Cedula',1094,'Miguel','Tamayo',10/10/2007,'123','admin','asd@hotmail.com','Integrante',null)");
+        db.execSQL("INSERT INTO Cargos VALUES ('Lider','Lider de Proyecto','8 a 12 - 14 a 18',1200000)");
     }
 
     @Override
