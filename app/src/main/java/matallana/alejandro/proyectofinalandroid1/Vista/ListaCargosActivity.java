@@ -41,6 +41,12 @@ public class ListaCargosActivity extends AppCompatActivity {
     }
 
     public void abrirGestionCargo() {
+        CargoActivity.tipo = 1;
+        Intent intent = new Intent(this,CargoActivity.class);
+    }
+
+    public void crearCargo(View view) {
+        CargoActivity.tipo = 0;
         Intent intent = new Intent(this,CargoActivity.class);
     }
 }

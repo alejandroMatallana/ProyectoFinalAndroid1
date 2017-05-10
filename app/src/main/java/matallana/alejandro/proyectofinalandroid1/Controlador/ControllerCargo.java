@@ -23,14 +23,9 @@ public class ControllerCargo {
         proyectoDAO = new ProyectoDAO(activity);
     }
 
-    public boolean guardar(Cargo cargo, String nombreProyecto) {
-        Proyecto proyecto = proyectoDAO.buscar(nombreProyecto);
-        if (proyecto != null) {
-            cargo.setProyecto(proyecto);
-            cargoDAO.guardar(cargo);
-            return true;
-        }
-        return false;
+    public boolean guardar(Cargo cargo) {
+        cargoDAO.guardar(cargo);
+        return true;
     }
 
     public Cargo buscar(String nombreCargo, String nombreProyecto) {
@@ -55,7 +50,6 @@ public class ControllerCargo {
     public boolean eliminar (String nombre){
         Cargo cargo = new Cargo(nombre,"","",0); // Aca faltaria la foranea al final
         return cargoDAO.eliminar(cargo);
-
     }
 
     /**
@@ -71,7 +65,6 @@ public class ControllerCargo {
 //        Proyecto proyecto = proyectoDAO.buscar(nomProyecto);
         Cargo cargo = new Cargo(nombre,descripcion,horario,salario);// Aca faltaria poner el proyecto
         return  cargoDAO.modificar(cargo);
-
     }
 
     public List<Cargo> listar() {

@@ -3,19 +3,24 @@ package matallana.alejandro.proyectofinalandroid1.Vista;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import matallana.alejandro.proyectofinalandroid1.Controlador.ControllerCargo;
+import matallana.alejandro.proyectofinalandroid1.Modelo.Cargo;
 import matallana.alejandro.proyectofinalandroid1.R;
 
 public class CargoActivity extends AppCompatActivity {
 
-    EditText txtNombre;
-    EditText txtHorario;
-    EditText txtSalario;
-    EditText txtDescripcion;
-    ControllerCargo controllerCargo;
+    public static int tipo=0;
+
+    private EditText txtNombre;
+    private EditText txtHorario;
+    private EditText txtSalario;
+    private EditText txtDescripcion;
+    private Button crear;
+    private ControllerCargo controllerCargo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,10 +31,26 @@ public class CargoActivity extends AppCompatActivity {
         txtSalario = (EditText)findViewById(R.id.salario);
         txtDescripcion = (EditText)findViewById(R.id.descripcion);
         controllerCargo = new ControllerCargo(this);
+        crear = (Button) findViewById(R.id.crear);
+        if (tipo == 1) {
+            crear.setVisibility(View.GONE);
+        }
     }
 
     public void crear(View view) {
-
+        if (txtNombre.getText().toString().isEmpty() || txtHorario.getText().toString().isEmpty() ||
+                txtSalario.getText().toString().isEmpty() || txtDescripcion.getText().toString().isEmpty()) {
+            Toast.makeText(this,"Se debe ingresar todos los datos",Toast.LENGTH_SHORT).show();
+        } else {
+            Cargo cargo = new Cargo();
+            cargo.setNombre(txtNombre.getText().toString());
+            cargo.setHorario(txtHorario.getText().toString());
+            cargo.setSalario(Double.parseDouble(txtSalario.getText().toString()));
+            cargo.setDescripcion(txtDescripcion.getText().toString());
+            cargo.setProyecto(MenuProyectosActivity.proyecto);
+            controllerCargo.guardar(cargo);
+            Toast.makeText(this,"Se registró el cargo",Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void buscar(View view) {
@@ -63,7 +84,6 @@ public class CargoActivity extends AppCompatActivity {
                 Toast.makeText(this, "Error!!! alamcenando la información", Toast.LENGTH_SHORT).show();
             }
         }
-
     }
 
     public void limpiarCampos(){

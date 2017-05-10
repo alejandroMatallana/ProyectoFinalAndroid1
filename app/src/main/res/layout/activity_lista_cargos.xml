@@ -5,10 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="matallana.alejandro.proyectofinalandroid1.Vista.ListaCargosActivity">
+    tools:context="matallana.alejandro.proyectofinalandroid1.Vista.ListaCargosActivity"
+    android:weightSum="1">
 
     <ListView
         android:id="@+id/lista"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="425dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Crear Cargo" />
 </LinearLayout>

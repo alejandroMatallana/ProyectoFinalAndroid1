@@ -74,11 +74,9 @@ public class Cargo {
 
     @Override
     public String toString() {
-        return "Cargo{" +
-                "nombre='" + nombre + '\'' +
+        return "nombre='" + nombre + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 ", horario='" + horario + '\'' +
-                ", salario=" + salario +
-                '}';
+                ", salario=" + salario;
     }
 }
