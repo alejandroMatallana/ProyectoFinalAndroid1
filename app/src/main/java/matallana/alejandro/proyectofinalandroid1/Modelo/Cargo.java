@@ -11,7 +11,7 @@ public class Cargo {
     private String descripcion;
     private String horario;
     private double salario;
-    private Proyecto idProyecto;
+    private Proyecto proyecto;
 
     public Cargo() {
     }
@@ -21,7 +21,7 @@ public class Cargo {
         this.descripcion = descripcion;
         this.horario = horario;
         this.salario = salario;
-        this.idProyecto = null;
+        this.proyecto = null;
     }
 
     public int getId() {
@@ -64,11 +64,11 @@ public class Cargo {
         this.salario = salario;
     }
 
-    public Proyecto getIdProyecto() {
-        return idProyecto;
+    public Proyecto getProyecto() {
+        return proyecto;
     }
 
-    public void setIdProyecto(Proyecto idProyecto) {
-        this.idProyecto = idProyecto;
+    public void setProyecto(Proyecto proyecto) {
+        this.proyecto = proyecto;
     }
 }

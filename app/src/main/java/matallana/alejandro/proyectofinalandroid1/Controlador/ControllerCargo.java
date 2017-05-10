@@ -24,9 +24,14 @@ public class ControllerCargo {
     public boolean guardar(Cargo cargo, String nombreProyecto) {
         Proyecto proyecto = proyectoDAO.buscar(nombreProyecto);
         if (proyecto != null) {
-            cargoDAO.guardar(cargo,proyecto.getId());
+            cargo.setProyecto(proyecto);
+            cargoDAO.guardar(cargo);
             return true;
         }
         return false;
+    }
+
+    public Cargo buscar(String nombreCargo, String nombreProyecto) {
+        return null;
     }
 }
