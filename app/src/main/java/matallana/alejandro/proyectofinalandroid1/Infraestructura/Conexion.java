@@ -63,7 +63,7 @@ public class Conexion extends SQLiteOpenHelper {
                 " \"idResponsable\" INTEGER REFERENCES Usuarios," +
                 " \"idProyecto\" INTEGER REFERENCES Proyectos)");
         db.execSQL("CREATE TABLE \"Tareas\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
-                " \"nombre\" VARCHAR NOT NULL , \"porcentajeDesarrollo\" INTEGER NOT NULL ," +
+                " \"nombre\" VARCHAR NOT NULL , \"porcentajeDesarrollo\" DOUBLE NOT NULL ," +
                 " \"fechaInicio\" DATETIME NOT NULL , \"fechaFinal\" DATETIME NOT NULL ," +
                 " \"estado\" VARCHAR NOT NULL , \"idActividad\" INTEGER REFERENCES Actividades)");
         db.execSQL("CREATE TABLE \"Recursos\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
