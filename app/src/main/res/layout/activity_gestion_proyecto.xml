@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="matallana.alejandro.proyectofinalandroid1.Vista.GestionProyectoActivity">
+
+    <TextView
+        android:id="@+id/lblTituloProyectos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Gestón de Proyectos" />
+
+    <EditText
+        android:id="@+id/txtNombreProyecto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Nombre del proyecto"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/dateInicioProyecto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:ems="10"
+        android:focusable="false"
+
+        android:hint="Fecha de inicio del proyecto"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/dateFinProyecto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:ems="10"
+        android:focusable="false"
+
+        android:hint="Fecha fin del proyecto"
+        android:inputType="date" />
+
+    <LinearLayout
+        android:id="@+id/layoutCrearBuscar"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnCrearProyecto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="crearProyecto"
+            android:text="Crear" />
+
+        <Button
+            android:id="@+id/btnBuscarProyecto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Buscar"
+            android:onClick="buscarProyecto"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layoutEditarEliminar"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnEditarProyecto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Editar"
+            android:onClick="editarProyecto"/>
+
+        <Button
+            android:id="@+id/btnEliminarProyecto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Eliminar"
+            android:onClick="eliminarProyecto"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnCancelarProyecto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cancelar Edición"
+        android:onClick="cancelarEdicionDeProyecto"/>
+</LinearLayout>
