@@ -18,7 +18,6 @@ import matallana.alejandro.proyectofinalandroid1.R;
 
 public class GestionProyectoActivity extends AppCompatActivity {
 
-    Proyecto proyecto=null;
     private LinearLayout layoutEdicion;
     private Button btnCrear;
     private EditText txtNombre, txtFechaInicio, txtFechaFin;
@@ -72,19 +71,19 @@ public class GestionProyectoActivity extends AppCompatActivity {
                 || txtNombre.getText().toString().equals("")){
             Toast.makeText(this, "Error al editar: Favor ingresar todos los datos", Toast.LENGTH_SHORT).show();
         } else {
-            if (txtNombre.getText().toString()== proyecto.getNombre()){
-                Calendar fechaInicio = Calendar.getInstance();
-                Calendar fechaFin = Calendar.getInstance();
-                String[] datos = txtFechaInicio.getText().toString().split("/");
-                String[] datos2 = txtFechaFin.getText().toString().split("/");
-                fechaInicio.set(Integer.parseInt(datos[0]), (Integer.parseInt(datos[1]))-1, Integer.parseInt(datos[2]));
-                fechaInicio.set(Integer.parseInt(datos2[0]), (Integer.parseInt(datos2[1]))-1, Integer.parseInt(datos2[2]));
-                proyecto.setFechaInicio(fechaInicio.getTime());
-                proyecto.setFechaFin(fechaFin.getTime());
-
-            }else {
-
-            }
+//            if (txtNombre.getText().toString()== proyecto.getNombre()){
+//                Calendar fechaInicio = Calendar.getInstance();
+//                Calendar fechaFin = Calendar.getInstance();
+//                String[] datos = txtFechaInicio.getText().toString().split("/");
+//                String[] datos2 = txtFechaFin.getText().toString().split("/");
+//                fechaInicio.set(Integer.parseInt(datos[0]), (Integer.parseInt(datos[1]))-1, Integer.parseInt(datos[2]));
+//                fechaInicio.set(Integer.parseInt(datos2[0]), (Integer.parseInt(datos2[1]))-1, Integer.parseInt(datos2[2]));
+//                proyecto.setFechaInicio(fechaInicio.getTime());
+//                proyecto.setFechaFin(fechaFin.getTime());
+//
+//            }else {
+//
+//            }
 
 
 
