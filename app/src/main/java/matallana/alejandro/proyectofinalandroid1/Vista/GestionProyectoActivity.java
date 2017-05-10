@@ -1,9 +1,11 @@
 package matallana.alejandro.proyectofinalandroid1.Vista;
 
+import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -31,6 +33,39 @@ public class GestionProyectoActivity extends AppCompatActivity {
         txtFechaFin = (EditText) findViewById(R.id.dateFinProyecto);
         txtFechaInicio = (EditText) findViewById(R.id.dateInicioProyecto);
         txtNombre = (EditText) findViewById(R.id.txtNombreProyecto);
+
+        txtFechaInicio.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                //To show current date in the datepicker
+                Calendar mcurrentDate=Calendar.getInstance();
+                DatePickerDialog mDatePicker=new DatePickerDialog(GestionProyectoActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+                        txtFechaInicio.setText(selectedyear+"/"+selectedmonth+"/"+selectedday);
+                    }
+                },mcurrentDate.get(Calendar.YEAR), mcurrentDate.get(Calendar.MONTH), mcurrentDate.get(Calendar.DAY_OF_MONTH));
+                mDatePicker.setTitle("Select date");
+                mDatePicker.show();  }
+        });
+
+        txtFechaFin.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                //To show current date in the datepicker
+                Calendar mcurrentDate=Calendar.getInstance();
+                DatePickerDialog mDatePicker=new DatePickerDialog(GestionProyectoActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    public void onDateSet(DatePicker datepicker, int selectedyear, int selectedmonth, int selectedday) {
+                        txtFechaFin.setText(selectedyear+"/"+selectedmonth+"/"+selectedday);
+                    }
+                },mcurrentDate.get(Calendar.YEAR), mcurrentDate.get(Calendar.MONTH), mcurrentDate.get(Calendar.DAY_OF_MONTH));
+                mDatePicker.setTitle("Select date");
+                mDatePicker.show();  }
+        });
+
         verificarSiCrearOEliminarEditar();
     }
 
@@ -44,7 +79,25 @@ public class GestionProyectoActivity extends AppCompatActivity {
                 || txtNombre.getText().toString().equals("")){
             Toast.makeText(this, "Favor ingresar todos los datos", Toast.LENGTH_SHORT).show();
         } else {
+            ControllerProyecto controllerProyecto = new ControllerProyecto(this);
 
+            Calendar fechaInicial = Calendar.getInstance();
+            String[] datosfechaIni = txtFechaInicio.getText().toString().split("/");
+            fechaInicial.set(Integer.parseInt(datosfechaIni[0]), Integer.parseInt(datosfechaIni[1]),
+                    Integer.parseInt(datosfechaIni[2]));
+
+            Calendar fechaFin = Calendar.getInstance();
+            String[] datosFechaFin = txtFechaFin.getText().toString().split("/");
+            fechaInicial.set(Integer.parseInt(datosFechaFin[0]), Integer.parseInt(datosFechaFin[1]),
+                    Integer.parseInt(datosFechaFin[2]));
+
+            String res = controllerProyecto.guardarProyecto(txtNombre.getText().toString(),
+                    fechaInicial.getTime(),fechaFin.getTime());
+            Toast.makeText(this, res, Toast.LENGTH_SHORT).show();
+            if(res.equals("El proyecto se ha guardado exitosamente")){
+                limpiarCampos();
+                finish();
+            }
         }
     }
 
