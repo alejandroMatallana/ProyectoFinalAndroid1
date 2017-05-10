@@ -24,14 +24,38 @@ public class ControllerCargo {
     public boolean guardar(Cargo cargo, String nombreProyecto) {
         Proyecto proyecto = proyectoDAO.buscar(nombreProyecto);
         if (proyecto != null) {
-            cargo.setProyecto(proyecto);
-            cargoDAO.guardar(cargo);
+            cargoDAO.guardar(cargo,proyecto.getId());
             return true;
         }
         return false;
     }
 
-    public Cargo buscar(String nombreCargo, String nombreProyecto) {
-        return null;
+
+    /**
+     * Metodo para eliminar un cargo
+     * @param nombre
+     * @return
+     */
+    public boolean eliminar (String nombre){
+        Cargo cargo = new Cargo(nombre,"","",0); // Aca faltaria la foranea al final
+        return cargoDAO.eliminar(cargo);
+
+    }
+
+
+    /**
+     * Metodo para modificar un cargo
+     * @param nombre
+     * @param descripcion
+     * @param horario
+     * @param salario
+     * @param nomProyecto
+     * @return
+     */
+    public boolean modificar(String nombre, String descripcion, String horario, double salario, String nomProyecto){
+        Proyecto proyecto = proyectoDAO.buscar(nomProyecto);
+        Cargo cargo = new Cargo(nombre,descripcion,horario,salario);// Aca faltaria poner el proyecto
+        return  cargoDAO.modificar(cargo);
+
     }
 }
