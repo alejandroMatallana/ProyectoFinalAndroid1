@@ -46,13 +46,13 @@
         android:text="Crear" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/modificar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Modificar" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/eliminar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Eliminar" />

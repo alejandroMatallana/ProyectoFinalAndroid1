@@ -20,6 +20,8 @@ public class CargoActivity extends AppCompatActivity {
     private EditText txtSalario;
     private EditText txtDescripcion;
     private Button crear;
+    private Button modificar;
+    private Button eliminar;
     private ControllerCargo controllerCargo;
 
     @Override
@@ -32,8 +34,13 @@ public class CargoActivity extends AppCompatActivity {
         txtDescripcion = (EditText)findViewById(R.id.descripcion);
         controllerCargo = new ControllerCargo(this);
         crear = (Button) findViewById(R.id.crear);
+        modificar = (Button) findViewById(R.id.modificar);
+        eliminar = (Button) findViewById(R.id.eliminar);
         if (tipo == 1) {
             crear.setVisibility(View.GONE);
+        } else {
+            modificar.setVisibility(View.GONE);
+            eliminar.setVisibility(View.GONE);
         }
     }
 
@@ -48,13 +55,12 @@ public class CargoActivity extends AppCompatActivity {
             cargo.setSalario(Double.parseDouble(txtSalario.getText().toString()));
             cargo.setDescripcion(txtDescripcion.getText().toString());
             cargo.setProyecto(MenuProyectosActivity.proyecto);
-            controllerCargo.guardar(cargo);
-            Toast.makeText(this,"Se registró el cargo",Toast.LENGTH_SHORT).show();
+            if (controllerCargo.guardar(cargo)) {
+                Toast.makeText(this,"Se registró el cargo",Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this,"El cargo ya existe",Toast.LENGTH_SHORT).show();
+            }
         }
-    }
-
-    public void buscar(View view) {
-
     }
 
     public void eliminar(View view){
@@ -92,5 +98,4 @@ public class CargoActivity extends AppCompatActivity {
         txtHorario.setText(null);
         txtSalario.setText(null);
     }
-
 }

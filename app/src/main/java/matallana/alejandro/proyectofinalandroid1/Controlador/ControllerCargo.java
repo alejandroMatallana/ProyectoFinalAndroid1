@@ -8,6 +8,7 @@ import matallana.alejandro.proyectofinalandroid1.DAO.CargoDAO;
 import matallana.alejandro.proyectofinalandroid1.DAO.ProyectoDAO;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Cargo;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Proyecto;
+import matallana.alejandro.proyectofinalandroid1.Vista.MenuProyectosActivity;
 
 /**
  * Created by sebastian,matallana,miguel on 10/05/17.
@@ -16,28 +17,25 @@ import matallana.alejandro.proyectofinalandroid1.Modelo.Proyecto;
 public class ControllerCargo {
 
     CargoDAO cargoDAO;
-    ProyectoDAO proyectoDAO;
 
     public ControllerCargo(Activity activity){
         cargoDAO = new CargoDAO(activity);
-        proyectoDAO = new ProyectoDAO(activity);
     }
 
     public boolean guardar(Cargo cargo) {
-        cargoDAO.guardar(cargo);
-        return true;
+        if (buscar(cargo.getNombre()) == null) {
+            cargoDAO.guardar(cargo);
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public Cargo buscar(String nombreCargo, String nombreProyecto) {
-        Proyecto proyecto = proyectoDAO.buscar(nombreProyecto);
-        if (proyecto != null) {
-            Cargo cargo = cargoDAO.buscar(nombreCargo, proyecto.getId());
-            if (cargo != null) {
-                cargo.setProyecto(proyecto);
-                return cargo;
-            } else {
-                return null;
-            }
+    public Cargo buscar(String nombreCargo) {
+        Cargo cargo = cargoDAO.buscar(nombreCargo, MenuProyectosActivity.proyecto.getId());
+        if (cargo != null) {
+            cargo.setProyecto(MenuProyectosActivity.proyecto);
+            return cargo;
         } else {
             return null;
         }
@@ -68,7 +66,6 @@ public class ControllerCargo {
     }
 
     public List<Cargo> listar() {
-        Proyecto proyecto = new Proyecto(); //Esto no va, esto sería a través de la variable estatica
-        return cargoDAO.listar(proyecto);
+        return cargoDAO.listar(MenuProyectosActivity.proyecto);
     }
 }
