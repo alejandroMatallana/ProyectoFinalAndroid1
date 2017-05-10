@@ -8,6 +8,8 @@ import java.util.Date;
 
 public class Proyecto {
 
+    private int id;
+
     private String nombre;
 
     /**
@@ -39,11 +41,16 @@ public class Proyecto {
      * @param fechaFin
      * @param etapa
      */
-    public Proyecto(String nombre, Date fechaInicio, Date fechaFin, double etapa) {
+    public Proyecto(int id, String nombre, Date fechaInicio, Date fechaFin, double etapa) {
+        this.id = id;
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.etapa = etapa;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getNombre() {

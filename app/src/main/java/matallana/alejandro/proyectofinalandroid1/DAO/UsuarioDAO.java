@@ -17,6 +17,7 @@ import matallana.alejandro.proyectofinalandroid1.Modelo.Usuario;
  */
 public class UsuarioDAO {
 
+    public static int IDUsuarioLogueado = 0;
     Conexion conex;
 
     public UsuarioDAO(Activity activity){
@@ -107,11 +108,12 @@ public class UsuarioDAO {
     }
 
     public String buscarLogin(String username, String password) {
-        String consulta = "select tipoUsuario from Usuarios where usuario='" + username + "' and pass='" + password + "'";
+        String consulta = "select tipoUsuario,id from Usuarios where usuario='" + username + "' and pass='" + password + "'";
         Cursor temp = conex.search(consulta);
         if (temp.getCount() > 0) {
             temp.moveToFirst();
             conex.cerrarConexion();
+            IDUsuarioLogueado = temp.getInt(1);
             return temp.getString(0);
         }
         conex.cerrarConexion();
