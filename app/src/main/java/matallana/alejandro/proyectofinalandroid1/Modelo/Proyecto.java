@@ -23,7 +23,7 @@ public class Proyecto {
     /**
      * porcentaje de finalizacion en el que se encuentra el proyecto
      */
-    private double estado;
+    private double etapa;
 
     /**
      * Constructor...
@@ -37,13 +37,13 @@ public class Proyecto {
      * @param nombre
      * @param fechaInicio
      * @param fechaFin
-     * @param estado
+     * @param etapa
      */
-    public Proyecto(String nombre, Date fechaInicio, Date fechaFin, double estado) {
+    public Proyecto(String nombre, Date fechaInicio, Date fechaFin, double etapa) {
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
-        this.estado = estado;
+        this.etapa = etapa;
     }
 
     public String getNombre() {
@@ -70,16 +70,16 @@ public class Proyecto {
         this.fechaFin = fechaFin;
     }
 
-    public double getEstado() {
-        return estado;
+    public double getEtapa() {
+        return etapa;
     }
 
-    public void setEstado(double estado) {
-        this.estado = estado;
+    public void setEtapa(double etapa) {
+        this.etapa = etapa;
     }
 
     @Override
     public String toString() {
-        return nombre + ", Estado " + (estado*100);
+        return nombre + ", Estado " + (etapa*100);
     }
 }
