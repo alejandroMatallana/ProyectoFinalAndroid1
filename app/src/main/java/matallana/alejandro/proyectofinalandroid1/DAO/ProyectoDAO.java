@@ -6,7 +6,9 @@ import android.database.Cursor;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import matallana.alejandro.proyectofinalandroid1.Infraestructura.Conexion;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Proyecto;
@@ -123,6 +125,35 @@ public class ProyectoDAO {
      */
     public boolean eliminar (Proyecto p){
         return true;
+    }
+
+
+    /**
+     * metodo para listar los proyectos del usuario que esté logueado
+     * @return
+     */
+    public ArrayList<Proyecto> listar(){
+        ArrayList<Proyecto> lista = new ArrayList<>();
+        String consulta = "SELECT p.id,p.nombre,p.fechaInicio,p.fechaFinal,p.etapa " +
+                "FROM Proyectos p JOIN ProyectosIntegrantes pi on p.id=pi.idProyecto " +
+                "WHERE pi.idUsuario="+UsuarioDAO.IDUsuarioLogueado + " ORDER BY p.etapa";
+        Cursor temp = conex.search(consulta);
+        if (temp.moveToFirst()){
+            do {
+                Date fechaInicio = null;
+                Date fechaFin = null;
+                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+                try {
+                    fechaInicio = format.parse(temp.getString(2));
+                    fechaFin = format.parse(temp.getString(3));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Proyecto p = new Proyecto(temp.getInt(0),temp.getString(1),fechaInicio,fechaFin,temp.getDouble(4));
+                lista.add(p);
+            } while (temp.moveToNext());
+        }
+        return lista;
     }
 
 }

@@ -2,7 +2,9 @@ package matallana.alejandro.proyectofinalandroid1.Controlador;
 
 import android.app.Activity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import matallana.alejandro.proyectofinalandroid1.DAO.ProyectoDAO;
 import matallana.alejandro.proyectofinalandroid1.DAO.ProyectosIntegrantesDAO;
@@ -64,6 +66,15 @@ public class ControllerProyecto {
        // Proyecto proyecto = new Proyecto(nombre,"","",0);
         //return proyectoDAO.eliminar(proyecto);
         return false;
+    }
+
+    /**
+     * metodo para listar proyectos de la persona que esté logueada
+     * @return
+     */
+    public ArrayList<Proyecto> listarProyectos(){
+        ProyectoDAO dao = new ProyectoDAO(activity);
+        return dao.listar();
     }
 
 }
