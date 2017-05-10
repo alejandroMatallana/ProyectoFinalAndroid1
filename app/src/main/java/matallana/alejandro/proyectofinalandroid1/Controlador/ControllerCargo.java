@@ -34,7 +34,7 @@ public class ControllerCargo {
     public Cargo buscar(String nombreCargo, String nombreProyecto) {
         Proyecto proyecto = proyectoDAO.buscar(nombreProyecto);
         if (proyecto != null) {
-            Cargo cargo = cargoDAO.buscar(nombreCargo,proyecto.getId());
+            Cargo cargo = cargoDAO.buscar(nombreCargo, proyecto.getId());
             if (cargo != null) {
                 cargo.setProyecto(proyecto);
                 return cargo;
@@ -44,6 +44,7 @@ public class ControllerCargo {
         } else {
             return null;
         }
+    }
     /**
      * Metodo para eliminar un cargo
      * @param nombre, el nombre del cargo que se va a eliminar
