@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import matallana.alejandro.proyectofinalandroid1.Controlador.ControllerUsuario;
 import matallana.alejandro.proyectofinalandroid1.DAO.UsuarioDAO;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Usuario;
 import matallana.alejandro.proyectofinalandroid1.R;
@@ -21,7 +22,8 @@ import matallana.alejandro.proyectofinalandroid1.R;
 public class UsuarioActivity extends AppCompatActivity {
 
     Usuario usuario = null;
-    UsuarioDAO dao;
+    //UsuarioDAO dao;
+    ControllerUsuario controllerUsuario;
     Spinner tipoDocumento;
     EditText numeroDoc;
     EditText nombre;
@@ -45,7 +47,7 @@ public class UsuarioActivity extends AppCompatActivity {
         password = (EditText)findViewById(R.id.contrasenaUsu);
         tipoUsuario = (Spinner) findViewById(R.id.tipoUsu);
         username = (EditText) findViewById(R.id.usernameUsu);
-
+        controllerUsuario = new ControllerUsuario(this);
         // En este parte se ejecuta lo del datePicker para que se muestre en la ventana
         // y se cirre se le puede configurar el formato en el que se captura
         fechaNacimiento.setOnClickListener(new View.OnClickListener() {
@@ -63,7 +65,7 @@ public class UsuarioActivity extends AppCompatActivity {
                 mDatePicker.setTitle("Select date");
                 mDatePicker.show();  }
         });
-        dao = new UsuarioDAO(this);
+        //dao = new UsuarioDAO(this);
         cargarSpinner();
     }
 
@@ -75,26 +77,23 @@ public class UsuarioActivity extends AppCompatActivity {
                 tipoUsuario.getSelectedItem().toString().isEmpty()) {
             Toast.makeText(this,"Debe ingresar todos los campos",Toast.LENGTH_SHORT).show();
         } else {
-            if (dao.buscar(Integer.parseInt(numeroDoc.getText().toString())) == null) {
-                if (!dao.verificarUsername(username.getText().toString())) {
-                    Calendar fechaNaci = Calendar.getInstance();
-                    String[] datos = fechaNacimiento.getText().toString().split("/");
-                    fechaNaci.set(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]));
-                    Usuario usuario = new Usuario(tipoDocumento.getSelectedItem().toString(),
-                            Integer.parseInt(numeroDoc.getText().toString()), nombre.getText().toString(),
-                            apellido.getText().toString(), fechaNaci.getTime(),
-                            password.getText().toString(), username.getText().toString(),
-                            correo.getText().toString(), tipoUsuario.getSelectedItem().toString());
-                    boolean resp = dao.guardar(usuario);
-                    if (resp) {
-                        Toast.makeText(this, "Se registró el usuario", Toast.LENGTH_SHORT).show();
-                        limpiarCampos();
-                    }
-                } else {
-                    Toast.makeText(this, "El Username que ingreso ya existe", Toast.LENGTH_SHORT).show();
-                }
+            Usuario user = new Usuario();
+            user.setTipoDocumento(tipoDocumento.getSelectedItem().toString());
+            user.setNumeroDocumento(Integer.valueOf(numeroDoc.getText().toString()));
+            user.setNombres(nombre.getText().toString());
+            user.setApellidos(apellido.getText().toString());
+            Calendar fechaNaci = Calendar.getInstance();
+            String[] datos = fechaNacimiento.getText().toString().split("/");
+            fechaNaci.set(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), Integer.parseInt(datos[2]));
+            user.setFechaNacimiento(fechaNaci.getTime());
+            user.setPass(password.getText().toString());
+            user.setUsuario(username.getText().toString());
+            user.setCorreoElectronico(correo.getText().toString());
+            user.setTipoUsuario(tipoUsuario.getSelectedItem().toString());
+            if (controllerUsuario.guardar(user)) {
+                Toast.makeText(this,"Se registro el usuario",Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this,"La cedula del usuario que desea registrar ya existe",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"El usuario o username ya existe",Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -103,7 +102,7 @@ public class UsuarioActivity extends AppCompatActivity {
         if (numeroDoc.getText().toString().isEmpty()) {
             Toast.makeText(this,"Debe ingresar la cedula del usuario que va a buscar",Toast.LENGTH_SHORT).show();
         } else {
-            usuario = dao.buscar(Integer.parseInt(numeroDoc.getText().toString()));
+            usuario = controllerUsuario.buscar(Integer.parseInt(numeroDoc.getText().toString()));
             if (usuario != null) {
                 if (usuario.getTipoDocumento().equalsIgnoreCase("Cedula")) {
                     tipoDocumento.setSelection(1);
@@ -135,7 +134,7 @@ public class UsuarioActivity extends AppCompatActivity {
 
     public void eliminar(View view){
         if(usuario != null) {
-            if(dao.eliminar(usuario)) {
+            if(controllerUsuario.eliminar(usuario)) {
                 Toast.makeText(this, "Se elimino el usuario correctamente", Toast.LENGTH_SHORT).show();
                 limpiarCampos();
             } else {
@@ -147,33 +146,33 @@ public class UsuarioActivity extends AppCompatActivity {
     }
 
     public void editar(View view){
-        if(usuario != null) {
-            if((!username.getText().toString().equals(usuario.getUsuario()) && !dao.verificarUsername(username.getText().toString())) || username.getText().toString().equals(usuario.getUsuario())) {
-                if(Integer.parseInt(numeroDoc.getText().toString()) == usuario.getNumeroDocumento() /*|| (!numeroDoc.getText().toString().equals(usuario.getNumeroDocumento()) && dao.buscar(numeroDoc.getText().toString()) == null) */) {
-                    Calendar fechaNaci = Calendar.getInstance();
-                    String[] datos = fechaNacimiento.getText().toString().split("/");
-                    fechaNaci.set(Integer.parseInt(datos[0]), (Integer.parseInt(datos[1]))-1, Integer.parseInt(datos[2]));
-                    usuario.setTipoDocumento(tipoDocumento.getSelectedItem().toString());
-                    usuario.setNumeroDocumento(Integer.parseInt(numeroDoc.getText().toString()));
-                    usuario.setNombres(nombre.getText().toString());
-                    usuario.setApellidos(apellido.getText().toString());
-                    usuario.setFechaNacimiento(fechaNaci.getTime());
-                    usuario.setPass(password.getText().toString());
-                    usuario.setUsuario(username.getText().toString());
-                    usuario.setCorreoElectronico(correo.getText().toString());
-                    usuario.setTipoUsuario(tipoUsuario.getSelectedItem().toString());
-                    dao.modificar(usuario);
-                    Toast.makeText(this, "Se modifico el usuario con exito", Toast.LENGTH_SHORT).show();
-                    limpiarCampos();
-                } else {
-                    Toast.makeText(this, "La cedula ingresada ya existe", Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Toast.makeText(this, "El username ingresado ya existe", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            Toast.makeText(this, "Debe primero buscar un Usuario", Toast.LENGTH_SHORT).show();
-        }
+//        if(usuario != null) {
+//            if((!username.getText().toString().equals(usuario.getUsuario()) && !con.verificarUsername(username.getText().toString())) || username.getText().toString().equals(usuario.getUsuario())) {
+//                if(Integer.parseInt(numeroDoc.getText().toString()) == usuario.getNumeroDocumento() /*|| (!numeroDoc.getText().toString().equals(usuario.getNumeroDocumento()) && dao.buscar(numeroDoc.getText().toString()) == null) */) {
+//                    Calendar fechaNaci = Calendar.getInstance();
+//                    String[] datos = fechaNacimiento.getText().toString().split("/");
+//                    fechaNaci.set(Integer.parseInt(datos[0]), (Integer.parseInt(datos[1]))-1, Integer.parseInt(datos[2]));
+//                    usuario.setTipoDocumento(tipoDocumento.getSelectedItem().toString());
+//                    usuario.setNumeroDocumento(Integer.parseInt(numeroDoc.getText().toString()));
+//                    usuario.setNombres(nombre.getText().toString());
+//                    usuario.setApellidos(apellido.getText().toString());
+//                    usuario.setFechaNacimiento(fechaNaci.getTime());
+//                    usuario.setPass(password.getText().toString());
+//                    usuario.setUsuario(username.getText().toString());
+//                    usuario.setCorreoElectronico(correo.getText().toString());
+//                    usuario.setTipoUsuario(tipoUsuario.getSelectedItem().toString());
+//                    dao.modificar(usuario);
+//                    Toast.makeText(this, "Se modifico el usuario con exito", Toast.LENGTH_SHORT).show();
+//                    limpiarCampos();
+//                } else {
+//                    Toast.makeText(this, "La cedula ingresada ya existe", Toast.LENGTH_SHORT).show();
+//                }
+//            } else {
+//                Toast.makeText(this, "El username ingresado ya existe", Toast.LENGTH_SHORT).show();
+//            }
+//        } else {
+//            Toast.makeText(this, "Debe primero buscar un Usuario", Toast.LENGTH_SHORT).show();
+//        }
     }
 
     public void cargarSpinner() {

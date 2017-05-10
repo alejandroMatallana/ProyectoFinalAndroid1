@@ -17,11 +17,15 @@ public class ControllerUsuario {
     }
 
     public boolean guardar(Usuario usuario) {
-        Usuario usuario1 = buscar(usuario.getNumeroDocumento());
-        if (usuario1 == null) {
-            return usuarioDAO.guardar(usuario);
-        } else {
+        if (usuarioDAO.verificarUsername(usuario.getUsuario())) {
             return false;
+        } else {
+            Usuario usuario1 = buscar(usuario.getNumeroDocumento());
+            if (usuario1 == null) {
+                return usuarioDAO.guardar(usuario);
+            } else {
+                return false;
+            }
         }
     }
 
