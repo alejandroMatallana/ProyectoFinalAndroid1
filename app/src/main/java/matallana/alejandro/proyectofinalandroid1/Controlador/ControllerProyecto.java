@@ -48,9 +48,11 @@ public class ControllerProyecto {
                 if(!res2){
                     return "Hubo un problema guardando";
                 } else {
+                    proyectoDAO.cerrarConexionBaseDeDatos();
                     return "El proyecto se ha guardado exitosamente";
                 }
             } else {
+                proyectoDAO.cerrarConexionBaseDeDatos();
                 return "Hubo un problema guardando";
             }
         }

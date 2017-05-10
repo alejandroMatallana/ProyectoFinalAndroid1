@@ -90,8 +90,6 @@ public class ProyectoDAO {
             }
             p.setEtapa(temp.getDouble(4));
         }
-
-        conex.cerrarConexion();
         return p;
     }
 
@@ -114,7 +112,6 @@ public class ProyectoDAO {
             p.setId(temp.getInt(0));
         }
 
-        conex.cerrarConexion();
         return p;
     }
 
@@ -154,6 +151,10 @@ public class ProyectoDAO {
             } while (temp.moveToNext());
         }
         return lista;
+    }
+
+    public void cerrarConexionBaseDeDatos(){
+        conex.cerrarConexion();
     }
 
 }
