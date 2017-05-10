@@ -56,7 +56,7 @@ public class Conexion extends SQLiteOpenHelper {
                 " \"nombres\" VARCHAR NOT NULL , \"apellidos\" VARCHAR NOT NULL , " +
                 "\"fechaNacimiento\" DATETIME NOT NULL , \"pass\" VARCHAR NOT NULL , " +
                 "\"usuario\" VARCHAR NOT NULL  UNIQUE , \"correoElectronico\" VARCHAR NOT NULL , " +
-                "\"tipoUsuario\" VARCHAR NOT NULL , \"idCargo\" INTEGER REFERENCES Cargos)");
+                "\"tipoUsuario\" VARCHAR NOT NULL)");
         db.execSQL("CREATE TABLE \"Actividades\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"nombre\" VARCHAR NOT NULL , \"descripcion\" VARCHAR NOT NULL ," +
                 " \"fechaInicio\" DATETIME NOT NULL , \"fechaFinal\" DATETIME NOT NULL ," +
@@ -80,6 +80,8 @@ public class Conexion extends SQLiteOpenHelper {
                 " \"idTarea\" INTEGER REFERENCES Tareas, \"idRecurso\" INTEGER REFERENCES Recursos)");
 
         db.execSQL("INSERT INTO Cargos VALUES ('Lider','Lider de Proyecto','8 a 12 - 14 a 18',1200000)");
+
+        //db.execSQL("INSERT INTO Usuarios VALUES ('Cedula',123456789,'alejandro','mata', '2017/05/10', '1234')");
     }
 
     @Override
