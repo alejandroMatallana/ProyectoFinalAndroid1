@@ -30,7 +30,6 @@ public class ControllerCargo {
         return false;
     }
 
-
     /**
      * Metodo para eliminar un cargo
      * @param nombre, el nombre del cargo que se va a eliminar
