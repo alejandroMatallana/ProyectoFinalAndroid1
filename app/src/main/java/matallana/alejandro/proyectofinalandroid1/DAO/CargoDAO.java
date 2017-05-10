@@ -41,7 +41,7 @@ public class CargoDAO {
         registro.put("descripcion", cargo.getDescripcion());
         registro.put("horario", cargo.getHorario());
         registro.put("salario",cargo.getSalario());
-        registro.put("idProyecto", cargo.getProyecto().getNombre()); // Aca va la foranea del id del proyecto
+        //registro.put("idProyecto", cargo.getProyecto().getNombre()); // Aca va la foranea del id del proyecto
         return  conex.update(tabla,condicion,registro);
 
     }

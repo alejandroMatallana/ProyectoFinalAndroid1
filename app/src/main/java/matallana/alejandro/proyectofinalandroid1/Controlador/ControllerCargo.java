@@ -62,11 +62,11 @@ public class ControllerCargo {
      * @param descripcion
      * @param horario
      * @param salario
-     * @param nomProyecto
+
      * @return, el cargo modificado si se hizo satisfactoriamente
      */
-    public boolean modificar(String nombre, String descripcion, String horario, double salario, String nomProyecto){
-        Proyecto proyecto = proyectoDAO.buscar(nomProyecto);
+    public boolean modificar(String nombre, String descripcion, String horario, double salario){
+//        Proyecto proyecto = proyectoDAO.buscar(nomProyecto);
         Cargo cargo = new Cargo(nombre,descripcion,horario,salario);// Aca faltaria poner el proyecto
         return  cargoDAO.modificar(cargo);
 
