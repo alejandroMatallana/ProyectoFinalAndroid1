@@ -113,6 +113,7 @@ public class UsuarioDAO {
         if (temp.getCount() > 0) {
             temp.moveToFirst();
             conex.cerrarConexion();
+            System.out.println(temp.getInt(1));
             IDUsuarioLogueado = temp.getInt(1);
             return temp.getString(0);
         }

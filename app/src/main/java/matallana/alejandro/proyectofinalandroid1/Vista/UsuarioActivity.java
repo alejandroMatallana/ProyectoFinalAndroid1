@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import matallana.alejandro.proyectofinalandroid1.Controlador.ControllerUsuario;
-import matallana.alejandro.proyectofinalandroid1.DAO.UsuarioDAO;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Usuario;
 import matallana.alejandro.proyectofinalandroid1.R;
 
@@ -90,6 +89,7 @@ public class UsuarioActivity extends AppCompatActivity {
             user.setTipoUsuario(tipoUsuario.getSelectedItem().toString());
             if (controllerUsuario.guardar(user)) {
                 Toast.makeText(this,"Se registro el usuario",Toast.LENGTH_SHORT).show();
+                limpiarCampos();
             } else {
                 Toast.makeText(this,"El usuario o username ya existe",Toast.LENGTH_SHORT).show();
             }

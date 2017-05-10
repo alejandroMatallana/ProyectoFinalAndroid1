@@ -20,6 +20,8 @@
         <activity android:name=".Vista.DirectorActivity" />
         <activity android:name=".Vista.CargoActivity" />
         <activity android:name=".Vista.ListaCargosActivity" />
+        <activity android:name=".Vista.ListaProyectoActivity" />
+        <activity android:name=".Vista.GestionProyectoActivity" />
         <activity android:name=".Vista.MenuProyectosActivity"></activity>
     </application>
 

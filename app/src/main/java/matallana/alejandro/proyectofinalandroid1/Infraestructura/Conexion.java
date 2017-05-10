@@ -49,8 +49,8 @@ public class Conexion extends SQLiteOpenHelper {
                 " \"fechaFinal\" DATETIME NOT NULL , \"etapa\" DOUBLE NOT NULL)");
         db.execSQL("CREATE TABLE \"Cargos\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"nombre\" VARCHAR NOT NULL , \"descripcion\" VARCHAR NOT NULL ," +
-                " \"horario\" VARCHAR NOT NULL , \"salario\" DOUBLE NOT NULL" +
-                " \"idProyecto\" INTEGER REFERENCES Proyectos)");
+                " \"horario\" VARCHAR NOT NULL , \"salario\" DOUBLE , " +
+                " \"idProyecto\" INTEGER REFERENCES Proyectos NULL)");
         db.execSQL("CREATE TABLE \"Usuarios\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"tipoDocumento\" VARCHAR NOT NULL , \"numeroDocumento\" INTEGER NOT NULL  UNIQUE ," +
                 " \"nombres\" VARCHAR NOT NULL , \"apellidos\" VARCHAR NOT NULL , " +
@@ -60,7 +60,7 @@ public class Conexion extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE \"Actividades\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"nombre\" VARCHAR NOT NULL , \"descripcion\" VARCHAR NOT NULL ," +
                 " \"fechaInicio\" DATETIME NOT NULL , \"fechaFinal\" DATETIME NOT NULL ," +
-                " \"idResponsable\" INTEGER REFERENCES Usuarios," +
+                " \"idResponsable\" INTEGER REFERENCES Usuarios , " +
                 " \"idProyecto\" INTEGER REFERENCES Proyectos)");
         db.execSQL("CREATE TABLE \"Tareas\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"nombre\" VARCHAR NOT NULL , \"porcentajeDesarrollo\" DOUBLE NOT NULL ," +
@@ -68,8 +68,7 @@ public class Conexion extends SQLiteOpenHelper {
                 " \"estado\" VARCHAR NOT NULL , \"idActividad\" INTEGER REFERENCES Actividades)");
         db.execSQL("CREATE TABLE \"Recursos\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"nombre\" VARCHAR NOT NULL , \"cantidad\" INTEGER NOT NULL ," +
-                " \"descripcion\" VARCHAR NOT NULL , \"ubicacion\" VARCHAR NOT NULL," +
-                " \"idTarea\" INTEGER REFERENCES Tareas) ");
+                " \"descripcion\" VARCHAR NOT NULL , \"ubicacion\" VARCHAR NOT NULL) ");
         db.execSQL("CREATE TABLE \"Reuniones\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"coordenadas\" VARCHAR NOT NULL , \"mensaje\" VARCHAR NOT NULL ," +
                 " \"tematica\" VARCHAR NOT NULL, \"idProyecto\" INTEGER REFERENCES Proyectos)");
@@ -79,7 +78,7 @@ public class Conexion extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE \"TareasRecursos\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"idTarea\" INTEGER REFERENCES Tareas, \"idRecurso\" INTEGER REFERENCES Recursos)");
 
-        db.execSQL("INSERT INTO Cargos VALUES ('Lider','Lider de Proyecto','8 a 12 - 14 a 18',1200000)");
+        //db.execSQL("INSERT INTO Cargos VALUES ('Lider','Lider de Proyecto','8 a 12 - 14 a 18',1200000,NULL)");
 
         //db.execSQL("INSERT INTO Usuarios VALUES ('Cedula',123456789,'alejandro','mata', '2017/05/10', '1234')");
     }

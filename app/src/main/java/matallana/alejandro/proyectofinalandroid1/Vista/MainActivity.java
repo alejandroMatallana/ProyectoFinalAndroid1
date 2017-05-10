@@ -33,8 +33,9 @@ public class MainActivity extends AppCompatActivity {
     public void login(View view) {
         String resp = dao.buscarLogin(userName.getText().toString(),password.getText().toString());
         if (resp != null) {
+            //UsuarioDAO.IDUsuarioLogueado =
             if (resp.equalsIgnoreCase("Director de proyecto")) {
-                Intent intent = new Intent(this,DirectorActivity.class);
+                Intent intent = new Intent(this,ListaProyectoActivity.class);
                 startActivity(intent);
             } else {
                 Intent intent = new Intent(this,IntegranteActivity.class);

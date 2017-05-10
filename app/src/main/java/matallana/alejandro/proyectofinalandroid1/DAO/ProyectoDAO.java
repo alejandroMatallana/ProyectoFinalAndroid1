@@ -100,9 +100,9 @@ public class ProyectoDAO {
      */
     public Proyecto buscarIdProyecto (String nombre){
         Proyecto p = null;
-        String consulta = "select p.id " +
-                "from Proyectos p JOIN ProyectosIntegrantes pi on p.id=pi.idProyecto" +
-                "where p.nombre=" + nombre + " and pi.idUsuario="+UsuarioDAO.IDUsuarioLogueado;
+        String consulta = "SELECT Proyectos.id " +
+                "FROM Proyectos JOIN ProyectosIntegrantes ON Proyectos.id=ProyectosIntegrantes.idProyecto " +
+                "WHERE Proyectos.nombre='" + nombre + "' AND ProyectosIntegrantes.idUsuario="+UsuarioDAO.IDUsuarioLogueado;
 
         Cursor temp = conex.search(consulta);
 
@@ -110,8 +110,8 @@ public class ProyectoDAO {
             p = new Proyecto();
             temp.moveToFirst();
             p.setId(temp.getInt(0));
+            System.out.println(temp.getInt(0));
         }
-
         return p;
     }
 
