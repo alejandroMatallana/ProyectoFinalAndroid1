@@ -46,7 +46,7 @@ public class Conexion extends SQLiteOpenHelper {
 
         db.execSQL("CREATE TABLE \"Proyectos\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"nombre\" VARCHAR NOT NULL , \"fechaInicio\" DATETIME NOT NULL ," +
-                " \"fechaFinal\" DATETIME NOT NULL , \"etapa\" VARCHAR NOT NULL)");
+                " \"fechaFinal\" DATETIME NOT NULL , \"etapa\" DOUBLE NOT NULL)");
         db.execSQL("CREATE TABLE \"Cargos\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"nombre\" VARCHAR NOT NULL , \"descripcion\" VARCHAR NOT NULL ," +
                 " \"horario\" VARCHAR NOT NULL , \"salario\" DOUBLE NOT NULL" +
