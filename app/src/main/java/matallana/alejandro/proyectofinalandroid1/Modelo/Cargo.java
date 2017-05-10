@@ -7,20 +7,22 @@ package matallana.alejandro.proyectofinalandroid1.Modelo;
 public class Cargo {
 
     private int id;
-    private int nombre;
-    private int descripcion;
-    private int horario;
-    private int salario;
+    private String nombre;
+    private String descripcion;
+    private String horario;
+    private double salario;
+    private Proyecto idProyecto;
 
     public Cargo() {
     }
 
-    public Cargo(int id, int nombre, int descripcion, int horario, int salario) {
+    public Cargo(int id, String nombre, String descripcion, String horario, double salario) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.horario = horario;
         this.salario = salario;
+        this.idProyecto = null;
     }
 
     public int getId() {
@@ -31,35 +33,43 @@ public class Cargo {
         this.id = id;
     }
 
-    public int getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(int nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public int getDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    public void setDescripcion(int descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    public int getHorario() {
+    public String getHorario() {
         return horario;
     }
 
-    public void setHorario(int horario) {
+    public void setHorario(String horario) {
         this.horario = horario;
     }
 
-    public int getSalario() {
+    public double getSalario() {
         return salario;
     }
 
-    public void setSalario(int salario) {
+    public void setSalario(double salario) {
         this.salario = salario;
+    }
+
+    public Proyecto getIdProyecto() {
+        return idProyecto;
+    }
+
+    public void setIdProyecto(Proyecto idProyecto) {
+        this.idProyecto = idProyecto;
     }
 }
