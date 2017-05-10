@@ -17,7 +17,7 @@ public class ControllerUsuario {
     }
 
     public boolean guardar(Usuario usuario) {
-        if (usuarioDAO.verificarUsername(usuario.getUsuario())) {
+        if (verificarUsername(usuario.getUsuario())) {
             return false;
         } else {
             Usuario usuario1 = buscar(usuario.getNumeroDocumento());
@@ -39,5 +39,9 @@ public class ControllerUsuario {
 
     public boolean eliminar(Usuario usuario) {
         return usuarioDAO.eliminar(usuario);
+    }
+
+    public boolean verificarUsername(String username) {
+        return usuarioDAO.verificarUsername(username);
     }
 }

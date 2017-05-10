@@ -22,7 +22,6 @@ import matallana.alejandro.proyectofinalandroid1.R;
 public class UsuarioActivity extends AppCompatActivity {
 
     Usuario usuario = null;
-    //UsuarioDAO dao;
     ControllerUsuario controllerUsuario;
     Spinner tipoDocumento;
     EditText numeroDoc;
@@ -65,7 +64,6 @@ public class UsuarioActivity extends AppCompatActivity {
                 mDatePicker.setTitle("Select date");
                 mDatePicker.show();  }
         });
-        //dao = new UsuarioDAO(this);
         cargarSpinner();
     }
 
@@ -146,33 +144,33 @@ public class UsuarioActivity extends AppCompatActivity {
     }
 
     public void editar(View view){
-//        if(usuario != null) {
-//            if((!username.getText().toString().equals(usuario.getUsuario()) && !con.verificarUsername(username.getText().toString())) || username.getText().toString().equals(usuario.getUsuario())) {
-//                if(Integer.parseInt(numeroDoc.getText().toString()) == usuario.getNumeroDocumento() /*|| (!numeroDoc.getText().toString().equals(usuario.getNumeroDocumento()) && dao.buscar(numeroDoc.getText().toString()) == null) */) {
-//                    Calendar fechaNaci = Calendar.getInstance();
-//                    String[] datos = fechaNacimiento.getText().toString().split("/");
-//                    fechaNaci.set(Integer.parseInt(datos[0]), (Integer.parseInt(datos[1]))-1, Integer.parseInt(datos[2]));
-//                    usuario.setTipoDocumento(tipoDocumento.getSelectedItem().toString());
-//                    usuario.setNumeroDocumento(Integer.parseInt(numeroDoc.getText().toString()));
-//                    usuario.setNombres(nombre.getText().toString());
-//                    usuario.setApellidos(apellido.getText().toString());
-//                    usuario.setFechaNacimiento(fechaNaci.getTime());
-//                    usuario.setPass(password.getText().toString());
-//                    usuario.setUsuario(username.getText().toString());
-//                    usuario.setCorreoElectronico(correo.getText().toString());
-//                    usuario.setTipoUsuario(tipoUsuario.getSelectedItem().toString());
-//                    dao.modificar(usuario);
-//                    Toast.makeText(this, "Se modifico el usuario con exito", Toast.LENGTH_SHORT).show();
-//                    limpiarCampos();
-//                } else {
-//                    Toast.makeText(this, "La cedula ingresada ya existe", Toast.LENGTH_SHORT).show();
-//                }
-//            } else {
-//                Toast.makeText(this, "El username ingresado ya existe", Toast.LENGTH_SHORT).show();
-//            }
-//        } else {
-//            Toast.makeText(this, "Debe primero buscar un Usuario", Toast.LENGTH_SHORT).show();
-//        }
+        if (usuario != null) {
+            if((!username.getText().toString().equals(usuario.getUsuario()) && !controllerUsuario.verificarUsername(username.getText().toString())) || username.getText().toString().equals(usuario.getUsuario())) {
+                if(Integer.parseInt(numeroDoc.getText().toString()) == usuario.getNumeroDocumento()) {
+                    Calendar fechaNaci = Calendar.getInstance();
+                    String[] datos = fechaNacimiento.getText().toString().split("/");
+                    fechaNaci.set(Integer.parseInt(datos[0]), (Integer.parseInt(datos[1]))-1, Integer.parseInt(datos[2]));
+                    usuario.setTipoDocumento(tipoDocumento.getSelectedItem().toString());
+                    usuario.setNumeroDocumento(Integer.parseInt(numeroDoc.getText().toString()));
+                    usuario.setNombres(nombre.getText().toString());
+                    usuario.setApellidos(apellido.getText().toString());
+                    usuario.setFechaNacimiento(fechaNaci.getTime());
+                    usuario.setPass(password.getText().toString());
+                    usuario.setUsuario(username.getText().toString());
+                    usuario.setCorreoElectronico(correo.getText().toString());
+                    usuario.setTipoUsuario(tipoUsuario.getSelectedItem().toString());
+                    controllerUsuario.modificar(usuario);
+                    Toast.makeText(this, "Se modifico el usuario con exito", Toast.LENGTH_SHORT).show();
+                    limpiarCampos();
+                } else {
+                    Toast.makeText(this, "La cedula ingresada ya existe", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, "El username ingresado ya existe", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "Debe primero buscar un Usuario", Toast.LENGTH_SHORT).show();
+        }
     }
 
     public void cargarSpinner() {
