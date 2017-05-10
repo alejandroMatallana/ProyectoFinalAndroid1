@@ -71,4 +71,14 @@ public class Cargo {
     public void setProyecto(Proyecto proyecto) {
         this.proyecto = proyecto;
     }
+
+    @Override
+    public String toString() {
+        return "Cargo{" +
+                "nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", horario='" + horario + '\'' +
+                ", salario=" + salario +
+                '}';
+    }
 }

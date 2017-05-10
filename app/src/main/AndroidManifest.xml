@@ -18,7 +18,9 @@
         <activity android:name=".Vista.UsuarioActivity" />
         <activity android:name=".Vista.IntegranteActivity" />
         <activity android:name=".Vista.DirectorActivity" />
-        <activity android:name=".Vista.CargoActivity"></activity>
+        <activity android:name=".Vista.CargoActivity" />
+        <activity android:name=".Vista.ListaCargosActivity" />
+        <activity android:name=".Vista.MenuProyectosActivity"></activity>
     </application>
 
 </manifest>

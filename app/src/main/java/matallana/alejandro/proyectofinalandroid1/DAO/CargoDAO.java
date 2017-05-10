@@ -4,8 +4,12 @@ import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import matallana.alejandro.proyectofinalandroid1.Infraestructura.Conexion;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Cargo;
+import matallana.alejandro.proyectofinalandroid1.Modelo.Proyecto;
 
 /**
  * Created by sebastian,matallana,miguel on 9/05/17.
@@ -74,5 +78,18 @@ public class CargoDAO {
         String tabla = "Cargos" ;
         String condicion = "nombre=" +  cargo.getNombre();
         return conex.delete(tabla,condicion);
+    }
+
+    public List<Cargo> listar(Proyecto proyecto) { //El parametro no va, eso sería un atributo estatico
+        List<Cargo> cargos = new ArrayList<>();
+        String consulta = "SELECT nombre,descripcion,horario,salario FROM Cargos WHERE idProyecto=" + proyecto.getId();
+        Cursor temp = conex.search(consulta);
+        if (temp.moveToFirst()){
+            do {
+                Cargo cargo = new Cargo(temp.getString(0),temp.getString(1),temp.getString(2),temp.getDouble(3));
+                cargos.add(cargo);
+            } while (temp.moveToNext());
+        }
+        return cargos;
     }
 }

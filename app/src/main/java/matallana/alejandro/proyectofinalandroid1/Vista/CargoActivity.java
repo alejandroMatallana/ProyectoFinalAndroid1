@@ -28,6 +28,13 @@ public class CargoActivity extends AppCompatActivity {
         controllerCargo = new ControllerCargo(this);
     }
 
+    public void crear(View view) {
+
+    }
+
+    public void buscar(View view) {
+
+    }
 
     public void eliminar(View view){
         String nombre = txtNombre.getText().toString();
@@ -39,7 +46,6 @@ public class CargoActivity extends AppCompatActivity {
             Toast.makeText(this, "Error!!!  no se encuenta alamcenando", Toast.LENGTH_SHORT).show();
         }
     }
-
 
     public void editar(View view){
         if (txtSalario.getText().toString().isEmpty() || txtHorario.getText().toString().isEmpty() || txtDescripcion.getText().toString().isEmpty()
@@ -60,13 +66,11 @@ public class CargoActivity extends AppCompatActivity {
 
     }
 
-
     public void limpiarCampos(){
         txtNombre.setText(null);
         txtDescripcion.setText(null);
         txtHorario.setText(null);
         txtSalario.setText(null);
     }
-
 
 }

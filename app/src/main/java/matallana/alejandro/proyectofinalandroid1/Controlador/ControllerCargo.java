@@ -2,6 +2,8 @@ package matallana.alejandro.proyectofinalandroid1.Controlador;
 
 import android.app.Activity;
 
+import java.util.List;
+
 import matallana.alejandro.proyectofinalandroid1.DAO.CargoDAO;
 import matallana.alejandro.proyectofinalandroid1.DAO.ProyectoDAO;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Cargo;
@@ -70,5 +72,10 @@ public class ControllerCargo {
         Cargo cargo = new Cargo(nombre,descripcion,horario,salario);// Aca faltaria poner el proyecto
         return  cargoDAO.modificar(cargo);
 
+    }
+
+    public List<Cargo> listar() {
+        Proyecto proyecto = new Proyecto(); //Esto no va, esto sería a través de la variable estatica
+        return cargoDAO.listar(proyecto);
     }
 }
