@@ -17,7 +17,8 @@
         </activity>
         <activity android:name=".Vista.UsuarioActivity" />
         <activity android:name=".Vista.IntegranteActivity" />
-        <activity android:name=".Vista.DirectorActivity"></activity>
+        <activity android:name=".Vista.DirectorActivity" />
+        <activity android:name=".Vista.CargoActivity"></activity>
     </application>
 
 </manifest>
