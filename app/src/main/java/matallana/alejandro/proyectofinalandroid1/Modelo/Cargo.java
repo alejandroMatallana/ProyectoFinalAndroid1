@@ -16,8 +16,7 @@ public class Cargo {
     public Cargo() {
     }
 
-    public Cargo(int id, String nombre, String descripcion, String horario, double salario) {
-        this.id = id;
+    public Cargo(String nombre, String descripcion, String horario, double salario) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.horario = horario;

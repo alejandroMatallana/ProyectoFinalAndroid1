@@ -5,6 +5,7 @@ import android.content.ContentValues;
 
 import matallana.alejandro.proyectofinalandroid1.Infraestructura.Conexion;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Cargo;
+import matallana.alejandro.proyectofinalandroid1.Modelo.Proyecto;
 
 /**
  * Created by sebastian,matallana,miguel on 9/05/17.
@@ -18,8 +19,14 @@ public class CargoDAO {
         conex = new Conexion(activity);
     }
 
-    public boolean guardar(Cargo cargo) {
-        return true;
+    public boolean guardar(Cargo cargo, int idProyecto) {
+        ContentValues registro= new ContentValues();
+        registro.put("nombre", cargo.getNombre());
+        registro.put("descripcion", cargo.getDescripcion());
+        registro.put("horario", cargo.getHorario());
+        registro.put("salario", cargo.getSalario());
+        registro.put("idProyecto", idProyecto);
+        return conex.insert("Cargos", registro);
     }
 
     /**
