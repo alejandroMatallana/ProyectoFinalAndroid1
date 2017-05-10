@@ -44,5 +44,30 @@ public class ControllerCargo {
         } else {
             return null;
         }
+    /**
+     * Metodo para eliminar un cargo
+     * @param nombre, el nombre del cargo que se va a eliminar
+     * @return
+     */
+    public boolean eliminar (String nombre){
+        Cargo cargo = new Cargo(nombre,"","",0); // Aca faltaria la foranea al final
+        return cargoDAO.eliminar(cargo);
+
+    }
+
+    /**
+     * Metodo para modificar un cargo
+     * @param nombre
+     * @param descripcion
+     * @param horario
+     * @param salario
+     * @param nomProyecto
+     * @return, el cargo modificado si se hizo satisfactoriamente
+     */
+    public boolean modificar(String nombre, String descripcion, String horario, double salario, String nomProyecto){
+        Proyecto proyecto = proyectoDAO.buscar(nomProyecto);
+        Cargo cargo = new Cargo(nombre,descripcion,horario,salario);// Aca faltaria poner el proyecto
+        return  cargoDAO.modificar(cargo);
+
     }
 }
