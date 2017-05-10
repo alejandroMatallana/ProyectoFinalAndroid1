@@ -5,6 +5,8 @@ import android.app.Activity;
 import java.util.Date;
 
 import matallana.alejandro.proyectofinalandroid1.DAO.ProyectoDAO;
+import matallana.alejandro.proyectofinalandroid1.DAO.ProyectosIntegrantesDAO;
+import matallana.alejandro.proyectofinalandroid1.DAO.UsuarioDAO;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Proyecto;
 
 /**
@@ -13,10 +15,43 @@ import matallana.alejandro.proyectofinalandroid1.Modelo.Proyecto;
 
 public class ControllerProyecto {
 
-    ProyectoDAO proyectoDAO;
+    private Activity activity;
 
     public ControllerProyecto (Activity activity) {
-        proyectoDAO = new ProyectoDAO(activity);
+        this.activity = activity;
+    }
+
+    /**
+     * metodo para guardar un nuevo proyecto
+     * @param nombre
+     * @param fechaInicio
+     * @param fechaFin
+     * @return
+     */
+    public String guardarProyecto(String nombre, Date fechaInicio, Date fechaFin){
+        ProyectoDAO proyectoDAO = new ProyectoDAO(activity);
+        Proyecto p = proyectoDAO.buscarIdProyecto(nombre);
+        if(p != null){
+            return "Señor usuario, ya hay un proyecto registrado con ese nombre";
+        } else {
+            Proyecto proyecto = new Proyecto(nombre,fechaInicio,fechaFin,0);
+            boolean res = proyectoDAO.guardar(proyecto);
+            //si retorna true, osea si guardó correctamente
+            if (res){
+                Proyecto proyectoGuardado = proyectoDAO.buscarIdProyecto(proyecto.getNombre());
+                ProyectosIntegrantesDAO piDAO = new ProyectosIntegrantesDAO(activity);
+                //guarda la respuesta del guardar, es true si se guardo el registro o false si no
+                boolean res2 = piDAO.guardar(1,proyectoGuardado.getId(), UsuarioDAO.IDUsuarioLogueado);
+                //si el false
+                if(!res2){
+                    return "Hubo un problema guardando";
+                } else {
+                    return "El proyecto se ha guardado exitosamente";
+                }
+            } else {
+                return "Hubo un problema guardando";
+            }
+        }
     }
 
     public boolean modificarProyecto(String nombre, Date fechaInicion, Date fechaFin, double estado){
