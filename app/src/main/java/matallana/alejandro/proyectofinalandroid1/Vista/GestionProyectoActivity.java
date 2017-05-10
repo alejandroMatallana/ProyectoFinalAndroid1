@@ -20,24 +20,19 @@ public class GestionProyectoActivity extends AppCompatActivity {
 
     Proyecto proyecto=null;
     private LinearLayout layoutEdicion;
-    private Button btnCancelarEdicion, btnCrear;
+    private Button btnCrear;
     private EditText txtNombre, txtFechaInicio, txtFechaFin;
-    ProyectoDAO proyectoDAO;
-    ControllerProyecto controllerProyecto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gestion_proyecto);
         layoutEdicion = (LinearLayout) findViewById(R.id.layoutEditarEliminar);
-        btnCancelarEdicion = (Button) findViewById(R.id.btnCancelarProyecto);
         btnCrear = (Button) findViewById(R.id.btnCrearProyecto);
         txtFechaFin = (EditText) findViewById(R.id.dateFinProyecto);
         txtFechaInicio = (EditText) findViewById(R.id.dateInicioProyecto);
         txtNombre = (EditText) findViewById(R.id.txtNombreProyecto);
-        proyectoDAO = new ProyectoDAO(this);
-        controllerProyecto = new ControllerProyecto(this);
-        ocultarBotonesEdicion();
+        verificarSiCrearOEliminarEditar();
     }
 
     /**
@@ -107,7 +102,6 @@ public class GestionProyectoActivity extends AppCompatActivity {
         } else {
             String nombre = txtNombre.getText().toString();
             if (nombre!=null){
-                controllerProyecto.eliminar(nombre);
                 Toast.makeText(this, "Exito, se ha eliminado correctamente",Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Error al eliminar: No se encuentra ningun proyecto con este nombre",
@@ -118,11 +112,15 @@ public class GestionProyectoActivity extends AppCompatActivity {
     }
 
     /**
-     * metodo para cancelar la edicion de un proyecto
-     * @param view
+     * metodo que verifica si se va a crear un proyecto o se va a editar.
+     * dependiendo de eso se habilitan unos campos y se ocultan otros
      */
-    public void cancelarEdicionDeProyecto(View view){
+    public void verificarSiCrearOEliminarEditar(){
+        if(MenuProyectosActivity.proyecto == null){
+            ocultarBotonesEdicion();
+        } else {
 
+        }
     }
 
     public void limpiarCampos(){
@@ -136,8 +134,8 @@ public class GestionProyectoActivity extends AppCompatActivity {
      */
     public void ocultarBotonesEdicion(){
         layoutEdicion.setVisibility(View.INVISIBLE);
-        btnCancelarEdicion.setVisibility(View.INVISIBLE);
         btnCrear.setVisibility(View.VISIBLE);
+        txtNombre.setClickable(true);
     }
 
     /**
@@ -145,8 +143,8 @@ public class GestionProyectoActivity extends AppCompatActivity {
      */
     public void habilitarBotonesEdicion(){
         layoutEdicion.setVisibility(View.VISIBLE);
-        btnCancelarEdicion.setVisibility(View.VISIBLE);
         btnCrear.setVisibility(View.INVISIBLE);
+        txtNombre.setClickable(false);
     }
 
 }

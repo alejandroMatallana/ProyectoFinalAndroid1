@@ -1,5 +1,6 @@
 package matallana.alejandro.proyectofinalandroid1.Vista;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -25,7 +26,9 @@ public class ListaProyectoActivity extends AppCompatActivity {
     }
 
     public void abrirCrearNuevoProyecto(View view){
-
+        MenuProyectosActivity.proyecto = null;
+        Intent i = new Intent(this, GestionProyectoActivity.class);
+        startActivity(i);
     }
 
     public void cargarLista(){

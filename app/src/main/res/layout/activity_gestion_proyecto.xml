@@ -57,13 +57,6 @@
             android:onClick="crearProyecto"
             android:text="Crear" />
 
-        <Button
-            android:id="@+id/btnBuscarProyecto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Buscar"
-            android:onClick="buscarProyecto"/>
     </LinearLayout>
 
     <LinearLayout
@@ -89,10 +82,4 @@
             android:onClick="eliminarProyecto"/>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnCancelarProyecto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Cancelar Edición"
-        android:onClick="cancelarEdicionDeProyecto"/>
 </LinearLayout>
