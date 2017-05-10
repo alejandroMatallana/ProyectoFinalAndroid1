@@ -33,7 +33,7 @@ public class ControllerCargo {
 
     /**
      * Metodo para eliminar un cargo
-     * @param nombre
+     * @param nombre, el nombre del cargo que se va a eliminar
      * @return
      */
     public boolean eliminar (String nombre){
@@ -50,7 +50,7 @@ public class ControllerCargo {
      * @param horario
      * @param salario
      * @param nomProyecto
-     * @return
+     * @return, el cargo modificado si se hizo satisfactoriamente
      */
     public boolean modificar(String nombre, String descripcion, String horario, double salario, String nomProyecto){
         Proyecto proyecto = proyectoDAO.buscar(nomProyecto);
