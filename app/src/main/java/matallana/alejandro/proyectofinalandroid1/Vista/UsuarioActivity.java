@@ -75,7 +75,7 @@ public class UsuarioActivity extends AppCompatActivity {
                 tipoUsuario.getSelectedItem().toString().isEmpty()) {
             Toast.makeText(this,"Debe ingresar todos los campos",Toast.LENGTH_SHORT).show();
         } else {
-            if (dao.buscar(numeroDoc.getText().toString()) == null) {
+            if (dao.buscar(Integer.parseInt(numeroDoc.getText().toString())) == null) {
                 if (!dao.verificarUsername(username.getText().toString())) {
                     Calendar fechaNaci = Calendar.getInstance();
                     String[] datos = fechaNacimiento.getText().toString().split("/");
@@ -103,7 +103,7 @@ public class UsuarioActivity extends AppCompatActivity {
         if (numeroDoc.getText().toString().isEmpty()) {
             Toast.makeText(this,"Debe ingresar la cedula del usuario que va a buscar",Toast.LENGTH_SHORT).show();
         } else {
-            usuario = dao.buscar(numeroDoc.getText().toString());
+            usuario = dao.buscar(Integer.parseInt(numeroDoc.getText().toString()));
             if (usuario != null) {
                 if (usuario.getTipoDocumento().equalsIgnoreCase("Cedula")) {
                     tipoDocumento.setSelection(1);

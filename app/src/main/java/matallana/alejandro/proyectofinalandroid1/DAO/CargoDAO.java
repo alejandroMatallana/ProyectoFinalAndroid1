@@ -58,7 +58,6 @@ public class CargoDAO {
             cargo.setDescripcion(temp.getString(0));
             cargo.setHorario(temp.getString(1));
             cargo.setSalario(temp.getDouble(2));
-            //cargo.setProyecto();
             conex.cerrarConexion();
             return cargo;
         }

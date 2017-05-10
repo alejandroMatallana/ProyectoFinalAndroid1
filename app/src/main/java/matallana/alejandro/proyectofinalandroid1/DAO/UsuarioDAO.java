@@ -45,7 +45,6 @@ public class UsuarioDAO {
         registro.put("usuario", usuario.getUsuario());
         registro.put("correoElectronico", usuario.getCorreoElectronico());
         registro.put("tipoUsuario", usuario.getTipoUsuario());
-        //registro.put("cargo", usuario.getCargo().getId());
         return conex.insert("Usuarios", registro);
     }
 
@@ -79,14 +78,13 @@ public class UsuarioDAO {
      * @param numeroDocumento
      * @return
      */
-    public Usuario buscar (String numeroDocumento) {
-        Usuario usuario = null;
+    public Usuario buscar (int numeroDocumento) {
         String consulta = "select tipoDocumento,nombres,apellidos,fechaNacimiento,pass,usuario," +
                 "correoElectronico,tipoUsuario from Usuarios where numeroDocumento=" + numeroDocumento;
 
         Cursor temp = conex.search(consulta);
         if (temp.getCount()>0){
-            usuario = new Usuario();
+            Usuario usuario = new Usuario();
             temp.moveToFirst();
             usuario.setTipoDocumento(temp.getString(0));
             usuario.setNombres(temp.getString(1));
@@ -101,10 +99,12 @@ public class UsuarioDAO {
             usuario.setUsuario(temp.getString(5));
             usuario.setCorreoElectronico(temp.getString(6));
             usuario.setTipoUsuario(temp.getString(7));
-            usuario.setNumeroDocumento(Integer.parseInt(numeroDocumento));
+            usuario.setNumeroDocumento(numeroDocumento);
+            conex.cerrarConexion();
+            return usuario;
         }
         conex.cerrarConexion();
-        return usuario;
+        return null;
     }
 
     public String buscarLogin(String username, String password) {

@@ -32,6 +32,17 @@ public class ControllerCargo {
     }
 
     public Cargo buscar(String nombreCargo, String nombreProyecto) {
-        return null;
+        Proyecto proyecto = proyectoDAO.buscar(nombreProyecto);
+        if (proyecto != null) {
+            Cargo cargo = cargoDAO.buscar(nombreCargo,proyecto.getId());
+            if (cargo != null) {
+                cargo.setProyecto(proyecto);
+                return cargo;
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
     }
 }
