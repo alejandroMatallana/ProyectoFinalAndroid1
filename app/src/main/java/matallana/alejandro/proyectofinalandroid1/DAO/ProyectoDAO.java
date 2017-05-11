@@ -50,7 +50,7 @@ public class ProyectoDAO {
      */
     public  boolean modificar (Proyecto p){
         String tabla = "Proyectos";
-        String condicion = "nombre=" + p.getNombre();
+        String condicion = "nombre='" + p.getNombre() + "'";
         Date fechaInicio = p.getFechaInicio();
         Date fechaFin = p.getFechaFin();
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
