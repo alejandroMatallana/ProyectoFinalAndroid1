@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -75,31 +76,47 @@ public class GestionProyectoActivity extends AppCompatActivity {
      * metodo para crear un proyecto
      * @param view
      */
-    public void crearProyecto(View view){
+    public void crearProyecto(View view) throws ParseException {
         if(txtFechaInicio.getText().toString().equals("")
                 || txtFechaFin.getText().toString().equals("")
                 || txtNombre.getText().toString().equals("")){
             Toast.makeText(this, "Favor ingresar todos los datos", Toast.LENGTH_SHORT).show();
         } else {
-            ControllerProyecto controllerProyecto = new ControllerProyecto(this);
 
-            Calendar fechaInicial = Calendar.getInstance();
-            String[] datosfechaIni = txtFechaInicio.getText().toString().split("/");
-            fechaInicial.set(Integer.parseInt(datosfechaIni[0]), Integer.parseInt(datosfechaIni[1]),
-                    Integer.parseInt(datosfechaIni[2]));
+            String fechaIni = txtFechaInicio.getText().toString();
+            String fechaFi = txtFechaFin.getText().toString();
 
-            Calendar fechaFin = Calendar.getInstance();
-            String[] datosFechaFin = txtFechaFin.getText().toString().split("/");
-            fechaFin.set(Integer.parseInt(datosFechaFin[0]), Integer.parseInt(datosFechaFin[1]),
-                    Integer.parseInt(datosFechaFin[2]));
+            SimpleDateFormat fechas = new SimpleDateFormat("yyyy/MM/dd");
+            Date inicio = fechas.parse(fechaIni);
+            Date fin = fechas.parse(fechaFi);
 
-            String res = controllerProyecto.guardarProyecto(txtNombre.getText().toString(),
-                    fechaInicial.getTime(),fechaFin.getTime());
-            Toast.makeText(this, res, Toast.LENGTH_SHORT).show();
-            if(res.equals("El proyecto se ha guardado exitosamente")){
-                limpiarCampos();
-                finish();
+            if (inicio.compareTo(fin)!=1){
+                ControllerProyecto controllerProyecto = new ControllerProyecto(this);
+
+                Calendar fechaInicial = Calendar.getInstance();
+                String[] datosfechaIni = txtFechaInicio.getText().toString().split("/");
+                fechaInicial.set(Integer.parseInt(datosfechaIni[0]), Integer.parseInt(datosfechaIni[1]),
+                        Integer.parseInt(datosfechaIni[2]));
+
+                Calendar fechaFin = Calendar.getInstance();
+                String[] datosFechaFin = txtFechaFin.getText().toString().split("/");
+                fechaFin.set(Integer.parseInt(datosFechaFin[0]), Integer.parseInt(datosFechaFin[1]),
+                        Integer.parseInt(datosFechaFin[2]));
+
+                String res = controllerProyecto.guardarProyecto(txtNombre.getText().toString(),
+                        fechaInicial.getTime(),fechaFin.getTime());
+                Toast.makeText(this, res, Toast.LENGTH_SHORT).show();
+                if(res.equals("El proyecto se ha guardado exitosamente")){
+                    limpiarCampos();
+                    finish();
+                }
+
+            } else {
+                Toast.makeText(this, "La fecha de fin es menor a la fecha inicial",
+                        Toast.LENGTH_SHORT).show();
             }
+
+
         }
     }
 
@@ -120,32 +137,44 @@ public class GestionProyectoActivity extends AppCompatActivity {
      * metodo para editar un proyecto
      * @param view
      */
-    public void editarProyecto(View view){
+    public void editarProyecto(View view) throws ParseException {
         if(txtFechaInicio.getText().toString().equals("")
                 || txtFechaFin.getText().toString().equals("")
                 || txtNombre.getText().toString().equals("")){
             Toast.makeText(this, "Error al editar: Favor ingresar todos los datos", Toast.LENGTH_SHORT).show();
         } else {
-            ControllerProyecto controllerProyecto = new ControllerProyecto(this);
 
-            Calendar fechaInicial = Calendar.getInstance();
-            String[] datosfechaIni = txtFechaInicio.getText().toString().split("/");
-            fechaInicial.set(Integer.parseInt(datosfechaIni[0]), Integer.parseInt(datosfechaIni[1]),
-                    Integer.parseInt(datosfechaIni[2]));
+            String fechaIni = txtFechaInicio.getText().toString();
+            String fechaFi = txtFechaFin.getText().toString();
 
-            Calendar fechaFin = Calendar.getInstance();
-            String[] datosFechaFin = txtFechaFin.getText().toString().split("/");
-            fechaFin.set(Integer.parseInt(datosFechaFin[0]), Integer.parseInt(datosFechaFin[1]),
-                    Integer.parseInt(datosFechaFin[2]));
+            SimpleDateFormat fechas = new SimpleDateFormat("yyyy/MM/dd");
+            Date inicio = fechas.parse(fechaIni);
+            Date fin = fechas.parse(fechaFi);
 
-            boolean res = controllerProyecto.modificarProyecto(txtNombre.getText().toString(),
-                    fechaInicial.getTime(),fechaFin.getTime(),Double.parseDouble(txtEstado.getText().toString()));
-            if(res){
-                Toast.makeText(this, "Modificado con exito", Toast.LENGTH_SHORT).show();
+            if (inicio.compareTo(fin)!=1){
+                ControllerProyecto controllerProyecto = new ControllerProyecto(this);
+
+                Calendar fechaInicial = Calendar.getInstance();
+                String[] datosfechaIni = txtFechaInicio.getText().toString().split("/");
+                fechaInicial.set(Integer.parseInt(datosfechaIni[0]), Integer.parseInt(datosfechaIni[1]),
+                        Integer.parseInt(datosfechaIni[2]));
+
+                Calendar fechaFin = Calendar.getInstance();
+                String[] datosFechaFin = txtFechaFin.getText().toString().split("/");
+                fechaFin.set(Integer.parseInt(datosFechaFin[0]), Integer.parseInt(datosFechaFin[1]),
+                        Integer.parseInt(datosFechaFin[2]));
+
+                boolean res = controllerProyecto.modificarProyecto(txtNombre.getText().toString(),
+                        fechaInicial.getTime(),fechaFin.getTime(),Double.parseDouble(txtEstado.getText().toString()));
+                if(res){
+                    Toast.makeText(this, "Modificado con exito", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Error al modificar", Toast.LENGTH_SHORT).show();
+                }
             } else {
-                Toast.makeText(this, "Error al modificar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "La fecha de fin es menor a la fecha inicial",
+                        Toast.LENGTH_SHORT).show();
             }
-
         }
     }
 
