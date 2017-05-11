@@ -199,7 +199,7 @@ public class GestionProyectoActivity extends AppCompatActivity {
     public void ocultarBotonesEdicion(){
         layoutEdicion.setVisibility(View.INVISIBLE);
         btnCrear.setVisibility(View.VISIBLE);
-        txtNombre.setClickable(true);
+        txtNombre.setEnabled(true);
     }
 
     /**
@@ -208,7 +208,7 @@ public class GestionProyectoActivity extends AppCompatActivity {
     public void habilitarBotonesEdicion(){
         layoutEdicion.setVisibility(View.VISIBLE);
         btnCrear.setVisibility(View.INVISIBLE);
-        txtNombre.setClickable(false);
+        txtNombre.setEnabled(false);
     }
 
 }
