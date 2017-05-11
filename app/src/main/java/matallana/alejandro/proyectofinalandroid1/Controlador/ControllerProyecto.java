@@ -72,6 +72,16 @@ public class ControllerProyecto {
     }
 
     /**
+     * metodo para verificar si ya se registro un integrante al proyecto
+     * @param idProyecto, id del proyecto
+     * @return true si ya hay un integrante registrado al proyecto
+     */
+    public boolean existeEnProyectosIntegrantes(int idProyecto){
+        ProyectoDAO dao = new ProyectoDAO(activity);
+        return dao.existeEnProyectosIntegrantes(idProyecto);
+    }
+
+    /**
      * metodo para listar proyectos de la persona que esté logueada
      * @return
      */
