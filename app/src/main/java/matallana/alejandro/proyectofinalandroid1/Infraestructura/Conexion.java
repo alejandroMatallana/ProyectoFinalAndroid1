@@ -30,7 +30,7 @@ public class Conexion extends SQLiteOpenHelper {
         super.onOpen(db);
         if (!db.isReadOnly()) {
             // Enable foreign key constraints
-            db.execSQL("PRAGMA foreign_keys=ON;");
+            db.execSQL("PRAGMA foreign_keys=ON");
             //db.setForeignKeyConstraintsEnabled(true);
         }
     }
@@ -53,12 +53,12 @@ public class Conexion extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE \"Actividades\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"nombre\" VARCHAR NOT NULL , \"descripcion\" VARCHAR NOT NULL ," +
                 " \"fechaInicio\" DATETIME NOT NULL , \"fechaFinal\" DATETIME NOT NULL ," +
-                " \"idResponsable\" INTEGER REFERENCES Usuarios , " +
+                " \"idResponsable\" INTEGER REFERENCES Usuarios ON DELETE CASCADE , " +
                 " \"idProyecto\" INTEGER REFERENCES Proyectos ON DELETE CASCADE)");
         db.execSQL("CREATE TABLE \"Tareas\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"nombre\" VARCHAR NOT NULL , \"porcentajeDesarrollo\" DOUBLE NOT NULL ," +
                 " \"fechaInicio\" DATETIME NOT NULL , \"fechaFinal\" DATETIME NOT NULL ," +
-                " \"estado\" VARCHAR NOT NULL , \"idActividad\" INTEGER REFERENCES Actividades)");
+                " \"estado\" VARCHAR NOT NULL , \"idActividad\" INTEGER REFERENCES Actividades ON DELETE CASCADE)");
         db.execSQL("CREATE TABLE \"Recursos\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"nombre\" VARCHAR NOT NULL , \"cantidad\" INTEGER NOT NULL ," +
                 " \"descripcion\" VARCHAR NOT NULL , \"ubicacion\" VARCHAR NOT NULL) ");
@@ -66,10 +66,10 @@ public class Conexion extends SQLiteOpenHelper {
                 " \"coordenadas\" VARCHAR NOT NULL , \"mensaje\" VARCHAR NOT NULL ," +
                 " \"tematica\" VARCHAR NOT NULL, \"idProyecto\" INTEGER REFERENCES Proyectos ON DELETE CASCADE)");
         db.execSQL("CREATE TABLE \"ProyectosIntegrantes\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
-                " \"idCargo\" INTEGER REFERENCES Cargos, \"idProyecto\" INTEGER REFERENCES Proyectos ON DELETE CASCADE," +
-                " \"idUsuario\" INTEGER REFERENCES Usuarios)");
+                " \"idCargo\" INTEGER REFERENCES Cargos ON DELETE CASCADE, \"idProyecto\" INTEGER REFERENCES Proyectos ON DELETE CASCADE," +
+                " \"idUsuario\" INTEGER REFERENCES Usuarios ON DELETE CASCADE)");
         db.execSQL("CREATE TABLE \"TareasRecursos\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
-                " \"idTarea\" INTEGER REFERENCES Tareas, \"idRecurso\" INTEGER REFERENCES Recursos)");
+                " \"idTarea\" INTEGER REFERENCES Tareas ON DELETE CASCADE, \"idRecurso\" INTEGER REFERENCES Recursos ON DELETE CASCADE)");
 
         db.execSQL("INSERT INTO Cargos (nombre,descripcion) VALUES ('Lider','Lider de Proyecto')");
 
@@ -112,6 +112,7 @@ public class Conexion extends SQLiteOpenHelper {
 
     public boolean delete(String tabla, String condicion) {
         bd = this.getWritableDatabase();
+        System.out.println(tabla);
         int cant = bd.delete(tabla, condicion, null);
         cerrarConexion();
         if (cant >= 1) {

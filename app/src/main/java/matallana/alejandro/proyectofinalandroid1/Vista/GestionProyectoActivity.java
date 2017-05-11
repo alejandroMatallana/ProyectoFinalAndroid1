@@ -193,6 +193,7 @@ public class GestionProyectoActivity extends AppCompatActivity {
                 ControllerProyecto controllerProyecto = new ControllerProyecto(this);
                 controllerProyecto.eliminar(txtNombre.getText().toString());
                 Toast.makeText(this, "Exito, se ha eliminado correctamente",Toast.LENGTH_SHORT).show();
+                finish();
             } else {
                 Toast.makeText(this, "Error al eliminar: No se encuentra ningun proyecto con este nombre",
                         Toast.LENGTH_SHORT).show();

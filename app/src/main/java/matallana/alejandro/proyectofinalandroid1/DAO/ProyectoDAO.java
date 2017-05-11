@@ -141,7 +141,7 @@ public class ProyectoDAO {
      */
     public boolean eliminar (Proyecto p){
         String tabla = "Proyectos";
-        String condicion = "nombre=" + p.getNombre();
+        String condicion = "nombre='" + p.getNombre() + "'";
         return conex.delete(tabla,condicion);
     }
 
