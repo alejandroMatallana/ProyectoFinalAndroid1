@@ -61,6 +61,7 @@ public class CargoActivity extends AppCompatActivity {
             cargo.setProyecto(MenuProyectosActivity.proyecto);
             if (controllerCargo.guardar(cargo)) {
                 Toast.makeText(this,"Se registró el cargo",Toast.LENGTH_SHORT).show();
+                limpiarCampos();
             } else {
                 Toast.makeText(this,"El cargo ya existe",Toast.LENGTH_SHORT).show();
             }
