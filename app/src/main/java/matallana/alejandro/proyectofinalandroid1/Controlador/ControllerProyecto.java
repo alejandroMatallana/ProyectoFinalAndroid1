@@ -64,9 +64,11 @@ public class ControllerProyecto {
         return dao.modificar(proyecto);
     }
 
-    public  boolean eliminar(String nombre){
-
-        return false;
+    public boolean eliminar(String nombre){
+        ProyectoDAO dao = new ProyectoDAO(activity);
+        Proyecto proyecto = new Proyecto();
+        proyecto.setNombre(nombre);
+        return dao.eliminar(proyecto);
     }
 
     /**

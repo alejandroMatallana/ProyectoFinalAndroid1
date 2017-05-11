@@ -140,7 +140,9 @@ public class ProyectoDAO {
      * @return true si el proyecto fue eliminado
      */
     public boolean eliminar (Proyecto p){
-        return true;
+        String tabla = "Proyectos";
+        String condicion = "nombre=" + p.getNombre();
+        return conex.delete(tabla,condicion);
     }
 
 
@@ -170,6 +172,23 @@ public class ProyectoDAO {
             } while (temp.moveToNext());
         }
         return lista;
+    }
+
+    /**
+     * metodo para verificar si ya se registro un integrante al proyecto
+     * @param idProyecto, id del proyecto
+     * @return true si ya hay un integrante registrado al proyecto
+     */
+    public boolean existeEnProyectosIntegrantes(int idProyecto){
+        String consulta = "SELECT count(p.id) FROM ProyectosIntegrantes AS p WHERE p.idProyecto="+idProyecto;
+        Cursor temp = conex.search(consulta);
+        if (temp.getCount()>0){
+            temp.moveToFirst();
+            if(temp.getInt(0) > 1){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void cerrarConexionBaseDeDatos(){

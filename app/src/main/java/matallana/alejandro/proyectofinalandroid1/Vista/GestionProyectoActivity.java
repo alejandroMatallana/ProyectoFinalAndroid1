@@ -160,6 +160,7 @@ public class GestionProyectoActivity extends AppCompatActivity {
         } else {
             String nombre = txtNombre.getText().toString();
             if (nombre!=null){
+
                 Toast.makeText(this, "Exito, se ha eliminado correctamente",Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Error al eliminar: No se encuentra ningun proyecto con este nombre",
