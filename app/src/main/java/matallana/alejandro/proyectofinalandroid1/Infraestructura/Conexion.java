@@ -50,7 +50,7 @@ public class Conexion extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE \"Cargos\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"nombre\" VARCHAR NOT NULL , \"descripcion\" VARCHAR NOT NULL ," +
                 " \"horario\" VARCHAR , \"salario\" DOUBLE , " +
-                " \"idProyecto\" INTEGER REFERENCES Proyectos NULL)");
+                " \"idProyecto\" INTEGER REFERENCES Proyectos ON DELETE CASCADE)");
         db.execSQL("CREATE TABLE \"Usuarios\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"tipoDocumento\" VARCHAR NOT NULL , \"numeroDocumento\" INTEGER NOT NULL  UNIQUE ," +
                 " \"nombres\" VARCHAR NOT NULL , \"apellidos\" VARCHAR NOT NULL , " +
@@ -61,7 +61,7 @@ public class Conexion extends SQLiteOpenHelper {
                 " \"nombre\" VARCHAR NOT NULL , \"descripcion\" VARCHAR NOT NULL ," +
                 " \"fechaInicio\" DATETIME NOT NULL , \"fechaFinal\" DATETIME NOT NULL ," +
                 " \"idResponsable\" INTEGER REFERENCES Usuarios , " +
-                " \"idProyecto\" INTEGER REFERENCES Proyectos)");
+                " \"idProyecto\" INTEGER REFERENCES Proyectos ON DELETE CASCADE)");
         db.execSQL("CREATE TABLE \"Tareas\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"nombre\" VARCHAR NOT NULL , \"porcentajeDesarrollo\" DOUBLE NOT NULL ," +
                 " \"fechaInicio\" DATETIME NOT NULL , \"fechaFinal\" DATETIME NOT NULL ," +
@@ -71,9 +71,9 @@ public class Conexion extends SQLiteOpenHelper {
                 " \"descripcion\" VARCHAR NOT NULL , \"ubicacion\" VARCHAR NOT NULL) ");
         db.execSQL("CREATE TABLE \"Reuniones\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"coordenadas\" VARCHAR NOT NULL , \"mensaje\" VARCHAR NOT NULL ," +
-                " \"tematica\" VARCHAR NOT NULL, \"idProyecto\" INTEGER REFERENCES Proyectos)");
+                " \"tematica\" VARCHAR NOT NULL, \"idProyecto\" INTEGER REFERENCES Proyectos ON DELETE CASCADE)");
         db.execSQL("CREATE TABLE \"ProyectosIntegrantes\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
-                " \"idCargo\" INTEGER REFERENCES Cargos, \"idProyecto\" INTEGER REFERENCES Proyectos," +
+                " \"idCargo\" INTEGER REFERENCES Cargos, \"idProyecto\" INTEGER REFERENCES Proyectos ON DELETE CASCADE," +
                 " \"idUsuario\" INTEGER REFERENCES Usuarios)");
         db.execSQL("CREATE TABLE \"TareasRecursos\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"idTarea\" INTEGER REFERENCES Tareas, \"idRecurso\" INTEGER REFERENCES Recursos)");
