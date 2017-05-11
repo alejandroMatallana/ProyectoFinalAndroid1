@@ -73,6 +73,8 @@ public class UsuarioActivity extends AppCompatActivity {
                 username.getText().toString().isEmpty() || correo.getText().toString().isEmpty() ||
                 tipoUsuario.getSelectedItem().toString().isEmpty()) {
             Toast.makeText(this,"Debe ingresar todos los campos",Toast.LENGTH_SHORT).show();
+        } else if (correo.getText().toString().matches("([a-zA-Z]+[0-9]*)||([0-9]+[a-zA-Z]*)")) {
+
         } else {
             Usuario user = new Usuario();
             user.setTipoDocumento(tipoDocumento.getSelectedItem().toString());

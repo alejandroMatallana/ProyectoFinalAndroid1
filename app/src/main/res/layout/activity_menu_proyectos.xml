@@ -11,13 +11,15 @@
         android:id="@+id/button6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ver Datos del Proyecto" />
+        android:text="Ver Datos del Proyecto"
+        android:onClick="gestionProyectosVerDatos"/>
 
     <Button
         android:id="@+id/button7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ver Cargos del Proyecto" />
+        android:text="Ver Cargos del Proyecto"
+        android:onClick="gestionarCargos"/>
 
     <Button
         android:id="@+id/button8"

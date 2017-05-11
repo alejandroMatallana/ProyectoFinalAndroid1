@@ -49,7 +49,7 @@ public class Conexion extends SQLiteOpenHelper {
                 " \"fechaFinal\" DATETIME NOT NULL , \"etapa\" DOUBLE NOT NULL)");
         db.execSQL("CREATE TABLE \"Cargos\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"nombre\" VARCHAR NOT NULL , \"descripcion\" VARCHAR NOT NULL ," +
-                " \"horario\" VARCHAR NOT NULL , \"salario\" DOUBLE , " +
+                " \"horario\" VARCHAR , \"salario\" DOUBLE , " +
                 " \"idProyecto\" INTEGER REFERENCES Proyectos NULL)");
         db.execSQL("CREATE TABLE \"Usuarios\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"tipoDocumento\" VARCHAR NOT NULL , \"numeroDocumento\" INTEGER NOT NULL  UNIQUE ," +
@@ -78,7 +78,7 @@ public class Conexion extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE \"TareasRecursos\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"idTarea\" INTEGER REFERENCES Tareas, \"idRecurso\" INTEGER REFERENCES Recursos)");
 
-        //db.execSQL("INSERT INTO Cargos VALUES ('Lider','Lider de Proyecto','8 a 12 - 14 a 18',1200000,NULL)");
+        db.execSQL("INSERT INTO Cargos (nombre,descripcion) VALUES ('Lider','Lider de Proyecto')");
 
         //db.execSQL("INSERT INTO Usuarios VALUES ('Cedula',123456789,'alejandro','mata', '2017/05/10', '1234')");
     }
