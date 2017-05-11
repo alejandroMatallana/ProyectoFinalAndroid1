@@ -168,6 +168,7 @@ public class GestionProyectoActivity extends AppCompatActivity {
                         fechaInicial.getTime(),fechaFin.getTime(),Double.parseDouble(txtEstado.getText().toString()));
                 if(res){
                     Toast.makeText(this, "Modificado con exito", Toast.LENGTH_SHORT).show();
+                    finish();
                 } else {
                     Toast.makeText(this, "Error al modificar", Toast.LENGTH_SHORT).show();
                 }
