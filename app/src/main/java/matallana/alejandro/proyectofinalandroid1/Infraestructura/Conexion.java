@@ -37,13 +37,6 @@ public class Conexion extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-//        db.execSQL("create table usuario("
-//                + "cedula text primary key, "
-//                + "nombre text, "
-//                + "apellido text, "
-//                + "edad integer, "
-//                + "genero integer REFERENCES genero ON DELETE CASCADE)");
-
         db.execSQL("CREATE TABLE \"Proyectos\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"nombre\" VARCHAR NOT NULL , \"fechaInicio\" DATETIME NOT NULL ," +
                 " \"fechaFinal\" DATETIME NOT NULL , \"etapa\" DOUBLE NOT NULL)");
@@ -127,9 +120,6 @@ public class Conexion extends SQLiteOpenHelper {
             return false;
         }
     }
-
-
-
 
     public boolean update(String tabla, String condicion,
                           ContentValues registro) {
