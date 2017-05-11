@@ -40,9 +40,9 @@ public class CargoDAO {
      */
     public boolean modificar(Cargo cargo) {
         String tabla = "Cargos" ;
-        String condicion = "id=" +  cargo.getId();
+        String condicion = "nombre= '" +  cargo.getNombre() +  "'";
         ContentValues registro = new ContentValues();
-        registro.put("nombre", cargo.getNombre());
+
         registro.put("descripcion", cargo.getDescripcion());
         registro.put("horario", cargo.getHorario());
         registro.put("salario",cargo.getSalario());

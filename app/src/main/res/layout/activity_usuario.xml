@@ -85,34 +85,6 @@
             android:id="@+id/guardar"
             android:onClick="crear" />
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Buscar"
-            android:id="@+id/buscarUsu"
-            android:onClick="buscar" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Editar"
-            android:id="@+id/editarUsu"
-            android:onClick="editar" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Eliminar"
-            android:id="@+id/eliminarUsu"
-            android:onClick="eliminar" />
     </LinearLayout>
 
 </LinearLayout>

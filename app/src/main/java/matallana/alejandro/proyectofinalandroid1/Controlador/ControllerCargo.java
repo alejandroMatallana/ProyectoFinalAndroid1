@@ -60,18 +60,6 @@ public class ControllerCargo {
      * @param salario
      * @return, el cargo modificado si se hizo satisfactoriamente
      */
-  //  public boolean modificar(String nombre, String descripcion, String horario, double salario) {
-//        if (nombre.equals(CargoActivity.cargo.getNombre())) {
-///*            Cargo cargo = new Cargo(nombre, descripcion, horario, salario);
-//            return cargoDAO.modificar(cargo);*/
-//            return true;
-//        } else {
-//            Cargo cargo = new Cargo(nombre, descripcion, horario, salario);
-//            return cargoDAO.modificar(cargo);
-//        }
-
-
-    //}
 
     public boolean modificar(String nombre, String descripcion, String horario, double salario){
         Cargo cargo = new Cargo(nombre,descripcion,horario,salario);
