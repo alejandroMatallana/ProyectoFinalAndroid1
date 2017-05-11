@@ -14,6 +14,7 @@ import matallana.alejandro.proyectofinalandroid1.R;
 public class CargoActivity extends AppCompatActivity {
 
     public static int tipo=0;
+    public static Cargo cargo = null;
 
     private EditText txtNombre;
     private EditText txtHorario;
@@ -42,6 +43,9 @@ public class CargoActivity extends AppCompatActivity {
             modificar.setVisibility(View.GONE);
             eliminar.setVisibility(View.GONE);
         }
+        if (cargo != null) {
+            cargarCargo();
+        }
     }
 
     public void crear(View view) {
@@ -69,6 +73,7 @@ public class CargoActivity extends AppCompatActivity {
           controllerCargo.eliminar(nombre);
             Toast.makeText(this, "Eliminado correctamente", Toast.LENGTH_SHORT).show();
             limpiarCampos();
+            finish();
         }  else {
             Toast.makeText(this, "Error!!!  no se encuenta alamcenando", Toast.LENGTH_SHORT).show();
         }
@@ -86,10 +91,18 @@ public class CargoActivity extends AppCompatActivity {
             if (controllerCargo.modificar(nombre,descripcion,horario,salario)){
                 Toast.makeText(this, "Editado correctamente", Toast.LENGTH_SHORT).show();
                 limpiarCampos();
+                finish();
             } else {
                 Toast.makeText(this, "Error!!! alamcenando la información", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public void cargarCargo() {
+        txtNombre.setText(cargo.getNombre());
+        txtDescripcion.setText(cargo.getDescripcion());
+        txtHorario.setText(cargo.getHorario());
+        txtSalario.setText(String.valueOf(cargo.getSalario()));
     }
 
     public void limpiarCampos(){
@@ -97,5 +110,6 @@ public class CargoActivity extends AppCompatActivity {
         txtDescripcion.setText(null);
         txtHorario.setText(null);
         txtSalario.setText(null);
+        cargo = null;
     }
 }

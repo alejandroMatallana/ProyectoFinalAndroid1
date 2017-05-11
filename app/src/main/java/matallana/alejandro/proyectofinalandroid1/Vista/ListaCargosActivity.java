@@ -28,6 +28,13 @@ public class ListaCargosActivity extends AppCompatActivity {
         configurarLista();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        listaCargos = (ListView) findViewById(R.id.lista);
+        configurarLista();
+    }
+
     public void configurarLista() {
         List<Cargo> cargos = controllerCargo.listar();
         ArrayAdapter<Cargo> adapter = new ArrayAdapter<Cargo>(this,android.R.layout.simple_list_item_1,cargos);
@@ -35,15 +42,17 @@ public class ListaCargosActivity extends AppCompatActivity {
         listaCargos.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int posicion, long id) {
-                abrirGestionCargo();
+                abrirGestionCargo(listaCargos.getItemAtPosition(posicion).toString());
             }
         });
     }
 
-    public void abrirGestionCargo() {
+    public void abrirGestionCargo(String datos) {
         CargoActivity.tipo = 1;
         Intent intent = new Intent(this,CargoActivity.class);
         startActivity(intent);
+        String[] dat = datos.split(" - ");
+        CargoActivity.cargo = controllerCargo.buscar(dat[0]);
     }
 
     public void crearCargo(View view) {
