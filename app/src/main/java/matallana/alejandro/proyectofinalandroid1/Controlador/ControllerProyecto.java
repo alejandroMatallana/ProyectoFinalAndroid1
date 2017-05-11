@@ -58,15 +58,14 @@ public class ControllerProyecto {
         }
     }
 
-    public boolean modificarProyecto(String nombre, Date fechaInicion, Date fechaFin, double estado){
-      //  Proyecto proyecto = new Proyecto(nombre,fechaInicion,fechaFin,estado);
-       // return proyectoDAO.modificar(proyecto);
-        return false;
+    public boolean modificarProyecto(String nombre, Date fechaInicio, Date fechaFin, double estado){
+        ProyectoDAO dao = new ProyectoDAO(activity);
+        Proyecto proyecto = new Proyecto(nombre,fechaInicio,fechaFin,estado);
+        return dao.modificar(proyecto);
     }
 
     public  boolean eliminar(String nombre){
-       // Proyecto proyecto = new Proyecto(nombre,"","",0);
-        //return proyectoDAO.eliminar(proyecto);
+
         return false;
     }
 

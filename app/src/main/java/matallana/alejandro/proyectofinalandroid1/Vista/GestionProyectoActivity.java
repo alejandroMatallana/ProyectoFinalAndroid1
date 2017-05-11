@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -22,7 +23,7 @@ public class GestionProyectoActivity extends AppCompatActivity {
 
     private LinearLayout layoutEdicion;
     private Button btnCrear;
-    private EditText txtNombre, txtFechaInicio, txtFechaFin;
+    private EditText txtNombre, txtFechaInicio, txtFechaFin, txtEstado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class GestionProyectoActivity extends AppCompatActivity {
         txtFechaFin = (EditText) findViewById(R.id.dateFinProyecto);
         txtFechaInicio = (EditText) findViewById(R.id.dateInicioProyecto);
         txtNombre = (EditText) findViewById(R.id.txtNombreProyecto);
+        txtEstado = (EditText) findViewById(R.id.txtEstadoProyecto);
 
         txtFechaInicio.setOnClickListener(new View.OnClickListener() {
 
@@ -88,7 +90,7 @@ public class GestionProyectoActivity extends AppCompatActivity {
 
             Calendar fechaFin = Calendar.getInstance();
             String[] datosFechaFin = txtFechaFin.getText().toString().split("/");
-            fechaInicial.set(Integer.parseInt(datosFechaFin[0]), Integer.parseInt(datosFechaFin[1]),
+            fechaFin.set(Integer.parseInt(datosFechaFin[0]), Integer.parseInt(datosFechaFin[1]),
                     Integer.parseInt(datosFechaFin[2]));
 
             String res = controllerProyecto.guardarProyecto(txtNombre.getText().toString(),
@@ -124,21 +126,25 @@ public class GestionProyectoActivity extends AppCompatActivity {
                 || txtNombre.getText().toString().equals("")){
             Toast.makeText(this, "Error al editar: Favor ingresar todos los datos", Toast.LENGTH_SHORT).show();
         } else {
-//            if (txtNombre.getText().toString()== proyecto.getNombre()){
-//                Calendar fechaInicio = Calendar.getInstance();
-//                Calendar fechaFin = Calendar.getInstance();
-//                String[] datos = txtFechaInicio.getText().toString().split("/");
-//                String[] datos2 = txtFechaFin.getText().toString().split("/");
-//                fechaInicio.set(Integer.parseInt(datos[0]), (Integer.parseInt(datos[1]))-1, Integer.parseInt(datos[2]));
-//                fechaInicio.set(Integer.parseInt(datos2[0]), (Integer.parseInt(datos2[1]))-1, Integer.parseInt(datos2[2]));
-//                proyecto.setFechaInicio(fechaInicio.getTime());
-//                proyecto.setFechaFin(fechaFin.getTime());
-//
-//            }else {
-//
-//            }
+            ControllerProyecto controllerProyecto = new ControllerProyecto(this);
 
+            Calendar fechaInicial = Calendar.getInstance();
+            String[] datosfechaIni = txtFechaInicio.getText().toString().split("/");
+            fechaInicial.set(Integer.parseInt(datosfechaIni[0]), Integer.parseInt(datosfechaIni[1]),
+                    Integer.parseInt(datosfechaIni[2]));
 
+            Calendar fechaFin = Calendar.getInstance();
+            String[] datosFechaFin = txtFechaFin.getText().toString().split("/");
+            fechaFin.set(Integer.parseInt(datosFechaFin[0]), Integer.parseInt(datosFechaFin[1]),
+                    Integer.parseInt(datosFechaFin[2]));
+
+            boolean res = controllerProyecto.modificarProyecto(txtNombre.getText().toString(),
+                    fechaInicial.getTime(),fechaFin.getTime(),Double.parseDouble(txtEstado.getText().toString()));
+            if(res){
+                Toast.makeText(this, "Modificado con exito", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Error al modificar", Toast.LENGTH_SHORT).show();
+            }
 
         }
     }
@@ -171,7 +177,13 @@ public class GestionProyectoActivity extends AppCompatActivity {
         if(MenuProyectosActivity.proyecto == null){
             ocultarBotonesEdicion();
         } else {
-
+            habilitarBotonesEdicion();
+            Proyecto pro = MenuProyectosActivity.proyecto;
+            txtNombre.setText(pro.getNombre());
+            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+            txtFechaFin.setText(format.format(pro.getFechaFin()));
+            txtFechaInicio.setText(format.format(pro.getFechaInicio()));
+            txtEstado.setText(String.valueOf(pro.getEtapa()));
         }
     }
 

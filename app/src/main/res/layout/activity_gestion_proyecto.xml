@@ -43,6 +43,14 @@
         android:hint="Fecha fin del proyecto"
         android:inputType="date" />
 
+    <EditText
+        android:id="@+id/txtEstadoProyecto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:visibility="invisible" />
+
     <LinearLayout
         android:id="@+id/layoutCrearBuscar"
         android:layout_width="match_parent"

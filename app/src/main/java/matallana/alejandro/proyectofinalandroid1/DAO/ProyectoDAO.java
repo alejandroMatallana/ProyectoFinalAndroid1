@@ -95,8 +95,7 @@ public class ProyectoDAO {
 
     /**
      * metodo para buscar el id y solo el id del ultimo proyecto registrado
-     * @param nombre, nombre del proyecto que se va a buscar
-     * @return el id de un proyecto encontrado por ese nombre
+     * @return el id del ultimo proyecto registrado
      */
     public Proyecto obtenerIdUltimoProyecto (){
         Proyecto p = null;
