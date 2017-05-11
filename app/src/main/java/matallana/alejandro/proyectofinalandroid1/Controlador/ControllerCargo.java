@@ -8,6 +8,7 @@ import matallana.alejandro.proyectofinalandroid1.DAO.CargoDAO;
 import matallana.alejandro.proyectofinalandroid1.DAO.ProyectoDAO;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Cargo;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Proyecto;
+import matallana.alejandro.proyectofinalandroid1.Vista.CargoActivity;
 import matallana.alejandro.proyectofinalandroid1.Vista.MenuProyectosActivity;
 
 /**
@@ -18,7 +19,7 @@ public class ControllerCargo {
 
     CargoDAO cargoDAO;
 
-    public ControllerCargo(Activity activity){
+    public ControllerCargo(Activity activity) {
         cargoDAO = new CargoDAO(activity);
     }
 
@@ -40,29 +41,41 @@ public class ControllerCargo {
             return null;
         }
     }
+
     /**
      * Metodo para eliminar un cargo
-     * @param nombre, el nombre del cargo que se va a eliminar
+     *
      * @return
      */
-    public boolean eliminar (String nombre){
-        Cargo cargo = new Cargo(nombre,"","",0); // Aca faltaria la foranea al final
+    public boolean eliminar(Cargo cargo) {
         return cargoDAO.eliminar(cargo);
     }
 
     /**
      * Metodo para modificar un cargo
+     *
      * @param nombre
      * @param descripcion
      * @param horario
      * @param salario
-
      * @return, el cargo modificado si se hizo satisfactoriamente
      */
+  //  public boolean modificar(String nombre, String descripcion, String horario, double salario) {
+//        if (nombre.equals(CargoActivity.cargo.getNombre())) {
+///*            Cargo cargo = new Cargo(nombre, descripcion, horario, salario);
+//            return cargoDAO.modificar(cargo);*/
+//            return true;
+//        } else {
+//            Cargo cargo = new Cargo(nombre, descripcion, horario, salario);
+//            return cargoDAO.modificar(cargo);
+//        }
+
+
+    //}
+
     public boolean modificar(String nombre, String descripcion, String horario, double salario){
-//        Proyecto proyecto = proyectoDAO.buscar(nomProyecto);
-        Cargo cargo = new Cargo(nombre,descripcion,horario,salario);// Aca faltaria poner el proyecto
-        return  cargoDAO.modificar(cargo);
+        Cargo cargo = new Cargo(nombre,descripcion,horario,salario);
+        return cargoDAO.modificar(cargo);
     }
 
     public List<Cargo> listar() {

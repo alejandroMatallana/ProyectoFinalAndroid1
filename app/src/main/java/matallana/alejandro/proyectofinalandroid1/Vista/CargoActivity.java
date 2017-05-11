@@ -69,15 +69,10 @@ public class CargoActivity extends AppCompatActivity {
     }
 
     public void eliminar(View view){
-        String nombre = txtNombre.getText().toString();
-        if (nombre!=null){
-          controllerCargo.eliminar(nombre);
+          controllerCargo.eliminar(cargo);
             Toast.makeText(this, "Eliminado correctamente", Toast.LENGTH_SHORT).show();
             limpiarCampos();
             finish();
-        }  else {
-            Toast.makeText(this, "Error!!!  no se encuenta alamcenando", Toast.LENGTH_SHORT).show();
-        }
     }
 
     public void editar(View view){
@@ -96,6 +91,7 @@ public class CargoActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Error!!! alamcenando la información", Toast.LENGTH_SHORT).show();
             }
+
         }
     }
 
