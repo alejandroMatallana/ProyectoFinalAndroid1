@@ -51,7 +51,7 @@ public class CargoDAO {
     }
 
     public Cargo buscar(String nombreCargo, int idProyecto) {
-        String consulta = "select descripcion,horario,salario " +
+        String consulta = "select descripcion,horario,salario from Cargos " +
                 "where nombre='" + nombreCargo + "' and idProyecto=" + idProyecto;
 
         Cursor temp = conex.search(consulta);
