@@ -167,6 +167,7 @@ public class GestionProyectoActivity extends AppCompatActivity {
                 boolean res = controllerProyecto.modificarProyecto(txtNombre.getText().toString(),
                         fechaInicial.getTime(),fechaFin.getTime(),Double.parseDouble(txtEstado.getText().toString()));
                 if(res){
+                    limpiarCampos();
                     Toast.makeText(this, "Modificado con exito", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
@@ -192,6 +193,7 @@ public class GestionProyectoActivity extends AppCompatActivity {
             if (nombre!=null){
                 ControllerProyecto controllerProyecto = new ControllerProyecto(this);
                 controllerProyecto.eliminar(txtNombre.getText().toString());
+                limpiarCampos();
                 Toast.makeText(this, "Exito, se ha eliminado correctamente",Toast.LENGTH_SHORT).show();
                 finish();
             } else {
