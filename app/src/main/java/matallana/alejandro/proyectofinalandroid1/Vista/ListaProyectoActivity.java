@@ -38,7 +38,7 @@ public class ListaProyectoActivity extends AppCompatActivity {
     }
 
     /**
-     * metodo que lista los proyectos que contengan los
+     * metodo que listaTareas los proyectos que contengan los
      * caracteres ingresados en el campo de buscar proyecto
      */
     public void listaBuscarProyectos(){
@@ -49,7 +49,7 @@ public class ListaProyectoActivity extends AppCompatActivity {
             auxiliar = new ArrayList<>();
             ControllerProyecto controlador = new ControllerProyecto(this);
             lista = controlador.listarProyectos();
-            //busca en la lista de todos los proyectos los que contengan en su nombre
+            //busca en la listaTareas de todos los proyectos los que contengan en su nombre
             //lo ingresado en el campo de texto de buscar proyecto
             for (int i = 0; i < lista.size(); i++) {
                 if(lista.get(i).getNombre().toLowerCase().contains(nombreProyecto.toLowerCase())){

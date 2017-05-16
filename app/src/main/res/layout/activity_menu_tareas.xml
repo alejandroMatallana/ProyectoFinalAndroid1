@@ -5,18 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="matallana.alejandro.proyectofinalandroid1.Vista.ListarTareasActivity"
-    android:weightSum="1">
-
-    <ListView
-        android:id="@+id/listaTareas"
-        android:layout_width="match_parent"
-        android:layout_height="452dp"
-        android:layout_weight="0.68" />
+    tools:context="matallana.alejandro.proyectofinalandroid1.Vista.MenuTareasActivity">
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Crear Tarea" />
+        android:text="Ver Datos" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Agregar Recursos" />
 </LinearLayout>

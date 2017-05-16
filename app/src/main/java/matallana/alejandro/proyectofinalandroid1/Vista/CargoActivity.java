@@ -13,7 +13,7 @@ import matallana.alejandro.proyectofinalandroid1.R;
 
 public class CargoActivity extends AppCompatActivity {
 
-    public static int tipo=0;
+    public static int tipo = 0;
     public static Cargo cargo = null;
 
     private EditText txtNombre;
@@ -29,10 +29,10 @@ public class CargoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cargo);
-        txtNombre = (EditText)findViewById(R.id.nombre);
-        txtHorario = (EditText)findViewById(R.id.horario);
-        txtSalario = (EditText)findViewById(R.id.salario);
-        txtDescripcion = (EditText)findViewById(R.id.descripcion);
+        txtNombre = (EditText) findViewById(R.id.nombre);
+        txtHorario = (EditText) findViewById(R.id.horario);
+        txtSalario = (EditText) findViewById(R.id.salario);
+        txtDescripcion = (EditText) findViewById(R.id.descripcion);
         controllerCargo = new ControllerCargo(this);
         crear = (Button) findViewById(R.id.crear);
         modificar = (Button) findViewById(R.id.modificar);
@@ -48,10 +48,16 @@ public class CargoActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        limpiarCampos();
+    }
+
     public void crear(View view) {
         if (txtNombre.getText().toString().isEmpty() || txtHorario.getText().toString().isEmpty() ||
                 txtSalario.getText().toString().isEmpty() || txtDescripcion.getText().toString().isEmpty()) {
-            Toast.makeText(this,"Se debe ingresar todos los datos",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Se debe ingresar todos los datos", Toast.LENGTH_SHORT).show();
         } else {
             Cargo cargo = new Cargo();
             cargo.setNombre(txtNombre.getText().toString());
@@ -60,38 +66,35 @@ public class CargoActivity extends AppCompatActivity {
             cargo.setDescripcion(txtDescripcion.getText().toString());
             cargo.setProyecto(MenuProyectosActivity.proyecto);
             if (controllerCargo.guardar(cargo)) {
-                Toast.makeText(this,"Se registró el cargo",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Se registró el cargo", Toast.LENGTH_SHORT).show();
                 limpiarCampos();
             } else {
-                Toast.makeText(this,"El cargo ya existe",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "El cargo ya existe", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    public void eliminar(View view){
-          controllerCargo.eliminar(cargo);
-            Toast.makeText(this, "Eliminado correctamente", Toast.LENGTH_SHORT).show();
-            limpiarCampos();
-            finish();
+    public void eliminar(View view) {
+        controllerCargo.eliminar(cargo);
+        Toast.makeText(this, "Eliminado correctamente", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
-    public void editar(View view){
+    public void editar(View view) {
         if (txtSalario.getText().toString().isEmpty() || txtHorario.getText().toString().isEmpty() || txtDescripcion.getText().toString().isEmpty()
-                || txtNombre.getText().toString().isEmpty()){
+                || txtNombre.getText().toString().isEmpty()) {
             Toast.makeText(this, "Debe llenar todos los campos para continuar", Toast.LENGTH_SHORT).show();
         } else {
             String nombre = txtNombre.getText().toString();
             String descripcion = txtDescripcion.getText().toString();
             String horario = txtHorario.getText().toString();
             double salario = Double.parseDouble(txtSalario.getText().toString());
-            if (controllerCargo.modificar(nombre,descripcion,horario,salario)){
+            if (controllerCargo.modificar(nombre, descripcion, horario, salario)) {
                 Toast.makeText(this, "Editado correctamente", Toast.LENGTH_SHORT).show();
-                limpiarCampos();
                 finish();
             } else {
                 Toast.makeText(this, "Error!!! alamcenando la información", Toast.LENGTH_SHORT).show();
             }
-
         }
     }
 
@@ -102,7 +105,7 @@ public class CargoActivity extends AppCompatActivity {
         txtSalario.setText(String.valueOf(cargo.getSalario()));
     }
 
-    public void limpiarCampos(){
+    public void limpiarCampos() {
         txtNombre.setText(null);
         txtDescripcion.setText(null);
         txtHorario.setText(null);

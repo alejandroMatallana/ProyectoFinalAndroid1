@@ -50,9 +50,9 @@ public class CargoDAO {
 
     }
 
-    public Cargo buscar(String nombreCargo, int idProyecto) {
+    public Cargo buscar(String nombreCargo, Proyecto proyecto) {
         String consulta = "select descripcion,horario,salario from Cargos " +
-                "where nombre='" + nombreCargo + "' and idProyecto=" + idProyecto;
+                "where UPPER(nombre)='" + nombreCargo.toUpperCase() + "' and idProyecto=" + proyecto.getId();
 
         Cursor temp = conex.search(consulta);
         if (temp.getCount()>0){
@@ -62,6 +62,7 @@ public class CargoDAO {
             cargo.setDescripcion(temp.getString(0));
             cargo.setHorario(temp.getString(1));
             cargo.setSalario(temp.getDouble(2));
+            cargo.setProyecto(proyecto);
             conex.cerrarConexion();
             return cargo;
         }
@@ -82,7 +83,8 @@ public class CargoDAO {
 
     public List<Cargo> listar(Proyecto proyecto) {
         List<Cargo> cargos = new ArrayList<>();
-        String consulta = "SELECT nombre,descripcion,horario,salario FROM Cargos WHERE idProyecto=" + proyecto.getId();
+        String consulta = "SELECT nombre,descripcion,horario,salario FROM Cargos WHERE idProyecto="
+                + proyecto.getId() + " ORDER BY nombre";
         Cursor temp = conex.search(consulta);
         if (temp.moveToFirst()){
             do {

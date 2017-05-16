@@ -14,7 +14,7 @@ public class Tarea {
     private int porcentaje;
     private Date fechaInicio;
     private Date fechaFinal;
-    private ArrayList<Recurso> recursos;
+    private Actividad actividad;
 
     public Tarea() {
     }
@@ -24,6 +24,7 @@ public class Tarea {
         this.porcentaje = porcentaje;
         this.fechaInicio = fechaInicio;
         this.fechaFinal = fechaFinal;
+        actividad = null;
     }
 
     public String getNombreTarea() {
@@ -58,14 +59,6 @@ public class Tarea {
         this.fechaFinal = fechaFinal;
     }
 
-    public ArrayList<Recurso> getRecursos() {
-        return recursos;
-    }
-
-    public void setRecursos(ArrayList<Recurso> recursos) {
-        this.recursos = recursos;
-    }
-
     public int getId() {
         return id;
     }
@@ -74,12 +67,16 @@ public class Tarea {
         this.id = id;
     }
 
+    public Actividad getActividad() {
+        return actividad;
+    }
+
+    public void setActividad(Actividad actividad) {
+        this.actividad = actividad;
+    }
+
     @Override
     public String toString() {
-        return nombreTarea + '\'' +
-                ", porcentaje='" + porcentaje + '\'' +
-                ", fechaInicio=" + fechaInicio +
-                ", fechaFinal=" + fechaFinal +
-                '}';
+        return nombreTarea + " - " + porcentaje + "% - " + fechaInicio + " - " + fechaFinal;
     }
 }

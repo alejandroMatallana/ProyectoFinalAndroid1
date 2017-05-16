@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import matallana.alejandro.proyectofinalandroid1.Infraestructura.Conexion;
+import matallana.alejandro.proyectofinalandroid1.Modelo.Actividad;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Tarea;
 
 /**
@@ -20,27 +21,49 @@ public class TareaDAO {
 
     Conexion conexion;
 
+    public Tarea buscar(String nombreTarea, Actividad actividad) {
+        String consulta = "SELECT porcentajeDesarrollo,fechaInicio,fechaFinal FROM Tareas " +
+                "WHERE nombre='" + nombreTarea + "' and idActividad=" + actividad.getId();
+
+        Cursor temp = conexion.search(consulta);
+        if (temp.getCount()>0){
+            try {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+                Tarea tarea = new Tarea();
+                temp.moveToFirst();
+                tarea.setFechaFinal(format.parse(temp.getString(2)));
+                tarea.setFechaInicio(format.parse(temp.getString(1)));
+                tarea.setNombreTarea(nombreTarea);
+                tarea.setActividad(actividad);
+                tarea.setPorcentaje(temp.getInt(0));
+                return tarea;
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        conexion.cerrarConexion();
+        return null;
+    }
+
     public TareaDAO(Activity activity) {
         conexion = new Conexion(activity);
     }
 
-    public List<Tarea> listar() {
+    public List<Tarea> listar(Actividad actividad) {
         List<Tarea> tareas = new ArrayList<>();
-        String consulta = "SELECT nombre,porcentajeDesarrollo,fechaInicio,fechaFinal FROM Tareas WHERE idActividad="  ;
+        String consulta = "SELECT nombre,porcentajeDesarrollo,fechaInicio,fechaFinal FROM Tareas WHERE idActividad=" + actividad.getId();
         Cursor temp = conexion.search(consulta);
         if (temp.moveToFirst()){
             do {
-                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-                Date fechaInicio = new Date();
-                Date fechaFinal = new Date();
                 try {
-                    fechaInicio = format.parse(temp.getString(2));
-                    fechaFinal = format.parse(temp.getString(3));
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+                    Date fechaInicio = format.parse(temp.getString(2));
+                    Date fechaFinal = format.parse(temp.getString(3));
+                    Tarea tarea = new Tarea(temp.getString(0),temp.getInt(1),fechaInicio,fechaFinal);
+                    tareas.add(tarea);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                Tarea tarea = new Tarea(temp.getString(0),temp.getInt(1),fechaInicio,fechaFinal);
-                tareas.add(tarea);
             } while (temp.moveToNext());
         }
         return tareas;
