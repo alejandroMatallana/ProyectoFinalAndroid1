@@ -23,7 +23,8 @@
         <activity android:name=".Vista.ListaProyectoActivity" />
         <activity android:name=".Vista.GestionProyectoActivity" />
         <activity android:name=".Vista.MenuProyectosActivity" />
-        <activity android:name=".Vista.ListarTareasActivity"></activity>
+        <activity android:name=".Vista.ListarTareasActivity" />
+        <activity android:name=".Vista.MenuActividadesActivity"></activity>
     </application>
 
 </manifest>
