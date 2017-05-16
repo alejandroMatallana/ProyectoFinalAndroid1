@@ -41,7 +41,7 @@ public class ListaProyectoActivity extends AppCompatActivity {
      * metodo que listaTareas los proyectos que contengan los
      * caracteres ingresados en el campo de buscar proyecto
      */
-    public void listaBuscarProyectos(){
+    public void listaBuscarProyectos(View view){
         String nombreProyecto = txtNombreBuscar.getText().toString();
         if(nombreProyecto.isEmpty()){
             cargarLista();

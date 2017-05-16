@@ -16,10 +16,11 @@
         android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnBuscarProyecto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="Buscar Proyecto"
+        android:onClick="listaBuscarProyectos"/>
 
     <TextView
         android:id="@+id/textView4"
