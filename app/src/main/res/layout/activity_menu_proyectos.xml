@@ -21,4 +21,11 @@
         android:text="Ver Cargos del Proyecto"
         android:onClick="gestionarCargos"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ver actividades proyecto"
+        android:id="@+id/button10"
+        android:layout_gravity="center_horizontal" />
+
 </LinearLayout>

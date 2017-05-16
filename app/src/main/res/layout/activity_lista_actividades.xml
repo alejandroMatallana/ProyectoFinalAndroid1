@@ -6,21 +6,20 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:orientation="vertical"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="matallana.alejandro.proyectofinalandroid1.Vista.MenuActividadesActivity">
+    android:orientation="vertical"
+    tools:context="matallana.alejandro.proyectofinalandroid1.Vista.ListaActividadesActivity"
+    android:weightSum="1">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="416dp"
+        android:id="@+id/TVlistaActividades"
+        android:layout_weight="1.37" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ver datos de la actividad"
-        android:id="@+id/button14"
-        android:layout_gravity="center_horizontal" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ver tarreas de la actividad"
-        android:id="@+id/button15"
-        android:layout_gravity="center_horizontal" />
+        android:text="Crear Actividad"
+        android:id="@+id/crearActi" />
 </LinearLayout>

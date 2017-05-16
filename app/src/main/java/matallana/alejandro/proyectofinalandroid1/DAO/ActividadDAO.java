@@ -14,6 +14,9 @@ import matallana.alejandro.proyectofinalandroid1.Infraestructura.Conexion;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Actividad;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Proyecto;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Usuario;
+import matallana.alejandro.proyectofinalandroid1.Vista.ListaProyectoActivity;
+import matallana.alejandro.proyectofinalandroid1.Vista.MainActivity;
+import matallana.alejandro.proyectofinalandroid1.Vista.MenuProyectosActivity;
 
 /**
  * Created by AlejandroM on 15/05/2017.
@@ -54,9 +57,9 @@ public class ActividadDAO {
      * @param nombre
      * @return
      */
-    public Actividad buscar(String nombre){
-        String consulta ="select a.descripcion, a.fechaInicio, a.fechaFinal, u.nombre, p.nombre from Actividades a join Proyectos p" +
-                "on p.id=a.idProyecto JOIN Usuarios u on u.id=a.idResponsable where a.nombre=" + nombre;
+    public Actividad buscar(String nombre, Usuario usuario, Proyecto proyecto){
+        String consulta ="select a.descripcion, a.fechaInicio, a.fechaFinal from Actividades a" +
+                " where a.nombre=" + nombre + "and idProyecto=" + proyecto.getId() + "and idResponsable=" +usuario.getId() ;
 
         Cursor temp = conex.search(consulta);
         if (temp.getCount()>0){
@@ -64,20 +67,16 @@ public class ActividadDAO {
             Actividad  actividad = new  Actividad();
             temp.moveToFirst();
             actividad.setNombre(nombre);
-            actividad.setDescripcion(temp.getString(3));
+            actividad.setDescripcion(temp.getString(0));
             SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
             try {
-                actividad.setFechaIni(format.parse(temp.getString(4)));
-                actividad.setFechaFin(format.parse(temp.getString(5)));
+                actividad.setFechaIni(format.parse(temp.getString(1)));
+                actividad.setFechaFin(format.parse(temp.getString(2)));
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            //actividad.setProyecto(temp.getString(6));
-
-
-
-
-            //actividad.setUsuario(temp.getInt(7));
+            actividad.setProyecto(MenuProyectosActivity.proyecto);
+            actividad.setUsuario(MainActivity.usuario);
             return  actividad;
         }
 
@@ -128,11 +127,10 @@ public class ActividadDAO {
      * Lista de actividades
      * @return
      */
-    public List<Actividad> listaActividades (){
+    public List<Actividad> listaActividades (Usuario usuario, Proyecto proyecto){
         ArrayList<Actividad> lista = new ArrayList<>();
-        String consulta ="select nombre, descripcion, fechaInicio,fechaFinal,idResponsable,idProyecto from Actividades a" +
-                "join ProyectosIntegrantes pi on p.id=pi.idProyecto WHERE pi.idUsuario="+UsuarioDAO.IDUsuarioLogueado;
-
+        String consulta ="select id, nombre, descripcion, fechaInicio,fechaFinal,idResponsable,idProyecto from Actividades " +
+                " WHERE idResponsable="+ usuario.getId() + "and idProyecto=" + proyecto.getId();
 
         Cursor temp = conex.search(consulta);
         if (temp.moveToFirst()){
@@ -146,9 +144,9 @@ public class ActividadDAO {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                //Actividad a = new Actividad(temp.getInt(0),temp.getString(1), temp.getString(2), fechaInicio, fechaFin, temp.getInt(5));
-                //Proyecto p = new Proyecto(temp.getInt(0),temp.getString(1),fechaInicio,fechaFin,temp.getDouble(4));
-                //lista.add(a);
+                Actividad a = new Actividad(temp.getString(1), temp.getString(2), fechaInicio, fechaFin, usuario, proyecto);
+                a.setId(temp.getInt(0));
+                lista.add(a);
             } while (temp.moveToNext());
         }
         return lista;

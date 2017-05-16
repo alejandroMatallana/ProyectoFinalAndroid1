@@ -27,7 +27,8 @@
         <activity android:name=".Vista.MenuActividadesActivity" />
         <activity android:name=".Vista.TareaActivity" />
         <activity android:name=".Vista.MenuTareasActivity" />
-        <activity android:name=".Vista.ListaRecursosActivity"></activity>
+        <activity android:name=".Vista.ListaRecursosActivity" />
+        <activity android:name=".Vista.ListaActividadesActivity"></activity>
     </application>
 
 </manifest>

@@ -27,4 +27,9 @@ public class MenuProyectosActivity extends AppCompatActivity {
         Intent intent = new Intent(this,GestionProyectoActivity.class);
         startActivity(intent);
     }
+
+    public void gestionActividades(View view){
+        Intent intent = new Intent(this,ListaActividadesActivity.class);
+        startActivity(intent);
+    }
 }

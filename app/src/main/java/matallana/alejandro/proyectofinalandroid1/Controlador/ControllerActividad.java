@@ -2,8 +2,14 @@ package matallana.alejandro.proyectofinalandroid1.Controlador;
 
 import android.app.Activity;
 
+import java.util.List;
+
 import matallana.alejandro.proyectofinalandroid1.DAO.ActividadDAO;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Actividad;
+import matallana.alejandro.proyectofinalandroid1.Modelo.Proyecto;
+import matallana.alejandro.proyectofinalandroid1.Modelo.Usuario;
+import matallana.alejandro.proyectofinalandroid1.Vista.MainActivity;
+import matallana.alejandro.proyectofinalandroid1.Vista.MenuProyectosActivity;
 
 /**
  * Created by AlejandroM on 15/05/2017.
@@ -38,15 +44,14 @@ public class ControllerActividad {
      * @return
      */
     public boolean buscar(String nombre){
-        Actividad actividad = actividadDAO.buscar(nombre);
+        Actividad actividad = actividadDAO.buscar(nombre, MainActivity.usuario, MenuProyectosActivity.proyecto);
         if (actividad!=null){
 
-            actividad.setNombre(nombre);
+            return true;
 
         }else {
-
+            return false;
         }
-        return false;
     }
 
     /**
@@ -70,6 +75,15 @@ public class ControllerActividad {
      */
     public boolean eliminar (Actividad actividad){
         return actividadDAO.eliminar(actividad);
+    }
+
+
+    /**
+     * Metodo para listar las actividades
+     * @return
+     */
+    public List<Actividad> listar(){
+        return  actividadDAO.listaActividades(MainActivity.usuario,MenuProyectosActivity.proyecto);
     }
 
 }

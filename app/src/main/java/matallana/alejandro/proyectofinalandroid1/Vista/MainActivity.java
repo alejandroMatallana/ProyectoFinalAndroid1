@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import matallana.alejandro.proyectofinalandroid1.DAO.UsuarioDAO;
+import matallana.alejandro.proyectofinalandroid1.Modelo.Usuario;
 import matallana.alejandro.proyectofinalandroid1.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     UsuarioDAO dao;
     EditText userName;
     EditText password;
+    public static Usuario usuario = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
         dao = new UsuarioDAO(this);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        usuario= null;
+    }
+
     public void signIn(View view){
         Intent intent = new Intent(this,UsuarioActivity.class);
         startActivity(intent);
@@ -33,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public void login(View view) {
         String resp = dao.buscarLogin(userName.getText().toString(),password.getText().toString());
         if (resp != null) {
+            usuario=dao.buscar(UsuarioDAO.IDUsuarioLogueado);
             if (resp.equalsIgnoreCase("Director de proyecto")) {
                 Intent intent = new Intent(this,ListaProyectoActivity.class);
                 startActivity(intent);
