@@ -58,7 +58,7 @@ public class Conexion extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE \"Tareas\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"nombre\" VARCHAR NOT NULL , \"porcentajeDesarrollo\" DOUBLE NOT NULL ," +
                 " \"fechaInicio\" DATETIME NOT NULL , \"fechaFinal\" DATETIME NOT NULL ," +
-                " \"estado\" VARCHAR NOT NULL , \"idActividad\" INTEGER REFERENCES Actividades ON DELETE CASCADE)");
+                " \"idActividad\" INTEGER REFERENCES Actividades ON DELETE CASCADE)");
         db.execSQL("CREATE TABLE \"Recursos\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"nombre\" VARCHAR NOT NULL , \"cantidad\" INTEGER NOT NULL ," +
                 " \"descripcion\" VARCHAR NOT NULL , \"ubicacion\" VARCHAR NOT NULL) ");

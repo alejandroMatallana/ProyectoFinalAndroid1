@@ -64,4 +64,13 @@ public class Tarea {
     public void setRecursos(ArrayList<Recurso> recursos) {
         this.recursos = recursos;
     }
+
+    @Override
+    public String toString() {
+        return nombreTarea + '\'' +
+                ", porcentaje='" + porcentaje + '\'' +
+                ", fechaInicio=" + fechaInicio +
+                ", fechaFinal=" + fechaFinal +
+                '}';
+    }
 }

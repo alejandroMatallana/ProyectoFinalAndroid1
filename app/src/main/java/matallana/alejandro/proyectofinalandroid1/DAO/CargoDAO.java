@@ -80,7 +80,7 @@ public class CargoDAO {
         return conex.delete(tabla,condicion);
     }
 
-    public List<Cargo> listar(Proyecto proyecto) { //El parametro no va, eso sería un atributo estatico
+    public List<Cargo> listar(Proyecto proyecto) {
         List<Cargo> cargos = new ArrayList<>();
         String consulta = "SELECT nombre,descripcion,horario,salario FROM Cargos WHERE idProyecto=" + proyecto.getId();
         Cursor temp = conex.search(consulta);
