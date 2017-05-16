@@ -235,6 +235,7 @@ public class GestionProyectoActivity extends AppCompatActivity {
         layoutEdicion.setVisibility(View.INVISIBLE);
         btnCrear.setVisibility(View.VISIBLE);
         txtNombre.setEnabled(true);
+        txtEstado.setVisibility(View.INVISIBLE);
     }
 
     /**
@@ -244,6 +245,8 @@ public class GestionProyectoActivity extends AppCompatActivity {
         layoutEdicion.setVisibility(View.VISIBLE);
         btnCrear.setVisibility(View.INVISIBLE);
         txtNombre.setEnabled(false);
+        txtEstado.setVisibility(View.VISIBLE);
+        txtEstado.setEnabled(false);
     }
 
 }
