@@ -9,8 +9,9 @@ import java.util.Date;
 
 public class Tarea {
 
+    private int id;
     private String nombreTarea;
-    private String porcentaje;
+    private int porcentaje;
     private Date fechaInicio;
     private Date fechaFinal;
     private ArrayList<Recurso> recursos;
@@ -18,7 +19,7 @@ public class Tarea {
     public Tarea() {
     }
 
-    public Tarea(String nombreTarea, String porcentaje, Date fechaInicio, Date fechaFinal) {
+    public Tarea(String nombreTarea, int porcentaje, Date fechaInicio, Date fechaFinal) {
         this.nombreTarea = nombreTarea;
         this.porcentaje = porcentaje;
         this.fechaInicio = fechaInicio;
@@ -33,11 +34,11 @@ public class Tarea {
         this.nombreTarea = nombreTarea;
     }
 
-    public String getPorcentaje() {
+    public int getPorcentaje() {
         return porcentaje;
     }
 
-    public void setPorcentaje(String porcentaje) {
+    public void setPorcentaje(int porcentaje) {
         this.porcentaje = porcentaje;
     }
 
@@ -63,6 +64,14 @@ public class Tarea {
 
     public void setRecursos(ArrayList<Recurso> recursos) {
         this.recursos = recursos;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
