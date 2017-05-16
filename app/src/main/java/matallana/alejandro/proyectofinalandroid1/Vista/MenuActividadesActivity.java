@@ -9,7 +9,7 @@ import matallana.alejandro.proyectofinalandroid1.R;
 public class MenuActividadesActivity extends AppCompatActivity {
 
 
-    public static Actividad tipoActividad=null;
+    public static Actividad actividad=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
