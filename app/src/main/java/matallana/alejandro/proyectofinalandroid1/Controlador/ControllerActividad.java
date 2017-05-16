@@ -63,4 +63,13 @@ public class ControllerActividad {
 
     }
 
+    /**
+     * MEtodo para eliminar una actividad
+     * @param actividad
+     * @return
+     */
+    public boolean eliminar (Actividad actividad){
+        return actividadDAO.eliminar(actividad);
+    }
+
 }

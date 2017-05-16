@@ -7,6 +7,7 @@ import java.util.Date;
  */
 public class Actividad {
 
+    private int id;
     private String nombre;
     private String descripcion;
     private Date fechaIni;
@@ -75,6 +76,13 @@ public class Actividad {
         this.proyecto = proyecto;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Override
     public String toString() {
