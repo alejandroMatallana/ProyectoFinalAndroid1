@@ -5,13 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="matallana.alejandro.proyectofinalandroid1.Vista.DatosIntegranteProyectoActivity">
+    tools:context="matallana.alejandro.proyectofinalandroid1.Vista.DatosIntegranteProyectoActivity"
+    android:weightSum="1">
 
     <TextView
         android:id="@+id/lblDatosUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="DATOS DEL USUARIO" />
+
+    <TextView
+        android:id="@+id/lblUsuarioIntegrante"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="El Usuario ya es intergante del proyecto" />
 
     <TextView
         android:id="@+id/lblTipoDocumento"
@@ -39,6 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:enabled="false"
         android:inputType="textPersonName" />
 
     <TextView
@@ -52,11 +60,51 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:enabled="false"
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/lblCorreoUser"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="TextView" />
+        android:text="Correo Electronico:" />
+
+    <EditText
+        android:id="@+id/txtDatosUCorreo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/lblCargoUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cargo a desempeñar en el proyecto:" />
+
+    <Spinner
+        android:id="@+id/spnDatosUCargo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.08" />
+
+    <Button
+        android:id="@+id/btnAgregarIntegrante"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Agregar Usuario Como Integrante" />
+
+    <Button
+        android:id="@+id/btnQuitarIntegrante"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Retirar Usuario Como Integrante" />
+
+    <Button
+        android:id="@+id/btnAtrasDatosUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Salir"
+        android:onClick="cerrarDatosIntegranteProyecto"/>
 </LinearLayout>

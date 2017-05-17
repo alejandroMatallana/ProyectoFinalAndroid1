@@ -41,6 +41,10 @@ public class ProyectosIntegrantesDAO {
         return conex.insert("ProyectosIntegrantes", registro);
     }
 
+    public boolean buscarUsuarioProyecto(int usuario, int proyecto){
+        return true;
+    }
+
     /**
      * metodo para listar todos los registros en la tabla ProyetosIntegrantes
      * que tengan como idProyecto a proyecto (parametro ingresado)
