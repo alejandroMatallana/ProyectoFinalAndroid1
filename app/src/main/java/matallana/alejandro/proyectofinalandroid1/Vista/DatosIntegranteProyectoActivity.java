@@ -52,9 +52,9 @@ public class DatosIntegranteProyectoActivity extends AppCompatActivity {
         if(usuario != null){
             int idUsuario = usuario.getId();
             int idProyecto = MenuProyectosActivity.proyecto.getId();
-            Cargo cargo = (Cargo)spnCargo.getSelectedItem();
+            Cargo c = (Cargo)spnCargo.getSelectedItem();
             ControllerDatosIntegranteProyectoActivity controller = new ControllerDatosIntegranteProyectoActivity(this);
-            boolean res = controller.agregarIntegrante(cargo.getId(),idUsuario,idProyecto);
+            boolean res = controller.agregarIntegrante(c.getId(),idUsuario,idProyecto);
             if(res){
                 Toast.makeText(this,"El usuario ha sido agregado como integrante del proyecto con " +
                         "exito", Toast.LENGTH_SHORT).show();
