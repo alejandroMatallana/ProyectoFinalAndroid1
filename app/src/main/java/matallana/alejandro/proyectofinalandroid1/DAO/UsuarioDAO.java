@@ -81,12 +81,13 @@ public class UsuarioDAO {
      */
     public Usuario buscar (int numeroDocumento) {
         String consulta = "select tipoDocumento,nombres,apellidos,fechaNacimiento,pass,usuario," +
-                "correoElectronico,tipoUsuario from Usuarios where numeroDocumento=" + numeroDocumento;
+                "correoElectronico,tipoUsuario,id from Usuarios where numeroDocumento=" + numeroDocumento;
 
         Cursor temp = conex.search(consulta);
         if (temp.getCount()>0){
             Usuario usuario = new Usuario();
             temp.moveToFirst();
+            usuario.setId(temp.getInt(8));
             usuario.setTipoDocumento(temp.getString(0));
             usuario.setNombres(temp.getString(1));
             usuario.setApellidos(temp.getString(2));
