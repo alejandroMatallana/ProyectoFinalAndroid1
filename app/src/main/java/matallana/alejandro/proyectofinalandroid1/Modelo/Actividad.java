@@ -86,6 +86,6 @@ public class Actividad {
 
     @Override
     public String toString() {
-        return "nombre='" + nombre ;
+        return nombre ;
     }
 }

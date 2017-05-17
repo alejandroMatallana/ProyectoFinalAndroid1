@@ -15,12 +15,14 @@
         android:layout_height="wrap_content"
         android:text="Ver datos de la actividad"
         android:id="@+id/button14"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:onClick="verdatos" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ver tarreas de la actividad"
         android:id="@+id/button15"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:onClick="tareasActividad" />
 </LinearLayout>

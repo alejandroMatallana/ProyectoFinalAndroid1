@@ -90,4 +90,9 @@ public class ControllerProyecto {
         return dao.listar();
     }
 
+    public  Proyecto buscar(String nombre){
+        ProyectoDAO proyectoDAO = new ProyectoDAO(activity);
+        return proyectoDAO.buscar(nombre);
+    }
+
 }

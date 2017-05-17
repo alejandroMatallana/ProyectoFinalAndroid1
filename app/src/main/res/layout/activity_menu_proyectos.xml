@@ -33,6 +33,7 @@
         android:layout_height="wrap_content"
         android:text="Ver actividades proyecto"
         android:id="@+id/button10"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:onClick="gestionActividades" />
 
 </LinearLayout>

@@ -13,33 +13,44 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/nomActividad"
         android:hint="nombre" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2"
+        android:id="@+id/descripActividad"
         android:hint="Descripcion" />
 
     <EditText
+        android:id="@+id/dateInicioActividad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText3"
-        android:hint="Fecha Inicio" />
+        android:layout_gravity="center_horizontal"
+        android:ems="10"
+        android:focusable="false"
+
+        android:hint="Fecha de inicio "
+        android:inputType="date" />
 
     <EditText
+        android:id="@+id/dateFinActividad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText4"
-        android:hint="Fecha Final" />
+        android:layout_gravity="center_horizontal"
+        android:ems="10"
+        android:focusable="false"
+
+        android:hint="Fecha fin "
+        android:inputType="date" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Crear"
         android:id="@+id/button13"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:onClick="crearActividad" />
 
     <Button
         android:layout_width="match_parent"

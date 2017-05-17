@@ -21,5 +21,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Crear Actividad"
-        android:id="@+id/crearActi" />
+        android:id="@+id/crearActi"
+        android:onClick="crearActividad" />
 </LinearLayout>

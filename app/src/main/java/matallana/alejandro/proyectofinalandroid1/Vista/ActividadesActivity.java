@@ -31,10 +31,10 @@ public class ActividadesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_actividades);
-        txtNomber = (EditText) findViewById(R.id.nombre);
-        txtDescripcion = (EditText) findViewById(R.id.descripcion);
-        txtFechaFin = (EditText) findViewById(R.id.fechaFin);
-        txtFechaInicio = (EditText) findViewById(R.id.fechaIni);
+        txtNomber = (EditText) findViewById(R.id.nomActividad);
+        txtDescripcion = (EditText) findViewById(R.id.descripActividad);
+        txtFechaInicio = (EditText) findViewById(R.id.dateInicioActividad);
+        txtFechaFin = (EditText) findViewById(R.id.dateFinActividad);
         controllerActividad = new ControllerActividad(this);
 
         txtFechaInicio.setOnClickListener(new View.OnClickListener() {
@@ -69,8 +69,9 @@ public class ActividadesActivity extends AppCompatActivity {
                 mDatePicker.setTitle("Select date");
                 mDatePicker.show();  }
         });
-    }
 
+
+    }
 
 
     public void crearActividad (View view) throws ParseException {
@@ -109,7 +110,7 @@ public class ActividadesActivity extends AppCompatActivity {
                 actividad.setFechaIni(fechaInicial.getTime());
                 actividad.setFechaFin(fechaFin.getTime());
 
-                if (controllerActividad.guardar(actividad)){
+                if (controllerActividad.guardar(actividad, MainActivity.usuario, MenuProyectosActivity.proyecto)){
                     Toast.makeText(this, "Se registró la actividad", Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(this, "Error creando la actividad", Toast.LENGTH_SHORT).show();
@@ -123,6 +124,58 @@ public class ActividadesActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Metodo para eliminar una actividad
+     * @throws ParseException
+     */
+    public void editar() throws ParseException {
+        String fechaIni = txtFechaInicio.getText().toString();
+        String fechaFi = txtFechaFin.getText().toString();
+
+        SimpleDateFormat fechas = new SimpleDateFormat("yyyy/MM/dd");
+        Date inicio = fechas.parse(fechaIni);
+        Date fin = fechas.parse(fechaFi);
+
+
+        if (inicio.compareTo(fin)!=1){
+
+            ControllerActividad controllerActividad = new ControllerActividad(this);
+
+            Actividad actividad = new Actividad();
+
+
+            Calendar fechaInicial = Calendar.getInstance();
+            String[] datosfechaIni = txtFechaInicio.getText().toString().split("/");
+            fechaInicial.set(Integer.parseInt(datosfechaIni[0]), Integer.parseInt(datosfechaIni[1]),
+                    Integer.parseInt(datosfechaIni[2]));
+
+
+            Calendar fechaFin = Calendar.getInstance();
+            String[] datosFechaFin = txtFechaFin.getText().toString().split("/");
+            fechaFin.set(Integer.parseInt(datosFechaFin[0]), Integer.parseInt(datosFechaFin[1]),
+                    Integer.parseInt(datosFechaFin[2]));
+
+            actividad.setNombre(txtNomber.getText().toString());
+            actividad.setDescripcion(txtDescripcion.getText().toString());
+            actividad.setFechaIni(fechaInicial.getTime());
+            actividad.setFechaFin(fechaFin.getTime());
+
+            if (controllerActividad.modificar(actividad)){
+                Toast.makeText(this, "Se Ha modificado exitosamente la actividad", Toast.LENGTH_SHORT).show();
+            }else {
+                Toast.makeText(this, "Error modificando la actividad", Toast.LENGTH_SHORT).show();
+            }
+
+        }else {
+            Toast.makeText(this, "La fecha de fin es menor a la fecha inicial", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void elimniar(){
+        controllerActividad.eliminar(actividad);
+        Toast.makeText(this, "¡Se ha eliminado orrectamente!", Toast.LENGTH_SHORT).show();
+        finish();
+    }
 
 
 

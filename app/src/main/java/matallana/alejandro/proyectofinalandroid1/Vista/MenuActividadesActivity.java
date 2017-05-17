@@ -10,13 +10,19 @@ import matallana.alejandro.proyectofinalandroid1.R;
 
 public class MenuActividadesActivity extends AppCompatActivity {
 
-
     public static Actividad actividad=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_actividades);
+
+    }
+
+
+    public void verdatos(View view){
+        Intent intent = new Intent(this,ActividadesActivity.class);
+        startActivity(intent);
     }
 
     public void tareasActividad(View view){

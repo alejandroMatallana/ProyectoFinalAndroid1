@@ -36,7 +36,7 @@ public class ActividadDAO {
      * @param actividad
      * @return
      */
-    public boolean guardar(Actividad actividad){
+    public boolean guardar(Actividad actividad, Usuario usuario, Proyecto proyecto){
 
         Date fechaInicio = actividad.getFechaIni();
         Date fechaFin =actividad.getFechaFin();
@@ -44,8 +44,10 @@ public class ActividadDAO {
         ContentValues registro= new ContentValues();
         registro.put("nombre",actividad.getNombre());
         registro.put("descripcion", actividad.getDescripcion());
-        registro.put("usuario", String.valueOf(actividad.getUsuario()));
-        registro.put("proyecto", String.valueOf(actividad.getProyecto()));
+        registro.put("idResponsable", usuario.getId());
+        registro.put("idProyecto", proyecto.getId());
+        //registro.put("usuario",usuario);
+        //registro.put("proyecto", proyecto);
         registro.put("fechaInicio", format.format(fechaInicio));
         registro.put("fechaFinal", format.format(fechaFin));
         return conex.insert("Actividades",registro);
@@ -129,8 +131,8 @@ public class ActividadDAO {
      */
     public List<Actividad> listaActividades (Usuario usuario, Proyecto proyecto){
         ArrayList<Actividad> lista = new ArrayList<>();
-        String consulta ="select id, nombre, descripcion, fechaInicio,fechaFinal,idResponsable,idProyecto from Actividades " +
-                " WHERE idResponsable="+ usuario.getId() + "and idProyecto=" + proyecto.getId();
+        String consulta ="select id, nombre, descripcion, fechaInicio,fechaFinal from Actividades " +
+                " WHERE idResponsable="+ usuario.getId() + " and idProyecto=" + proyecto.getId();
 
         Cursor temp = conex.search(consulta);
         if (temp.moveToFirst()){
@@ -139,8 +141,8 @@ public class ActividadDAO {
                 Date fechaFin = null;
                 SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
                 try {
-                    fechaInicio = format.parse(temp.getString(4));
-                    fechaFin = format.parse(temp.getString(5));
+                    fechaInicio = format.parse(temp.getString(3));
+                    fechaFin = format.parse(temp.getString(4));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

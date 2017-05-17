@@ -47,7 +47,7 @@ public class ListaProyectoActivity extends AppCompatActivity {
             cargarLista();
         } else {
             auxiliar = new ArrayList<>();
-            ControllerProyecto controlador = new ControllerProyecto(this);
+            final ControllerProyecto controlador = new ControllerProyecto(this);
             lista = controlador.listarProyectos();
             //busca en la listaTareas de todos los proyectos los que contengan en su nombre
             //lo ingresado en el campo de texto de buscar proyecto

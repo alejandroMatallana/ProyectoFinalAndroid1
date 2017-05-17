@@ -27,8 +27,14 @@ public class ListaActividadesActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_actividades);
         listaActividades = (ListView) findViewById(R.id.TVlistaActividades);
         controllerActividad = new ControllerActividad(this);
+        cargarLista();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        cargarLista();
+    }
 
     public void cargarLista(){
         final List<Actividad> actividades = controllerActividad.listar();
@@ -37,10 +43,14 @@ public class ListaActividadesActivity extends AppCompatActivity {
         listaActividades.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int posicion, long id) {
+                Actividad aux = actividades.get(posicion);
+                ActividadesActivity.actividad = aux;
+                System.out.println(ActividadesActivity.actividad);
+                System.out.println(posicion);
                 ActividadesActivity.tipo = 1;
-                Intent intent = new Intent(getApplicationContext(),ActividadesActivity.class);
+                Intent intent = new Intent(getApplicationContext(),MenuActividadesActivity.class);
                 startActivity(intent);
-                ActividadesActivity.actividad = actividades.get(posicion);
+
             }
         });
     }

@@ -29,9 +29,11 @@ public class ControllerActividad {
      * @param actividad
      * @return
      */
-    public boolean guardar(Actividad actividad){
-        if (actividad.getNombre()==null){
-            actividadDAO.guardar(actividad);
+    public boolean guardar(Actividad actividad, Usuario usuario, Proyecto proyecto){
+        if (actividad.getNombre()!=null){
+            System.out.println(proyecto.getNombre() + usuario.getNombres());
+            System.out.println(proyecto.getId() + usuario.getId());
+            actividadDAO.guardar(actividad, usuario, proyecto);
             return true;
         } else {
             return  false;
