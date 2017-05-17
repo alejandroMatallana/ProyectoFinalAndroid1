@@ -17,9 +17,23 @@ public class Usuario {
     private String pass;
     private String correoElectronico;
     private String tipoUsuario;
-    private Cargo cargo;
 
     public Usuario() {
+    }
+
+    public Usuario(int id, String tipoDocumento, int numeroDocumento, String nombres,
+                   String apellidos, Date fechaNacimiento, String usuario, String pass,
+                   String correoElectronico, String tipoUsuario) {
+        this.id = id;
+        this.tipoDocumento = tipoDocumento;
+        this.numeroDocumento = numeroDocumento;
+        this.nombres = nombres;
+        this.apellidos = apellidos;
+        this.fechaNacimiento = fechaNacimiento;
+        this.usuario = usuario;
+        this.pass = pass;
+        this.correoElectronico = correoElectronico;
+        this.tipoUsuario = tipoUsuario;
     }
 
     public Usuario(String tipoDocumento, int numeroDocumento, String nombres, String apellidos,
@@ -34,7 +48,6 @@ public class Usuario {
         this.usuario = usuario;
         this.correoElectronico = correoElectronico;
         this.tipoUsuario = tipoUsuario;
-        this.cargo = null;
     }
 
     public int getId() {
@@ -115,14 +128,6 @@ public class Usuario {
 
     public void setTipoUsuario(String tipoUsuario) {
         this.tipoUsuario = tipoUsuario;
-    }
-
-    public Cargo getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(Cargo cargo) {
-        this.cargo = cargo;
     }
 }
 

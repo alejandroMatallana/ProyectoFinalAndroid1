@@ -16,6 +16,15 @@ public class Cargo {
     public Cargo() {
     }
 
+    public Cargo(int id, String nombre, String descripcion, String horario, double salario, Proyecto proyecto) {
+        this.id = id;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.horario = horario;
+        this.salario = salario;
+        this.proyecto = proyecto;
+    }
+
     public Cargo(String nombre, String descripcion, String horario, double salario) {
         this.nombre = nombre;
         this.descripcion = descripcion;
