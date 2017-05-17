@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import matallana.alejandro.proyectofinalandroid1.Controlador.ControllerDatosIntegranteProyectoActivity;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Cargo;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Usuario;
 import matallana.alejandro.proyectofinalandroid1.R;
@@ -40,7 +41,13 @@ public class DatosIntegranteProyectoActivity extends AppCompatActivity {
         finish();
     }
 
+    public void agregarEsteIntegrante(View view){
 
+    }
+
+    public void quitarEsteIntegrante(View view){
+
+    }
 
     public void mostrarDatosUsuario(){
         if(usuario != null){
@@ -51,7 +58,13 @@ public class DatosIntegranteProyectoActivity extends AppCompatActivity {
 
             //si se va a agregar el usuario como integrante
             if(cargo == null){
-                ocultarBotonQuitar();
+                ControllerDatosIntegranteProyectoActivity controller = new ControllerDatosIntegranteProyectoActivity(this);
+                boolean res = controller.esUsuarioUnIntegrante(usuario.getId(),MenuProyectosActivity.proyecto.getId());
+                if(res){
+                    ocultarBotonAgregar();
+                } else {
+                    ocultarBotonQuitar();
+                }
             } else {
                 //entra al else, si el cargo es diferente de null significa que el usuario ya es
                 //integrante del proyecto

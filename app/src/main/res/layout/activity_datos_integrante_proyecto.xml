@@ -93,13 +93,15 @@
         android:id="@+id/btnAgregarIntegrante"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Agregar Usuario Como Integrante" />
+        android:text="Agregar Usuario Como Integrante"
+        android:onClick="agregarEsteIntegrante"/>
 
     <Button
         android:id="@+id/btnQuitarIntegrante"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Retirar Usuario Como Integrante" />
+        android:text="Retirar Usuario Como Integrante"
+        android:onClick="quitarEsteIntegrante"/>
 
     <Button
         android:id="@+id/btnAtrasDatosUsuario"
