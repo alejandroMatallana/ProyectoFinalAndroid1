@@ -29,15 +29,15 @@ public class ControllerActividad {
      * @param actividad
      * @return
      */
-    public String guardar(Actividad actividad, Usuario usuario, Proyecto proyecto){
+    public String guardar(Actividad actividad, int usuario, Proyecto proyecto){
         Actividad a = actividadDAO.buscarNombre(actividad.getNombre());
         if (a!=null){
             return "Señor usuario ya hay una actividad creada con este nombre";
         } else {
             if (actividad.getNombre() != null) {
-                System.out.println(proyecto.getNombre() + usuario.getNombres());
-                System.out.println(proyecto.getId() + usuario.getId());
-                actividadDAO.guardar(actividad, usuario, proyecto);
+               // System.out.println(proyecto.getNombre() + usuario.getNombres());
+                //System.out.println(proyecto.getId() + usuario.getId());
+                actividadDAO.guardar(actividad,usuario, proyecto);
                 return "La actividad se ha registrado exitosamente";
             } else {
                 return "Se ha generado un problema al crear la actividad";
@@ -89,8 +89,8 @@ public class ControllerActividad {
      * Metodo para listar las actividades
      * @return
      */
-    public List<Actividad> listar(){
-        return  actividadDAO.listaActividades(MainActivity.usuario,MenuProyectosActivity.proyecto);
+    public List<Actividad> listar(Proyecto proyecto){
+        return  actividadDAO.listaActividades(proyecto);
     }
 
 }

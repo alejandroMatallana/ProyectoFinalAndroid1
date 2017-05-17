@@ -29,6 +29,7 @@ public class ListaAgregarIntegranteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_agregar_integrante);
         txtBuscarUsuario = (EditText) findViewById(R.id.txtBuscarUsuarioIntegrante);
         lstUsuarios = (ListView) findViewById(R.id.lstUsuariosIntegrantes);
+        usuariosAuxiliar = new ArrayList<>();
         cargarListaUsuariosTipoIntegrante();
         cargarListViewUsuarios();
     }
@@ -38,6 +39,7 @@ public class ListaAgregarIntegranteActivity extends AppCompatActivity {
         super.onResume();
         txtBuscarUsuario = (EditText) findViewById(R.id.txtBuscarUsuarioIntegrante);
         lstUsuarios = (ListView) findViewById(R.id.lstUsuariosIntegrantes);
+        usuariosAuxiliar = new ArrayList<>();
         cargarListaUsuariosTipoIntegrante();
         cargarListViewUsuarios();
     }

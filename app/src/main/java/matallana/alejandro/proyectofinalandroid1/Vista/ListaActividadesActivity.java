@@ -37,7 +37,7 @@ public class ListaActividadesActivity extends AppCompatActivity {
     }
 
     public void cargarLista(){
-        final List<Actividad> actividades = controllerActividad.listar();
+        final List<Actividad> actividades = controllerActividad.listar(MenuProyectosActivity.proyecto);
         ArrayAdapter<Actividad> adapter = new ArrayAdapter<Actividad>(this,android.R.layout.simple_list_item_1,actividades);
         listaActividades.setAdapter(adapter);
         listaActividades.setOnItemClickListener(new AdapterView.OnItemClickListener(){

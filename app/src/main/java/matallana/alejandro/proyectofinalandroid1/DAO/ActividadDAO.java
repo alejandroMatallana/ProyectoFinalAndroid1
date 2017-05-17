@@ -36,7 +36,7 @@ public class ActividadDAO {
      * @param actividad
      * @return
      */
-    public boolean guardar(Actividad actividad, Usuario usuario, Proyecto proyecto){
+    public boolean guardar(Actividad actividad,int usuario,  Proyecto proyecto){
 
         Date fechaInicio = actividad.getFechaIni();
         Date fechaFin =actividad.getFechaFin();
@@ -44,7 +44,8 @@ public class ActividadDAO {
         ContentValues registro= new ContentValues();
         registro.put("nombre",actividad.getNombre());
         registro.put("descripcion", actividad.getDescripcion());
-        registro.put("idResponsable", usuario.getId());
+        //registro.put("idResponsable", actividad.getUsuario().getId());
+        registro.put("idResponsable",usuario);
         registro.put("idProyecto", proyecto.getId());
         //registro.put("usuario",usuario);
         //registro.put("proyecto", proyecto);
@@ -151,10 +152,10 @@ public class ActividadDAO {
      * Lista de actividades
      * @return
      */
-    public List<Actividad> listaActividades (Usuario usuario, Proyecto proyecto){
+    public List<Actividad> listaActividades (Proyecto proyecto){
         ArrayList<Actividad> lista = new ArrayList<>();
         String consulta ="select id, nombre, descripcion, fechaInicio,fechaFinal from Actividades " +
-                " WHERE idResponsable="+ usuario.getId() + " and idProyecto=" + proyecto.getId();
+                " WHERE idProyecto=" + proyecto.getId();
 
         Cursor temp = conex.search(consulta);
         if (temp.moveToFirst()){
@@ -168,7 +169,7 @@ public class ActividadDAO {
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                Actividad a = new Actividad(temp.getString(1), temp.getString(2), fechaInicio, fechaFin, usuario, proyecto);
+                Actividad a = new Actividad(temp.getString(1), temp.getString(2), fechaInicio, fechaFin, new Usuario(), proyecto);
                 a.setId(temp.getInt(0));
                 lista.add(a);
             } while (temp.moveToNext());

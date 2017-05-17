@@ -68,9 +68,9 @@ public class ProyectosIntegrantesDAO {
         Cursor temp = conex.search(consulta);
 
         if (temp.getCount()>0){
+            temp.moveToFirst();
             Cargo cargo = new Cargo();
             cargo.setId(temp.getInt(0));
-            System.out.println(temp.getInt(0));
             cargo.setNombre(temp.getString(1));
             cargo.setDescripcion(temp.getString(2));
             cargo.setHorario(temp.getString(3));
@@ -95,7 +95,7 @@ public class ProyectosIntegrantesDAO {
                 "c.id,c.nombre,c.descripcion,c.horario,c.salario" +
                 " FROM (Usuarios AS u JOIN ProyectosIntegrantes AS pi ON u.id=pi.idUsuario)" +
                        " JOIN Cargos AS c ON pi.idCargo=c.id" +
-                " WHERE pi.idProyecto="+proyecto;
+                " WHERE pi.idProyecto="+proyecto + " AND u.tipoUsuario='Integrante del proyecto'";
         Cursor temp = conex.search(consulta);
         if (temp.moveToFirst()){
             do {

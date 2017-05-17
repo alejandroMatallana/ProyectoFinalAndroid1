@@ -21,6 +21,7 @@ import matallana.alejandro.proyectofinalandroid1.Controlador.ControllerActividad
 import matallana.alejandro.proyectofinalandroid1.Controlador.ControllerListaIntegrantesActivity;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Actividad;
 import matallana.alejandro.proyectofinalandroid1.Modelo.ProyectosIntegrantes;
+import matallana.alejandro.proyectofinalandroid1.Modelo.Usuario;
 import matallana.alejandro.proyectofinalandroid1.R;
 
 public class ActividadesActivity extends AppCompatActivity {
@@ -121,9 +122,12 @@ public class ActividadesActivity extends AppCompatActivity {
                 actividad.setDescripcion(txtDescripcion.getText().toString());
                 actividad.setFechaIni(fechaInicial.getTime());
                 actividad.setFechaFin(fechaFin.getTime());
+                //actividad.setUsuario((Usuario) responsable.getSelectedItem());
+                ProyectosIntegrantes pi =(ProyectosIntegrantes) responsable.getSelectedItem();
+                Usuario usuario = pi.getIntegrante();
 
 
-                String res =  controllerActividad.guardar(actividad, MainActivity.usuario, MenuProyectosActivity.proyecto);
+                String res =  controllerActividad.guardar(actividad,usuario.getId(), MenuProyectosActivity.proyecto);
                 //if (controllerActividad.guardar(actividad, MainActivity.usuario, MenuProyectosActivity.proyecto)){
                     Toast.makeText(this, res, Toast.LENGTH_SHORT).show();
 //                }else {
