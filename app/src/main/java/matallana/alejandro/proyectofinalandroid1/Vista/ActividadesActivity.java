@@ -4,18 +4,23 @@ import android.app.DatePickerDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import matallana.alejandro.proyectofinalandroid1.Controlador.ControllerActividad;
+import matallana.alejandro.proyectofinalandroid1.Controlador.ControllerListaIntegrantesActivity;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Actividad;
+import matallana.alejandro.proyectofinalandroid1.Modelo.ProyectosIntegrantes;
 import matallana.alejandro.proyectofinalandroid1.R;
 
 public class ActividadesActivity extends AppCompatActivity {
@@ -23,8 +28,10 @@ public class ActividadesActivity extends AppCompatActivity {
     private Button crear;
     private EditText txtNomber, txtDescripcion, txtFechaInicio, txtFechaFin;
     private ControllerActividad controllerActividad;
-    public static Actividad actividad= null;
+    private ControllerListaIntegrantesActivity controllerListaIntegrantesActivity;
+
     public static  int tipo =0;
+    private Spinner responsable;
 
 
     @Override
@@ -36,6 +43,8 @@ public class ActividadesActivity extends AppCompatActivity {
         txtFechaInicio = (EditText) findViewById(R.id.dateInicioActividad);
         txtFechaFin = (EditText) findViewById(R.id.dateFinActividad);
         controllerActividad = new ControllerActividad(this);
+        controllerListaIntegrantesActivity = new ControllerListaIntegrantesActivity(this);
+        responsable = (Spinner) findViewById(R.id.UsuarioRespon);
 
         txtFechaInicio.setOnClickListener(new View.OnClickListener() {
 
@@ -73,6 +82,7 @@ public class ActividadesActivity extends AppCompatActivity {
 
 
         cargarActividad();
+        cargarResponsable();
     }
 
 
@@ -176,23 +186,32 @@ public class ActividadesActivity extends AppCompatActivity {
     }
 
     public void elimniarActividad(View view){
-        controllerActividad.eliminar(actividad);
+        controllerActividad.eliminar(MenuActividadesActivity.actividad);
         Toast.makeText(this, "¡Se ha eliminado orrectamente!", Toast.LENGTH_SHORT).show();
         finish();
     }
 
 
     public void cargarActividad(){
-        txtDescripcion.setText(actividad.getDescripcion());
-        txtNomber.setText(actividad.getNombre());
-        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-        txtFechaFin.setText(format.format(actividad.getFechaFin()));
-        txtFechaInicio.setText(format.format(actividad.getFechaIni()));
+        if (MenuActividadesActivity.actividad!=null){
+            txtDescripcion.setText(MenuActividadesActivity.actividad.getDescripcion());
+            txtNomber.setText(MenuActividadesActivity.actividad.getNombre());
+            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+            txtFechaFin.setText(format.format(MenuActividadesActivity.actividad.getFechaFin()));
+            txtFechaInicio.setText(format.format(MenuActividadesActivity.actividad.getFechaIni()));
+        } else {
+
+        }
+
     }
 
 
+    public void cargarResponsable(){
+        final List<ProyectosIntegrantes> proyecInte = controllerListaIntegrantesActivity.listarIntegrantesDelProyecto(MenuProyectosActivity.proyecto.getId());
+        ArrayAdapter<ProyectosIntegrantes> lista = new ArrayAdapter<ProyectosIntegrantes>(this,android.R.layout.simple_list_item_1,proyecInte);
+        responsable.setAdapter(lista);
 
-
+    }
 
 
 

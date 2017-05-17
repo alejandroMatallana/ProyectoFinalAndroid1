@@ -83,12 +83,13 @@ public class CargoDAO {
 
     public List<Cargo> listar(Proyecto proyecto) {
         List<Cargo> cargos = new ArrayList<>();
-        String consulta = "SELECT nombre,descripcion,horario,salario FROM Cargos WHERE idProyecto="
+        String consulta = "SELECT nombre,descripcion,horario,salario,id FROM Cargos WHERE idProyecto="
                 + proyecto.getId() + " ORDER BY nombre";
         Cursor temp = conex.search(consulta);
         if (temp.moveToFirst()){
             do {
                 Cargo cargo = new Cargo(temp.getString(0),temp.getString(1),temp.getString(2),temp.getDouble(3));
+                cargo.setId(temp.getInt(4));
                 cargos.add(cargo);
             } while (temp.moveToNext());
         }

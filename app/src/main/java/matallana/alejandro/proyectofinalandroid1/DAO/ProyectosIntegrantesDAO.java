@@ -55,15 +55,21 @@ public class ProyectosIntegrantesDAO {
     }
 
     public boolean buscarUsuarioProyecto(int usuario, int proyecto){
-        String consulta = "SELECT count(pi.id) FROM ProyectosIntegrantes AS pi" +
+        String consulta = "SELECT c.id,c.nombre,c.descripcion,c.horario,c.salario" +
+                " FROM ProyectosIntegrantes AS pi JOIN Cargos AS c ON pi.idCargo=c.id" +
                 " WHERE pi.idProyecto="+proyecto + " AND pi.idUsuario="+usuario;
 
         Cursor temp = conex.search(consulta);
 
         if (temp.getCount()>0){
-            if (temp.getInt(0) > 0){
-                return true;
-            }
+            Cargo cargo = new Cargo();
+            cargo.setId(temp.getInt(0));
+            cargo.setNombre(temp.getString(1));
+            cargo.setDescripcion(temp.getString(2));
+            cargo.setHorario(temp.getString(3));
+            cargo.setSalario(temp.getDouble(4));
+            return  true;
+
         }
         return false;
     }

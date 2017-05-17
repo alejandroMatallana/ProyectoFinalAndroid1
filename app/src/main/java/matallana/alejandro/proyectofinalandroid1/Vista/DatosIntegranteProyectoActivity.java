@@ -36,6 +36,8 @@ public class DatosIntegranteProyectoActivity extends AppCompatActivity {
         txtTipoDoc = (EditText) findViewById(R.id.txtDatosUTipoDocu);
         spnCargo = (Spinner) findViewById(R.id.spnDatosUCargo);
         lblUsuarioIntegrante = (TextView) findViewById(R.id.lblUsuarioIntegrante);
+        btnAgregarIntegrante = (Button) findViewById(R.id.btnAgregarIntegrante);
+        btnQuitarIntegrante = (Button) findViewById(R.id.btnQuitarIntegrante);
         cargarSpinnerCargos();
         mostrarDatosUsuario();
     }

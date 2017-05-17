@@ -44,8 +44,6 @@ public class ListaActividadesActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int posicion, long id) {
                 MenuActividadesActivity.actividad = actividades.get(posicion);
-                System.out.println(ActividadesActivity.actividad);
-                System.out.println(posicion);
                 ActividadesActivity.tipo = 1;
                 Intent intent = new Intent(getApplicationContext(),MenuActividadesActivity.class);
                 startActivity(intent);
