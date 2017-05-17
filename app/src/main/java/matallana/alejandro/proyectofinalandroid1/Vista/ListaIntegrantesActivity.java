@@ -48,7 +48,11 @@ public class ListaIntegrantesActivity extends AppCompatActivity {
         lstLista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                ProyectosIntegrantes pi = lista.get(position);
+                DatosIntegranteProyectoActivity.usuario = pi.getIntegrante();
+                DatosIntegranteProyectoActivity.cargo = pi.getCargo();
+                Intent i = new Intent(getApplicationContext(), DatosIntegranteProyectoActivity.class);
+                startActivity(i);
             }
         });
     }
