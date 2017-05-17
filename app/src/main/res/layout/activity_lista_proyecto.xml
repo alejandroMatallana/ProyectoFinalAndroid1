@@ -15,12 +15,27 @@
         android:hint="Buscar Proyecto Por Nombre"
         android:inputType="textPersonName" />
 
-    <Button
-        android:id="@+id/btnBuscarProyecto"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Buscar Proyecto"
-        android:onClick="listaBuscarProyectos"/>
+        android:layout_height="77dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnBuscarProyecto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Buscar"
+            android:onClick="listaBuscarProyectos"/>
+
+        <Button
+            android:id="@+id/btnLimpiarBusquedaPro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Limpiar"
+            android:onClick="limpiarBusquedaProyecto"/>
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textView4"
@@ -28,21 +43,10 @@
         android:layout_height="wrap_content"
         android:text="Seleccione un proyecto" />
 
-    <ScrollView
+    <ListView
+        android:id="@+id/lstListaProyectos"
         android:layout_width="match_parent"
-        android:layout_height="346dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <ListView
-                android:id="@+id/lstListaProyectos"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-    </ScrollView>
+        android:layout_height="356dp" />
 
     <Button
         android:id="@+id/btnCrearNuevoProyecto"

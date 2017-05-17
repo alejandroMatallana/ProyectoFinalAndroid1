@@ -70,6 +70,11 @@ public class ListaProyectoActivity extends AppCompatActivity {
         }
     }
 
+    public void limpiarBusquedaProyecto(View view){
+        txtNombreBuscar.setText("");
+        cargarLista();
+    }
+
     public void abrirCrearNuevoProyecto(View view){
         MenuProyectosActivity.proyecto = null;
         Intent i = new Intent(this, GestionProyectoActivity.class);
