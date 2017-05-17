@@ -87,6 +87,28 @@ public class ActividadDAO {
 
     }
 
+    /**
+     * MEtodo para buscar una actividad solo por su nombre
+     * @param nombre
+     * @return
+     */
+    public Actividad buscarNombre(String nombre){
+        Actividad a = null;
+        String consulta ="select a.id from Actividades a" +
+                " where a.nombre='" + nombre  + "'";
+
+        Cursor temp = conex.search(consulta);
+
+        if (temp.getCount()>0){
+
+            a = new Actividad();
+            temp.moveToFirst();
+            a.setId(temp.getInt(0));
+
+        }
+        return a;
+    }
+
 
 
     /**
@@ -94,7 +116,7 @@ public class ActividadDAO {
      * @param actividad
      * @return
      */
-    public boolean modificar(Actividad actividad){
+    public boolean modificar(Actividad actividad, Usuario usuario, Proyecto proyecto){
         String tabla = "Actividades";
         String condicion = "nombre='" + actividad.getNombre() + "'";
 
@@ -104,8 +126,8 @@ public class ActividadDAO {
         ContentValues registro= new ContentValues();
         registro.put("nombre",actividad.getNombre());
         registro.put("descripcion", actividad.getDescripcion());
-        registro.put("usuario", String.valueOf(actividad.getUsuario()));
-        registro.put("proyecto", String.valueOf(actividad.getProyecto()));
+        registro.put("idResponsable", usuario.getId());
+        registro.put("idProyecto", proyecto.getId());
         registro.put("fechaInicio", format.format(fechaInicio));
         registro.put("fechaFinal", format.format(fechaFin));
 

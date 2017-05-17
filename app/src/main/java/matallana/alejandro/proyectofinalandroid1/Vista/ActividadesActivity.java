@@ -71,6 +71,8 @@ public class ActividadesActivity extends AppCompatActivity {
         });
 
 
+
+        cargarActividad();
     }
 
 
@@ -110,11 +112,13 @@ public class ActividadesActivity extends AppCompatActivity {
                 actividad.setFechaIni(fechaInicial.getTime());
                 actividad.setFechaFin(fechaFin.getTime());
 
-                if (controllerActividad.guardar(actividad, MainActivity.usuario, MenuProyectosActivity.proyecto)){
-                    Toast.makeText(this, "Se registró la actividad", Toast.LENGTH_SHORT).show();
-                }else {
-                    Toast.makeText(this, "Error creando la actividad", Toast.LENGTH_SHORT).show();
-                }
+
+                String res =  controllerActividad.guardar(actividad, MainActivity.usuario, MenuProyectosActivity.proyecto);
+                //if (controllerActividad.guardar(actividad, MainActivity.usuario, MenuProyectosActivity.proyecto)){
+                    Toast.makeText(this, res, Toast.LENGTH_SHORT).show();
+//                }else {
+//                    Toast.makeText(this, "Error creando la actividad", Toast.LENGTH_SHORT).show();
+//                }
 
             }else {
                 Toast.makeText(this, "La fecha de fin es menor a la fecha inicial", Toast.LENGTH_SHORT).show();
@@ -128,7 +132,7 @@ public class ActividadesActivity extends AppCompatActivity {
      * Metodo para eliminar una actividad
      * @throws ParseException
      */
-    public void editar() throws ParseException {
+    public void editarActividad(View view) throws ParseException {
         String fechaIni = txtFechaInicio.getText().toString();
         String fechaFi = txtFechaFin.getText().toString();
 
@@ -160,7 +164,7 @@ public class ActividadesActivity extends AppCompatActivity {
             actividad.setFechaIni(fechaInicial.getTime());
             actividad.setFechaFin(fechaFin.getTime());
 
-            if (controllerActividad.modificar(actividad)){
+            if (controllerActividad.modificar(actividad, MainActivity.usuario, MenuProyectosActivity.proyecto)){
                 Toast.makeText(this, "Se Ha modificado exitosamente la actividad", Toast.LENGTH_SHORT).show();
             }else {
                 Toast.makeText(this, "Error modificando la actividad", Toast.LENGTH_SHORT).show();
@@ -171,12 +175,20 @@ public class ActividadesActivity extends AppCompatActivity {
         }
     }
 
-    public void elimniar(){
+    public void elimniarActividad(View view){
         controllerActividad.eliminar(actividad);
         Toast.makeText(this, "¡Se ha eliminado orrectamente!", Toast.LENGTH_SHORT).show();
         finish();
     }
 
+
+    public void cargarActividad(){
+        txtDescripcion.setText(actividad.getDescripcion());
+        txtNomber.setText(actividad.getNombre());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        txtFechaFin.setText(format.format(actividad.getFechaFin()));
+        txtFechaInicio.setText(format.format(actividad.getFechaIni()));
+    }
 
 
 

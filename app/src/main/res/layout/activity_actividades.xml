@@ -56,11 +56,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Editar"
-        android:id="@+id/editar" />
+        android:id="@+id/editar"
+        android:onClick="editarActividad" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Eliminar"
-        android:id="@+id/eliminar" />
+        android:id="@+id/eliminar"
+        android:onClick="elimniarActividad" />
 </LinearLayout>
