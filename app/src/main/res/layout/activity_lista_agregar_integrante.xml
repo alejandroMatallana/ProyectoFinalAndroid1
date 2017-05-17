@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="matallana.alejandro.proyectofinalandroid1.Vista.ListaAgregarIntegranteActivity">
+
+    <TextView
+        android:id="@+id/lblInfoBuscarIntegrante"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Busque el usuario que quiere agregar al proyecto" />
+
+    <EditText
+        android:id="@+id/txtBuscarUsuarioIntegrante"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Identificacion o Nombre del Usuario"
+        android:inputType="textPersonName" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnBuscarUsuarioIntegrante"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Buscar"
+            android:onClick="buscarUsuarioIntegrante"/>
+
+        <Button
+            android:id="@+id/btnLimpiarBuscarUsuInt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Limpiar"
+            android:onClick="limpiarCampoBuscarUsuarioIntegrante"/>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/lblInfoSeleccionarUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Seleccione el usuario a integrar al proyecto" />
+
+    <ListView
+        android:id="@+id/lstUsuariosIntegrantes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>

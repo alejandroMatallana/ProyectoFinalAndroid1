@@ -188,6 +188,7 @@ public class UsuarioActivity extends AppCompatActivity {
 
         ArrayList<String> tiposUsuario = new ArrayList<>();
         tiposUsuario.add("Seleccione Tipo Usuario");
+        //Nota: no mover estos valores...
         tiposUsuario.add("Director de proyecto");
         tiposUsuario.add("Integrante del proyecto");
         ArrayAdapter<String> adapterUsuario = new ArrayAdapter(this,android.R.layout.simple_spinner_item,tiposUsuario);

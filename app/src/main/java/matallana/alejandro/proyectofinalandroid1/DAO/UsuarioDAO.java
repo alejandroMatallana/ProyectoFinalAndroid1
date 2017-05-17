@@ -6,6 +6,7 @@ import android.database.Cursor;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -136,6 +137,37 @@ public class UsuarioDAO {
         String tabla = "Usuarios";
         String condicion = "numeroDocumento=" + usuario.getNumeroDocumento();
         return conex.delete(tabla,condicion);
+    }
+
+    /**
+     * metodo para listar todos los usuario registrados como tipo integrante
+     * @return
+     */
+    public ArrayList<Usuario> listarIntegrantes(){
+        ArrayList<Usuario> lista = new ArrayList<>();
+        String consulta = "SELECT u.id,u.tipoDocumento,u.numeroDocumento,u.nombres,u.apellidos," +
+                "u.fechaNacimiento,u.pass,u.usuario,u.correoElectronico,u.tipoUsuario" +
+                " FROM Usuarios AS u WHERE u.tipoUsuario='Integrante del proyecto'";
+        Cursor temp = conex.search(consulta);
+        if (temp.moveToFirst()){
+            do {
+                Date fechaNacimientoUsuario = null;
+                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+                try {
+                    fechaNacimientoUsuario = format.parse(temp.getString(5));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                Usuario usuario = new Usuario(temp.getInt(0),temp.getString(1),temp.getInt(2),
+                        temp.getString(3),temp.getString(4),fechaNacimientoUsuario,temp.getString(7),
+                        temp.getString(6),temp.getString(8),temp.getString(9));
+
+                lista.add(usuario);
+
+            } while (temp.moveToNext());
+        }
+        return lista;
     }
 
     public List<Usuario> listar(){

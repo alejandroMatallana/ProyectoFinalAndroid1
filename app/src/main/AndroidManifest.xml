@@ -29,7 +29,9 @@
         <activity android:name=".Vista.MenuTareasActivity" />
         <activity android:name=".Vista.ListaRecursosActivity" />
         <activity android:name=".Vista.ListaActividadesActivity" />
-        <activity android:name=".Vista.ListaIntegrantesActivity"></activity>
+        <activity android:name=".Vista.ListaIntegrantesActivity" />
+        <activity android:name=".Vista.ListaAgregarIntegranteActivity" />
+        <activity android:name=".Vista.DatosIntegranteProyectoActivity"></activity>
     </application>
 
 </manifest>

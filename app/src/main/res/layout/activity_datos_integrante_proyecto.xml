@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="matallana.alejandro.proyectofinalandroid1.Vista.DatosIntegranteProyectoActivity">
+
+    <TextView
+        android:id="@+id/lblDatosUsuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="DATOS DEL USUARIO" />
+
+    <TextView
+        android:id="@+id/lblTipoDocumento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tipo de documento:" />
+
+    <EditText
+        android:id="@+id/txtDatosUTipoDocu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:editable="false"
+        android:ems="10"
+        android:enabled="false"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/lblIdentificacionUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Numero de documento:" />
+
+    <EditText
+        android:id="@+id/txtDatosUDocumento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/lblNombreUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nombre completo:" />
+
+    <EditText
+        android:id="@+id/txtDatosUNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+</LinearLayout>

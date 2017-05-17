@@ -24,5 +24,6 @@
         android:id="@+id/btnAgregarNuevoIntegrante"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Agregar Nuevo Integrante" />
+        android:text="Agregar Nuevo Integrante"
+        android:onClick="abrirAgregarNuevoIntegrante"/>
 </LinearLayout>
