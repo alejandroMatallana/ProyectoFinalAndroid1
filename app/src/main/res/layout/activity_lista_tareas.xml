@@ -27,7 +27,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Buscar Tarea" />
+            android:text="Buscar Tarea"
+            android:onClick=""/>
     </LinearLayout>
 
     <ListView
@@ -46,13 +47,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Crear Tarea" />
+            android:text="Crear Tarea"
+            android:onClick="crearTarea"/>
 
         <Button
             android:id="@+id/button12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Refrescar Lista" />
+            android:text="Refrescar Lista"
+            android:onClick="listar"/>
     </LinearLayout>
 </LinearLayout>

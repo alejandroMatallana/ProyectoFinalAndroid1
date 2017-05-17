@@ -1,6 +1,7 @@
 package matallana.alejandro.proyectofinalandroid1.DAO;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.database.Cursor;
 
 import java.text.ParseException;
@@ -20,6 +21,17 @@ import matallana.alejandro.proyectofinalandroid1.Modelo.Tarea;
 public class TareaDAO {
 
     Conexion conexion;
+
+    public boolean crear(Tarea tarea, Actividad actividad) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        ContentValues registro= new ContentValues();
+        registro.put("nombre", tarea.getNombreTarea());
+        registro.put("porcentajeDesarrollo", tarea.getPorcentaje());
+        registro.put("fechaInicio", format.format(tarea.getFechaInicio()));
+        registro.put("fechaFinal", format.format(tarea.getFechaFinal()));
+        registro.put("idActividad", actividad.getId());
+        return conexion.insert("Tareas", registro);
+    }
 
     public Tarea buscar(String nombreTarea, Actividad actividad) {
         String consulta = "SELECT porcentajeDesarrollo,fechaInicio,fechaFinal FROM Tareas " +

@@ -14,7 +14,7 @@ import matallana.alejandro.proyectofinalandroid1.Vista.MenuActividadesActivity;
 
 public class ControllerTarea {
 
-    TareaDAO tareaDAO;
+    private TareaDAO tareaDAO;
 
     public ControllerTarea(Activity activity) {
         tareaDAO = new TareaDAO(activity);
@@ -22,6 +22,13 @@ public class ControllerTarea {
 
     public Tarea buscar(String nombreTarea) {
         return tareaDAO.buscar(nombreTarea, MenuActividadesActivity.actividad);
+    }
+
+    public boolean crear(Tarea tarea) {
+        if (tarea.getFechaInicio().compareTo(MenuActividadesActivity.actividad.getFechaIni()) > 0) {
+
+        }
+        return tareaDAO.crear(tarea, MenuActividadesActivity.actividad);
     }
 
     public List<Tarea> listar() {
