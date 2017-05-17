@@ -32,4 +32,9 @@ public class MenuProyectosActivity extends AppCompatActivity {
         Intent intent = new Intent(this,ListaActividadesActivity.class);
         startActivity(intent);
     }
+
+    public void gestionIntegrantes(View view){
+        Intent intent = new Intent(this,ListaIntegrantesActivity.class);
+        startActivity(intent);
+    }
 }
