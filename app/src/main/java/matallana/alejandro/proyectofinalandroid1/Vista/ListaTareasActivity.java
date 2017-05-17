@@ -40,7 +40,7 @@ public class ListaTareasActivity extends AppCompatActivity {
     }
 
     public void crearTarea(View view) {
-        TareaActivity.tipo = 1;
+        TareaActivity.tipo = 0;
         Intent intent = new Intent(this,TareaActivity.class);
         startActivity(intent);
     }
@@ -66,7 +66,7 @@ public class ListaTareasActivity extends AppCompatActivity {
         listaTareas.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int posicion, long id) {
-                Intent intent = new Intent(getApplicationContext(),TareaActivity.class);
+                Intent intent = new Intent(getApplicationContext(),MenuTareasActivity.class);
                 startActivity(intent);
                 MenuTareasActivity.tarea = busqueda.get(posicion);
             }
@@ -80,10 +80,14 @@ public class ListaTareasActivity extends AppCompatActivity {
         listaTareas.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int posicion, long id) {
-                Intent intent = new Intent(getApplicationContext(),TareaActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MenuTareasActivity.class);
                 startActivity(intent);
                 MenuTareasActivity.tarea = tareas.get(posicion);
             }
         });
+    }
+
+    public void refrescar(View view) {
+        listar();
     }
 }

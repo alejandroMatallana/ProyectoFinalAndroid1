@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Buscar Tarea"
-            android:onClick=""/>
+            android:onClick="buscar"/>
     </LinearLayout>
 
     <ListView
@@ -56,6 +56,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Refrescar Lista"
-            android:onClick="listar"/>
+            android:onClick="refrescar"/>
     </LinearLayout>
 </LinearLayout>

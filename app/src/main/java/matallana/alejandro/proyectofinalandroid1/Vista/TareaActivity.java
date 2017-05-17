@@ -9,9 +9,12 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import matallana.alejandro.proyectofinalandroid1.Controlador.ControllerTarea;
+import matallana.alejandro.proyectofinalandroid1.Modelo.Tarea;
 import matallana.alejandro.proyectofinalandroid1.R;
 
 public class TareaActivity extends AppCompatActivity {
@@ -82,8 +85,33 @@ public class TareaActivity extends AppCompatActivity {
                 fechaIni.getText().toString().isEmpty() || fechaFin.getText().toString().isEmpty()) {
             Toast.makeText(this,"Debe ingresar todos los datos",Toast.LENGTH_SHORT).show();
         } else {
-            //controllerTarea.
-            limpiar();
+            Calendar fechaInicial = Calendar.getInstance();
+            String[] datosfechaIni = fechaIni.getText().toString().split("/");
+            fechaInicial.set(Integer.parseInt(datosfechaIni[0]), Integer.parseInt(datosfechaIni[1]),
+                    Integer.parseInt(datosfechaIni[2]));
+            fechaInicial.set(Calendar.HOUR_OF_DAY,0);
+            fechaInicial.set(Calendar.MINUTE,0);
+            fechaInicial.set(Calendar.SECOND,0);
+            fechaInicial.set(Calendar.MILLISECOND,0);
+            Calendar fechaFinal = Calendar.getInstance();
+            String[] datosfechaFin = fechaFin.getText().toString().split("/");
+            fechaFinal.set(Integer.parseInt(datosfechaFin[0]), Integer.parseInt(datosfechaFin[1]),
+                    Integer.parseInt(datosfechaFin[2]));
+            fechaFinal.set(Calendar.HOUR_OF_DAY,0);
+            fechaFinal.set(Calendar.MINUTE,0);
+            fechaFinal.set(Calendar.SECOND,0);
+            fechaFinal.set(Calendar.MILLISECOND,0);
+            Tarea tarea = new Tarea();
+            tarea.setActividad(MenuActividadesActivity.actividad);
+            tarea.setPorcentaje(Integer.parseInt(porcentaje.getText().toString()));
+            tarea.setNombreTarea(nombre.getText().toString());
+            tarea.setFechaInicio(fechaInicial.getTime());
+            tarea.setFechaFinal(fechaFinal.getTime());
+            String resp = controllerTarea.crear(tarea);
+            if (resp.equalsIgnoreCase("Se registro la tarea")) {
+                limpiar();
+            }
+            Toast.makeText(this,resp,Toast.LENGTH_SHORT).show();
         }
     }
 

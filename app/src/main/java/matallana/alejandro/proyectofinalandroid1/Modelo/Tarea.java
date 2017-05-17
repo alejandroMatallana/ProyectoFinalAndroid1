@@ -1,5 +1,6 @@
 package matallana.alejandro.proyectofinalandroid1.Modelo;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -77,6 +78,7 @@ public class Tarea {
 
     @Override
     public String toString() {
-        return nombreTarea + " - " + porcentaje + "% - " + fechaInicio + " - " + fechaFinal;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        return nombreTarea + " - " + porcentaje + "% - " + format.format(fechaInicio) + " - " + format.format(fechaFinal);
     }
 }

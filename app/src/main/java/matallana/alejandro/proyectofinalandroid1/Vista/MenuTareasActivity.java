@@ -19,6 +19,7 @@ public class MenuTareasActivity extends AppCompatActivity {
     }
 
     public void verDatos(View view) {
+        TareaActivity.tipo = 1;
         Intent intent = new Intent(this, TareaActivity.class);
         startActivity(intent);
     }
