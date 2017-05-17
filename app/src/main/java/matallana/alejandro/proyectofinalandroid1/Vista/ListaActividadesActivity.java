@@ -43,8 +43,7 @@ public class ListaActividadesActivity extends AppCompatActivity {
         listaActividades.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int posicion, long id) {
-                Actividad aux = actividades.get(posicion);
-                ActividadesActivity.actividad = aux;
+                MenuActividadesActivity.actividad = actividades.get(posicion);
                 System.out.println(ActividadesActivity.actividad);
                 System.out.println(posicion);
                 ActividadesActivity.tipo = 1;

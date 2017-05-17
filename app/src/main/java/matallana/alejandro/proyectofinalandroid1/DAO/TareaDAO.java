@@ -51,6 +51,7 @@ public class TareaDAO {
 
     public List<Tarea> listar(Actividad actividad) {
         List<Tarea> tareas = new ArrayList<>();
+        System.out.println(actividad.getId());
         String consulta = "SELECT nombre,porcentajeDesarrollo,fechaInicio,fechaFinal FROM Tareas WHERE idActividad=" + actividad.getId();
         Cursor temp = conexion.search(consulta);
         if (temp.moveToFirst()){

@@ -21,7 +21,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ver tarreas de la actividad"
+        android:text="Ver tareas de la actividad"
         android:id="@+id/button15"
         android:layout_gravity="center_horizontal"
         android:onClick="tareasActividad" />
