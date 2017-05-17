@@ -3,10 +3,14 @@ package matallana.alejandro.proyectofinalandroid1.Vista;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import matallana.alejandro.proyectofinalandroid1.Controlador.ControllerDatosIntegranteProyectoActivity;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Cargo;
@@ -32,6 +36,7 @@ public class DatosIntegranteProyectoActivity extends AppCompatActivity {
         txtTipoDoc = (EditText) findViewById(R.id.txtDatosUTipoDocu);
         spnCargo = (Spinner) findViewById(R.id.spnDatosUCargo);
         lblUsuarioIntegrante = (TextView) findViewById(R.id.lblUsuarioIntegrante);
+        cargarSpinnerCargos();
         mostrarDatosUsuario();
     }
 
@@ -42,11 +47,36 @@ public class DatosIntegranteProyectoActivity extends AppCompatActivity {
     }
 
     public void agregarEsteIntegrante(View view){
-
+        if(usuario != null){
+            int idUsuario = usuario.getId();
+            int idProyecto = MenuProyectosActivity.proyecto.getId();
+            Cargo cargo = (Cargo)spnCargo.getSelectedItem();
+            ControllerDatosIntegranteProyectoActivity controller = new ControllerDatosIntegranteProyectoActivity(this);
+            boolean res = controller.agregarIntegrante(cargo.getId(),idUsuario,idProyecto);
+            if(res){
+                Toast.makeText(this,"El usuario ha sido agregado como integrante del proyecto con " +
+                        "exito", Toast.LENGTH_SHORT).show();
+                usuario=null;
+                cargo=null;
+                finish();
+            }
+        }
     }
 
     public void quitarEsteIntegrante(View view){
-
+        if(usuario != null){
+            int idUsuario = usuario.getId();
+            int idProyecto = MenuProyectosActivity.proyecto.getId();
+            ControllerDatosIntegranteProyectoActivity controller = new ControllerDatosIntegranteProyectoActivity(this);
+            boolean res = controller.quitarIntegrante(idUsuario,idProyecto);
+            if(res){
+                Toast.makeText(this,"El usuario ha sido eliminado como integrante del proyecto con " +
+                        "exito", Toast.LENGTH_SHORT).show();
+                usuario=null;
+                cargo=null;
+                finish();
+            }
+        }
     }
 
     public void mostrarDatosUsuario(){
@@ -72,6 +102,13 @@ public class DatosIntegranteProyectoActivity extends AppCompatActivity {
             }
 
         }
+    }
+
+    public void cargarSpinnerCargos(){
+        ControllerDatosIntegranteProyectoActivity controller = new ControllerDatosIntegranteProyectoActivity(this);
+        ArrayList<Cargo> lista = controller.listarCargosDelProyecto(MenuProyectosActivity.proyecto);
+        ArrayAdapter<Cargo> adapter = new ArrayAdapter<Cargo>(this,android.R.layout.simple_spinner_item,lista);
+        spnCargo.setAdapter(adapter);
     }
 
     public void ocultarBotonAgregar(){

@@ -41,6 +41,19 @@ public class ProyectosIntegrantesDAO {
         return conex.insert("ProyectosIntegrantes", registro);
     }
 
+    /**
+     * metodo para eliminar un registro de la tabla ProyectosIntegrantes donde coincidan el usuario
+     * y el proyecto
+     * @param usuario, id del usuario
+     * @param proyecto, id del proyecto
+     * @return true si se eliminó el registro, false de lo contrario
+     */
+    public boolean eliminar(int usuario, int proyecto){
+        String tabla = "ProyectosIntegrantes";
+        String condicion = "idUsuario=" + usuario + " AND idProyecto=" + proyecto;
+        return conex.delete(tabla,condicion);
+    }
+
     public boolean buscarUsuarioProyecto(int usuario, int proyecto){
         String consulta = "SELECT count(pi.id) FROM ProyectosIntegrantes AS pi" +
                 " WHERE pi.idProyecto="+proyecto + " AND pi.idUsuario="+usuario;
