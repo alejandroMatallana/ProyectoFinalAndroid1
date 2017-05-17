@@ -42,7 +42,17 @@ public class ProyectosIntegrantesDAO {
     }
 
     public boolean buscarUsuarioProyecto(int usuario, int proyecto){
-        return true;
+        String consulta = "SELECT count(pi.id) FROM ProyectosIntegrantes AS pi" +
+                " WHERE pi.idProyecto="+proyecto + " AND pi.idUsuario="+usuario;
+
+        Cursor temp = conex.search(consulta);
+
+        if (temp.getCount()>0){
+            if (temp.getInt(0) > 0){
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
