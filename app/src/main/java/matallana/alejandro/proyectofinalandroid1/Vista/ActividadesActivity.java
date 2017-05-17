@@ -1,6 +1,7 @@
 package matallana.alejandro.proyectofinalandroid1.Vista;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -133,6 +134,7 @@ public class ActividadesActivity extends AppCompatActivity {
 //                }else {
 //                    Toast.makeText(this, "Error creando la actividad", Toast.LENGTH_SHORT).show();
 //                }
+                limpiarCampos();
 
             }else {
                 Toast.makeText(this, "La fecha de fin es menor a la fecha inicial", Toast.LENGTH_SHORT).show();
@@ -192,6 +194,9 @@ public class ActividadesActivity extends AppCompatActivity {
     public void elimniarActividad(View view){
         controllerActividad.eliminar(MenuActividadesActivity.actividad);
         Toast.makeText(this, "¡Se ha eliminado orrectamente!", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this,ListaActividadesActivity.class);
+        startActivity(intent);
         finish();
     }
 
@@ -217,6 +222,13 @@ public class ActividadesActivity extends AppCompatActivity {
 
     }
 
+
+    public void limpiarCampos(){
+        txtNomber.setText(null);
+        txtDescripcion.setText(null);
+        txtFechaFin.setText(null);
+        txtFechaInicio.setText(null);
+    }
 
 
 }

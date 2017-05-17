@@ -56,6 +56,7 @@ public class ListaActividadesActivity extends AppCompatActivity {
     public void crearActividad(View view){
         ActividadesActivity.tipo=0;
         Intent intent = new Intent(this,ActividadesActivity.class);
+        MenuActividadesActivity.actividad=null;
         startActivity(intent);
     }
 }
