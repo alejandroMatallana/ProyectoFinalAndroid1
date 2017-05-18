@@ -18,6 +18,12 @@ public class MenuTareasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu_tareas);
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        //tarea = null;
+    }
+
     public void verDatos(View view) {
         TareaActivity.tipo = 1;
         Intent intent = new Intent(this, TareaActivity.class);

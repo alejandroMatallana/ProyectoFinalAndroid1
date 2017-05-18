@@ -41,6 +41,10 @@ public class TareaActivity extends AppCompatActivity {
             eliminar.setVisibility(View.GONE);
         } else {
             crear.setVisibility(View.GONE);
+            nombre.setEnabled(false);
+        }
+        if (MenuTareasActivity.tarea != null) {
+            cargar();
         }
         fechaIni.setOnClickListener(new View.OnClickListener() {
 
@@ -116,11 +120,50 @@ public class TareaActivity extends AppCompatActivity {
     }
 
     public void editar(View view) {
-        finish();
+        if (nombre.getText().toString().isEmpty() || porcentaje.getText().toString().isEmpty() ||
+                fechaIni.getText().toString().isEmpty() || fechaFin.getText().toString().isEmpty()) {
+            Toast.makeText(this,"Debe ingresar todos los datos",Toast.LENGTH_SHORT).show();
+        } else {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+            Tarea tarea = MenuTareasActivity.tarea;
+            try {
+                tarea.setFechaFinal(format.parse(fechaFin.getText().toString()));
+                tarea.setFechaInicio(format.parse(fechaIni.getText().toString()));
+                tarea.setPorcentaje(Integer.parseInt(porcentaje.getText().toString()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            String resp = controllerTarea.editar(tarea);
+            if (resp.equalsIgnoreCase("Se edito la tarea")) {
+                MenuTareasActivity.tarea = tarea;
+                Toast.makeText(this,resp,Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(this,resp,Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     public void eliminar(View view) {
-        finish();
+        if (controllerTarea.eliminar(MenuTareasActivity.tarea)) {
+            Toast.makeText(this,"Se elimino correctamente",Toast.LENGTH_SHORT).show();
+            finish();
+        } else {
+            Toast.makeText(this,"Ocurrio un error al eliminar",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void cargar() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        String inicio = format.format(MenuTareasActivity.tarea.getFechaInicio());
+        String[] datIni = inicio.split("/");
+        String fin = format.format(MenuTareasActivity.tarea.getFechaFinal());
+        String[] datFin = fin.split("/");
+        nombre.setText(MenuTareasActivity.tarea.getNombreTarea());
+        porcentaje.setText(String.valueOf(MenuTareasActivity.tarea.getPorcentaje()));
+        fechaIni.setText(datIni[0]+"/"+datIni[1]+"/"+datIni[2]);
+        fechaFin.setText(datFin[0]+"/"+datFin[1]+"/"+datFin[2]);
+        nombre.setText(MenuTareasActivity.tarea.getNombreTarea());
     }
 
     public void limpiar() {
