@@ -103,4 +103,23 @@ public class TareaDAO {
         return tareas;
     }
 
+    /**
+     * metodo que devuelve la suma del porcentaje de desarrollo de las tareas de una actividad
+     * @param actividad, la actividad
+     * @return
+     */
+    public double desarolloDeLasTareas(Actividad actividad) {
+        double porcentaje = 0;
+        String consulta = "SELECT sum(t.porcentajeDesarrollo),count(t.id) FROM Tareas AS t" +
+                " WHERE idActividad=" + actividad.getId();
+        Cursor temp = conexion.search(consulta);
+        if (temp.getCount() > 0){
+            temp.moveToFirst();
+            int cantidadTareas = temp.getInt(1);
+            double sumaProcentajes = temp.getDouble(0);
+            porcentaje = sumaProcentajes / cantidadTareas;
+        }
+        return porcentaje;
+    }
+
 }

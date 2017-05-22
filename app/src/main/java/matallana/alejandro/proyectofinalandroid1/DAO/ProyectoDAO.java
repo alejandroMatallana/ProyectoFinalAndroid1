@@ -191,6 +191,13 @@ public class ProyectoDAO {
         return false;
     }
 
+    /**
+     * metodo para actualizar el estado del proyecto, porcentaje de desarrollo
+     */
+    public void actualizarEstadoProyecto(){
+
+    }
+
     public void cerrarConexionBaseDeDatos(){
         conex.cerrarConexion();
     }

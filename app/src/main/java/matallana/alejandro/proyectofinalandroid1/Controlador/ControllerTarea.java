@@ -4,7 +4,11 @@ import android.app.Activity;
 
 import java.util.List;
 
+import matallana.alejandro.proyectofinalandroid1.DAO.ActividadDAO;
+import matallana.alejandro.proyectofinalandroid1.DAO.ProyectoDAO;
 import matallana.alejandro.proyectofinalandroid1.DAO.TareaDAO;
+import matallana.alejandro.proyectofinalandroid1.Modelo.Actividad;
+import matallana.alejandro.proyectofinalandroid1.Modelo.Proyecto;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Tarea;
 import matallana.alejandro.proyectofinalandroid1.Vista.MenuActividadesActivity;
 
@@ -15,8 +19,10 @@ import matallana.alejandro.proyectofinalandroid1.Vista.MenuActividadesActivity;
 public class ControllerTarea {
 
     private TareaDAO tareaDAO;
+    private Activity activity;
 
     public ControllerTarea(Activity activity) {
+        this.activity = activity;
         tareaDAO = new TareaDAO(activity);
     }
 
@@ -31,6 +37,7 @@ public class ControllerTarea {
                     if (tarea.getFechaFinal().compareTo(MenuActividadesActivity.actividad.getFechaFin()) <= 0) {
                         if (tarea.getPorcentaje() <= 100) {
                             if (tareaDAO.editar(tarea)) {
+                                actualizarDesarrolloProyecto(MenuActividadesActivity.actividad.getProyecto());
                                 return "Se edito la tarea";
                             } else {
                                 return "Error en la edicion de la tarea";
@@ -60,6 +67,7 @@ public class ControllerTarea {
                     if (tarea.getFechaFinal().compareTo(MenuActividadesActivity.actividad.getFechaFin()) <= 0) {
                         if (tarea.getPorcentaje() <= 100) {
                             if (tareaDAO.crear(tarea, MenuActividadesActivity.actividad)) {
+                                actualizarDesarrolloProyecto(MenuActividadesActivity.actividad.getProyecto());
                                 return "Se registro la tarea";
                             } else {
                                 return "Error en el registro de la tarea";
@@ -88,5 +96,23 @@ public class ControllerTarea {
 
     public List<Tarea> listar() {
         return tareaDAO.listar(MenuActividadesActivity.actividad);
+    }
+
+    /**
+     * metodo para actualizar el estado de desarrollo del proyecto al que pertenece
+     * una tarea
+     * @param proyecto, el proyecto al que pertenece la tarea
+     */
+    public void actualizarDesarrolloProyecto(Proyecto proyecto){
+        double porcentaje = 0;
+        ActividadDAO actividadDAO = new ActividadDAO(activity);
+        ProyectoDAO proyectoDao = new ProyectoDAO(activity);
+        List<Actividad> actividades = actividadDAO.listaActividades(proyecto);
+        for (int i = 0; i < actividades.size(); i++) {
+            porcentaje += tareaDAO.desarolloDeLasTareas(actividades.get(i));
+        }
+        porcentaje = porcentaje / actividades.size();
+        proyecto.setEtapa(porcentaje);
+        proyectoDao.modificar(proyecto);
     }
 }
