@@ -37,10 +37,10 @@
         android:onClick="gestionActividades" />
 
     <Button
-        android:id="@+id/button16"
+        android:id="@+id/btnVerRecurosProyecto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ver Listado de Recursos"
-        android:onClick="verRecursos"/>
+        android:onClick="verRecursos"
+        android:text="Ver Listado de Recursos" />
 
 </LinearLayout>

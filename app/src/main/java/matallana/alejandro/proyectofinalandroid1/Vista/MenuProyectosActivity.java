@@ -7,19 +7,39 @@ import android.view.View;
 import android.widget.Button;
 
 import matallana.alejandro.proyectofinalandroid1.Modelo.Proyecto;
+import matallana.alejandro.proyectofinalandroid1.Modelo.Usuario;
 import matallana.alejandro.proyectofinalandroid1.R;
 
 public class MenuProyectosActivity extends AppCompatActivity {
 
     public static Proyecto proyecto = null;
-    private Button btnVerCargosProyecto, btnAbrirIntegrantesActivity;
+    private Button btnVerCargosProyecto, btnAbrirIntegrantesActivity, btnVerRecurosProyecto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_menu_proyectos);
         btnVerCargosProyecto = (Button) findViewById(R.id.btnVerCargosProyecto);
         btnAbrirIntegrantesActivity = (Button) findViewById(R.id.btnAbrirIntegrantesActivity);
-        setContentView(R.layout.activity_menu_proyectos);
+        btnVerRecurosProyecto = (Button) findViewById(R.id.btnVerRecurosProyecto);
+        ocultarBotones();
+    }
+
+    /**
+     * metodo para mostrar u ocultar botones segun el usuario que se logueo.
+     * Usuario tipo integrante, oculta ver cargos, ver integrantes y ver recursos.
+     * Usuario tipo Director, muestra todos los botones
+     */
+    public void ocultarBotones(){
+        if(MainActivity.usuario.getTipoUsuario().equalsIgnoreCase(Usuario.TIPO_DIRECTOR)){
+            btnAbrirIntegrantesActivity.setVisibility(View.VISIBLE);
+            btnVerCargosProyecto.setVisibility(View.VISIBLE);
+            btnVerRecurosProyecto.setVisibility(View.VISIBLE);
+        } else if (MainActivity.usuario.getTipoUsuario().equalsIgnoreCase(Usuario.TIPO_INTEGRANTE)){
+            btnAbrirIntegrantesActivity.setVisibility(View.INVISIBLE);
+            btnVerCargosProyecto.setVisibility(View.INVISIBLE);
+            btnVerRecurosProyecto.setVisibility(View.INVISIBLE);
+        }
     }
 
     public void gestionarCargos(View view) {
