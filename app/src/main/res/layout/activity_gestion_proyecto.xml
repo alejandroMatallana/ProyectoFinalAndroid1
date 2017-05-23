@@ -88,6 +88,70 @@
             android:layout_weight="1"
             android:text="Eliminar"
             android:onClick="eliminarProyecto"/>
+
     </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollLiderProyecto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/layoutLiderProyecto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DATOS DEL LIDER DEL PROYECTO" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre:" />
+
+            <EditText
+                android:id="@+id/txtNombreLider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Número de documento:" />
+
+            <EditText
+                android:id="@+id/txtNumeroDocuLider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Correo electronico:" />
+
+            <EditText
+                android:id="@+id/txtCorreoLider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:inputType="textPersonName" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

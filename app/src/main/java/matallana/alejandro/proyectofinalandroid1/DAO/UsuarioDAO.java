@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 import matallana.alejandro.proyectofinalandroid1.Infraestructura.Conexion;
+import matallana.alejandro.proyectofinalandroid1.Modelo.Proyecto;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Usuario;
 
 /**
@@ -102,6 +103,43 @@ public class UsuarioDAO {
             usuario.setCorreoElectronico(temp.getString(6));
             usuario.setTipoUsuario(temp.getString(7));
             usuario.setNumeroDocumento(numeroDocumento);
+            conex.cerrarConexion();
+            return usuario;
+        }
+        conex.cerrarConexion();
+        return null;
+    }
+
+    /**
+     * metodo para buscar el lider del proyecto y traer sus datos
+     * @param proyecto, el proyecto al que se le buscará el lider
+     * @return el usuario que es lider del proyecto
+     */
+    public Usuario buscarLiderProyecto(Proyecto proyecto){
+        String consulta = "select u.tipoDocumento,u.nombres,u.apellidos,u.fechaNacimiento,u.pass,u.usuario," +
+                "u.correoElectronico,u.tipoUsuario,u.id,u.numeroDocumento" +
+                " from Usuarios AS u JOIN ProyectosIntegrantes AS pi ON u.id=pi.idUsuario" +
+                " where pi.idProyecto="+proyecto.getId()+" AND pi.idCargo=1";
+
+        Cursor temp = conex.search(consulta);
+        if (temp.getCount()>0){
+            Usuario usuario = new Usuario();
+            temp.moveToFirst();
+            usuario.setId(temp.getInt(8));
+            usuario.setTipoDocumento(temp.getString(0));
+            usuario.setNombres(temp.getString(1));
+            usuario.setApellidos(temp.getString(2));
+            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+            try {
+                usuario.setFechaNacimiento(format.parse(temp.getString(3)));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            usuario.setPass(temp.getString(4));
+            usuario.setUsuario(temp.getString(5));
+            usuario.setCorreoElectronico(temp.getString(6));
+            usuario.setTipoUsuario(temp.getString(7));
+            usuario.setNumeroDocumento(temp.getInt(9));
             conex.cerrarConexion();
             return usuario;
         }

@@ -10,6 +10,7 @@ import matallana.alejandro.proyectofinalandroid1.DAO.ProyectoDAO;
 import matallana.alejandro.proyectofinalandroid1.DAO.ProyectosIntegrantesDAO;
 import matallana.alejandro.proyectofinalandroid1.DAO.UsuarioDAO;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Proyecto;
+import matallana.alejandro.proyectofinalandroid1.Modelo.Usuario;
 
 /**
  * Created by sebastiancardona on 9/05/17.
@@ -93,6 +94,16 @@ public class ControllerProyecto {
     public  Proyecto buscar(String nombre){
         ProyectoDAO proyectoDAO = new ProyectoDAO(activity);
         return proyectoDAO.buscar(nombre);
+    }
+
+    /**
+     * metodo para buscar el lider del proyecto
+     * @param proyecto, el proyecto
+     * @return el usuario que es lider del proyecto
+     */
+    public Usuario buscarLiderDelProyecto(Proyecto proyecto){
+        UsuarioDAO dao = new UsuarioDAO(activity);
+        return dao.buscarLiderProyecto(proyecto);
     }
 
 }

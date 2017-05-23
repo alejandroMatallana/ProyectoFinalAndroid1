@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import java.text.ParseException;
@@ -18,6 +19,7 @@ import java.util.Date;
 import matallana.alejandro.proyectofinalandroid1.Controlador.ControllerProyecto;
 import matallana.alejandro.proyectofinalandroid1.DAO.ProyectoDAO;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Proyecto;
+import matallana.alejandro.proyectofinalandroid1.Modelo.Usuario;
 import matallana.alejandro.proyectofinalandroid1.R;
 
 public class GestionProyectoActivity extends AppCompatActivity {
@@ -25,6 +27,8 @@ public class GestionProyectoActivity extends AppCompatActivity {
     private LinearLayout layoutEdicion;
     private Button btnCrear;
     private EditText txtNombre, txtFechaInicio, txtFechaFin, txtEstado;
+    private EditText txtNombreLider, txtNumeroDocuLider, txtCorreoLider;
+    private ScrollView scrollLiderProyecto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,11 @@ public class GestionProyectoActivity extends AppCompatActivity {
         txtFechaInicio = (EditText) findViewById(R.id.dateInicioProyecto);
         txtNombre = (EditText) findViewById(R.id.txtNombreProyecto);
         txtEstado = (EditText) findViewById(R.id.txtEstadoProyecto);
+
+        txtNombreLider = (EditText) findViewById(R.id.txtNombreLider);
+        txtNumeroDocuLider = (EditText) findViewById(R.id.txtNumeroDocuLider);
+        txtCorreoLider = (EditText) findViewById(R.id.txtCorreoLider);
+        scrollLiderProyecto = (ScrollView) findViewById(R.id.scrollLiderProyecto);
 
         txtFechaInicio.setOnClickListener(new View.OnClickListener() {
 
@@ -69,7 +78,43 @@ public class GestionProyectoActivity extends AppCompatActivity {
                 mDatePicker.show();  }
         });
 
-        verificarSiCrearOEliminarEditar();
+        verificarDirectorIntegrante();
+    }
+
+    /**
+     * metodo para verificar si el usuario logueado es tipo Director o tipo Integrante
+     * y según esto se muestra o se ocultan unos datos o componentes del activity
+     */
+    public void verificarDirectorIntegrante(){
+        if(MainActivity.usuario.getTipoUsuario().equalsIgnoreCase(Usuario.TIPO_DIRECTOR)){
+            verificarSiCrearOEliminarEditar();
+            scrollLiderProyecto.setVisibility(View.INVISIBLE);
+            txtFechaFin.setEnabled(true);
+            txtFechaFin.setEnabled(true);
+        } else if (MainActivity.usuario.getTipoUsuario().equalsIgnoreCase(Usuario.TIPO_INTEGRANTE)){
+            layoutEdicion.setVisibility(View.INVISIBLE);
+            btnCrear.setVisibility(View.INVISIBLE);
+            txtNombre.setEnabled(false);
+            txtFechaFin.setEnabled(false);
+            txtFechaFin.setEnabled(false);
+            txtEstado.setVisibility(View.VISIBLE);
+            txtEstado.setEnabled(false);
+            scrollLiderProyecto.setVisibility(View.VISIBLE);
+            mostrarDatosLiderProyecto();
+        }
+    }
+
+    /**
+     * metodo para mostrar los datos del lider del proyecto
+     */
+    public void mostrarDatosLiderProyecto(){
+        ControllerProyecto controllerProyecto = new ControllerProyecto(this);
+        Usuario liderProyecto = controllerProyecto.buscarLiderDelProyecto(MenuProyectosActivity.proyecto);
+        if(liderProyecto != null){
+            txtNombreLider.setText(liderProyecto.getNombres()+" "+liderProyecto.getApellidos());
+            txtCorreoLider.setText(liderProyecto.getCorreoElectronico());
+            txtNumeroDocuLider.setText(String.valueOf(liderProyecto.getNumeroDocumento()));
+        }
     }
 
     /**
