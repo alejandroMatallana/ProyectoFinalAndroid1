@@ -105,7 +105,9 @@ public class Proyecto {
 
     @Override
     public String toString() {
-        return "Nombre: "+nombre +
-                "\nEstado: " + (etapa)+"%";
+        return "Nombre: "+nombre
+                + "\nInicio: " + fechaInicio
+                + "\nFinalización: " + fechaFin
+                + "\nEstado: " + (etapa)+"%";
     }
 }

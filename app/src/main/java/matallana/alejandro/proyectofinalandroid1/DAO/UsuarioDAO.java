@@ -148,7 +148,7 @@ public class UsuarioDAO {
         ArrayList<Usuario> lista = new ArrayList<>();
         String consulta = "SELECT u.id,u.tipoDocumento,u.numeroDocumento,u.nombres,u.apellidos," +
                 "u.fechaNacimiento,u.pass,u.usuario,u.correoElectronico,u.tipoUsuario" +
-                " FROM Usuarios AS u WHERE u.tipoUsuario='Integrante del proyecto'";
+                " FROM Usuarios AS u WHERE u.tipoUsuario='"+Usuario.TIPO_INTEGRANTE+"'";
         Cursor temp = conex.search(consulta);
         if (temp.moveToFirst()){
             do {

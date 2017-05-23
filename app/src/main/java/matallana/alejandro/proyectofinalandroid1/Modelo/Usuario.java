@@ -7,6 +7,9 @@ import java.util.Date;
  */
 public class Usuario {
 
+    public static final String TIPO_DIRECTOR = "Director de proyecto";
+    public static final String TIPO_INTEGRANTE = "Integrante del proyecto";
+
     private int id;
     private String tipoDocumento;
     private int numeroDocumento;

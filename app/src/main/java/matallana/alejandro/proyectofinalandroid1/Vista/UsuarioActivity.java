@@ -189,8 +189,8 @@ public class UsuarioActivity extends AppCompatActivity {
         ArrayList<String> tiposUsuario = new ArrayList<>();
         tiposUsuario.add("Seleccione Tipo Usuario");
         //Nota: no mover estos valores...
-        tiposUsuario.add("Director de proyecto");
-        tiposUsuario.add("Integrante del proyecto");
+        tiposUsuario.add(Usuario.TIPO_DIRECTOR);
+        tiposUsuario.add(Usuario.TIPO_INTEGRANTE);
         ArrayAdapter<String> adapterUsuario = new ArrayAdapter(this,android.R.layout.simple_spinner_item,tiposUsuario);
         adapterUsuario.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         tipoUsuario.setAdapter(adapterUsuario);
