@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         usuario= null;
+        limpiarCampos();
     }
 
     public void signIn(View view){
@@ -47,5 +48,10 @@ public class MainActivity extends AppCompatActivity {
         } else {
             Toast.makeText(this,"Usuario no existe",Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void limpiarCampos() {
+        userName.setText(null);
+        password.setText(null);
     }
 }

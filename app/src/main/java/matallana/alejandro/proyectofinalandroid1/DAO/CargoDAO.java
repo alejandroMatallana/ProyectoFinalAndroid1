@@ -42,12 +42,10 @@ public class CargoDAO {
         String tabla = "Cargos" ;
         String condicion = "nombre= '" +  cargo.getNombre() +  "'";
         ContentValues registro = new ContentValues();
-
         registro.put("descripcion", cargo.getDescripcion());
         registro.put("horario", cargo.getHorario());
         registro.put("salario",cargo.getSalario());
         return  conex.update(tabla,condicion,registro);
-
     }
 
     public Cargo buscar(String nombreCargo, Proyecto proyecto) {

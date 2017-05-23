@@ -32,7 +32,10 @@
         <activity android:name=".Vista.ListaActividadesActivity" />
         <activity android:name=".Vista.ListaIntegrantesActivity" />
         <activity android:name=".Vista.ListaAgregarIntegranteActivity" />
-        <activity android:name=".Vista.DatosIntegranteProyectoActivity"></activity>
+        <activity android:name=".Vista.DatosIntegranteProyectoActivity" />
+        <activity android:name=".Vista.RecursoActivity" />
+        <activity android:name=".Vista.MenuRecursosActivity" />
+        <activity android:name=".Vista.ListaRecursosTareasActivity"></activity>
     </application>
 
 </manifest>

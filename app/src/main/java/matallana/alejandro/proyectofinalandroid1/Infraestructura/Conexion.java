@@ -59,9 +59,10 @@ public class Conexion extends SQLiteOpenHelper {
                 " \"nombre\" VARCHAR NOT NULL , \"porcentajeDesarrollo\" DOUBLE NOT NULL ," +
                 " \"fechaInicio\" DATETIME NOT NULL , \"fechaFinal\" DATETIME NOT NULL ," +
                 " \"idActividad\" INTEGER REFERENCES Actividades ON DELETE CASCADE)");
-        db.execSQL("CREATE TABLE \"Recursos\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
-                " \"nombre\" VARCHAR NOT NULL , \"cantidad\" INTEGER NOT NULL ," +
-                " \"descripcion\" VARCHAR NOT NULL , \"ubicacion\" VARCHAR NOT NULL) ");
+        db.execSQL("CREATE TABLE \"Recursos\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , " +
+                " \"nombre\" VARCHAR NOT NULL , \"cantidad\" INTEGER NOT NULL , " +
+                " \"descripcion\" VARCHAR NOT NULL , \"ubicacion\" VARCHAR NOT NULL , " +
+                " \"idProyecto\" INTEGER REFERENCES Proyectos ON DELETE CASCADE)");
         db.execSQL("CREATE TABLE \"Reuniones\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"coordenadas\" VARCHAR NOT NULL , \"mensaje\" VARCHAR NOT NULL ," +
                 " \"tematica\" VARCHAR NOT NULL, \"idProyecto\" INTEGER REFERENCES Proyectos ON DELETE CASCADE)");
