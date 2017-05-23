@@ -42,13 +42,8 @@ public class MainActivity extends AppCompatActivity {
         String resp = dao.buscarLogin(userName.getText().toString(),password.getText().toString());
         if (resp != null) {
             usuario=dao.buscar(UsuarioDAO.IDUsuarioLogueado);
-            if (resp.equalsIgnoreCase("Director de proyecto")) {
-                Intent intent = new Intent(this,ListaProyectoActivity.class);
-                startActivity(intent);
-            } else {
-                Intent intent = new Intent(this,IntegranteActivity.class);
-                startActivity(intent);
-            }
+            Intent intent = new Intent(this,ListaProyectoActivity.class);
+            startActivity(intent);
         } else {
             Toast.makeText(this,"Usuario no existe",Toast.LENGTH_SHORT).show();
         }

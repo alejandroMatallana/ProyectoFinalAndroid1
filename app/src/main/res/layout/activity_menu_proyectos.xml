@@ -15,11 +15,11 @@
         android:onClick="gestionProyectosVerDatos"/>
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/btnVerCargosProyecto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ver Cargos del Proyecto"
-        android:onClick="gestionarCargos"/>
+        android:onClick="gestionarCargos"
+        android:text="Ver Cargos del Proyecto" />
 
     <Button
         android:id="@+id/btnAbrirIntegrantesActivity"

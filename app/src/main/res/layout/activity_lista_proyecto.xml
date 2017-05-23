@@ -46,7 +46,7 @@
     <ListView
         android:id="@+id/lstListaProyectos"
         android:layout_width="match_parent"
-        android:layout_height="356dp" />
+        android:layout_height="324dp" />
 
     <Button
         android:id="@+id/btnCrearNuevoProyecto"

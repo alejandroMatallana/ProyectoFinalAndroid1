@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import matallana.alejandro.proyectofinalandroid1.Modelo.Proyecto;
 import matallana.alejandro.proyectofinalandroid1.R;
@@ -11,10 +12,13 @@ import matallana.alejandro.proyectofinalandroid1.R;
 public class MenuProyectosActivity extends AppCompatActivity {
 
     public static Proyecto proyecto = null;
+    private Button btnVerCargosProyecto, btnAbrirIntegrantesActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        btnVerCargosProyecto = (Button) findViewById(R.id.btnVerCargosProyecto);
+        btnAbrirIntegrantesActivity = (Button) findViewById(R.id.btnAbrirIntegrantesActivity);
         setContentView(R.layout.activity_menu_proyectos);
     }
 
