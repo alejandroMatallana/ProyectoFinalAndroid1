@@ -106,6 +106,6 @@ public class Proyecto {
     @Override
     public String toString() {
         return "Nombre: "+nombre +
-                "\nEstado: " + (etapa*100)+"%";
+                "\nEstado: " + (etapa)+"%";
     }
 }

@@ -66,9 +66,10 @@ public class ListaTareasActivity extends AppCompatActivity {
         listaTareas.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int posicion, long id) {
-                Intent intent = new Intent(getApplicationContext(),MenuTareasActivity.class);
+                TareaActivity.tipo = 1;
+                TareaActivity.tarea = busqueda.get(posicion);
+                Intent intent = new Intent(getApplicationContext(),TareaActivity.class);
                 startActivity(intent);
-                MenuTareasActivity.tarea = busqueda.get(posicion);
             }
         });
     }
@@ -80,9 +81,10 @@ public class ListaTareasActivity extends AppCompatActivity {
         listaTareas.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int posicion, long id) {
-                Intent intent = new Intent(getApplicationContext(), MenuTareasActivity.class);
+                TareaActivity.tipo = 1;
+                TareaActivity.tarea = tareas.get(posicion);
+                Intent intent = new Intent(getApplicationContext(), TareaActivity.class);
                 startActivity(intent);
-                MenuTareasActivity.tarea = tareas.get(posicion);
             }
         });
     }

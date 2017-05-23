@@ -37,4 +37,9 @@ public class MenuProyectosActivity extends AppCompatActivity {
         Intent intent = new Intent(this,ListaIntegrantesActivity.class);
         startActivity(intent);
     }
+
+    public void verRecursos(View view) {
+        Intent intent = new Intent(this, ListaRecursosActivity.class);
+        startActivity(intent);
+    }
 }

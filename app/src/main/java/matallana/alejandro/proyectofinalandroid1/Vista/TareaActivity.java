@@ -20,6 +20,7 @@ import matallana.alejandro.proyectofinalandroid1.R;
 public class TareaActivity extends AppCompatActivity {
 
     public static int tipo = 0;
+    public static Tarea tarea = null;
     private ControllerTarea controllerTarea;
     private EditText nombre, porcentaje, fechaIni, fechaFin;
     private Button crear, editar, eliminar;
@@ -43,7 +44,7 @@ public class TareaActivity extends AppCompatActivity {
             crear.setVisibility(View.GONE);
             nombre.setEnabled(false);
         }
-        if (MenuTareasActivity.tarea != null) {
+        if (TareaActivity.tarea != null) {
             cargar();
         }
         fechaIni.setOnClickListener(new View.OnClickListener() {
@@ -155,15 +156,15 @@ public class TareaActivity extends AppCompatActivity {
 
     public void cargar() {
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-        String inicio = format.format(MenuTareasActivity.tarea.getFechaInicio());
+        String inicio = format.format(tarea.getFechaInicio());
         String[] datIni = inicio.split("/");
-        String fin = format.format(MenuTareasActivity.tarea.getFechaFinal());
+        String fin = format.format(tarea.getFechaFinal());
         String[] datFin = fin.split("/");
-        nombre.setText(MenuTareasActivity.tarea.getNombreTarea());
-        porcentaje.setText(String.valueOf(MenuTareasActivity.tarea.getPorcentaje()));
+        nombre.setText(tarea.getNombreTarea());
+        porcentaje.setText(String.valueOf(tarea.getPorcentaje()));
         fechaIni.setText(datIni[0]+"/"+datIni[1]+"/"+datIni[2]);
         fechaFin.setText(datFin[0]+"/"+datFin[1]+"/"+datFin[2]);
-        nombre.setText(MenuTareasActivity.tarea.getNombreTarea());
+        nombre.setText(tarea.getNombreTarea());
     }
 
     public void limpiar() {
@@ -172,5 +173,6 @@ public class TareaActivity extends AppCompatActivity {
         porcentaje.setText(null);
         fechaIni.setText(null);
         fechaFin.setText(null);
+        tarea = null;
     }
 }

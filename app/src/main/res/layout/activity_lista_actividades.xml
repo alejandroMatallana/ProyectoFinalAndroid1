@@ -12,15 +12,15 @@
     android:weightSum="1">
 
     <ListView
-        android:layout_width="match_parent"
-        android:layout_height="416dp"
         android:id="@+id/TVlistaActividades"
-        android:layout_weight="1.37" />
-
-    <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Crear Actividad"
+        android:layout_weight="0.87" />
+
+    <Button
         android:id="@+id/crearActi"
-        android:onClick="crearActividad" />
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="crearActividad"
+        android:text="Crear Actividad" />
 </LinearLayout>

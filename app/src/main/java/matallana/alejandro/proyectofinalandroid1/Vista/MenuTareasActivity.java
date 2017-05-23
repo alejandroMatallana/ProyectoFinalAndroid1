@@ -29,9 +29,4 @@ public class MenuTareasActivity extends AppCompatActivity {
         Intent intent = new Intent(this, TareaActivity.class);
         startActivity(intent);
     }
-
-    public void asignarRecursos(View view) {
-        Intent intent = new Intent(this, ListaRecursosActivity.class);
-        startActivity(intent);
-    }
 }

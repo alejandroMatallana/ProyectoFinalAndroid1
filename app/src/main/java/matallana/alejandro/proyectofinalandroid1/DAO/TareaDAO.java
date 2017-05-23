@@ -117,6 +117,8 @@ public class TareaDAO {
             temp.moveToFirst();
             int cantidadTareas = temp.getInt(1);
             double sumaProcentajes = temp.getDouble(0);
+            System.out.println("POR AQUIIIIIIIIIIIIIII.... "+temp.getDouble(0));
+            System.out.println("POR AQUIIIIIIIIIIIIIII.... "+temp.getInt(1));
             porcentaje = sumaProcentajes / cantidadTareas;
         }
         return porcentaje;

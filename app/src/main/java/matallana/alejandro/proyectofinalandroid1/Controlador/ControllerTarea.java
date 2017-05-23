@@ -109,9 +109,11 @@ public class ControllerTarea {
         ProyectoDAO proyectoDao = new ProyectoDAO(activity);
         List<Actividad> actividades = actividadDAO.listaActividades(proyecto);
         for (int i = 0; i < actividades.size(); i++) {
-            porcentaje += tareaDAO.desarolloDeLasTareas(actividades.get(i));
+            porcentaje = porcentaje + tareaDAO.desarolloDeLasTareas(actividades.get(i));
         }
+        System.out.println("sin dividri....."+porcentaje);
         porcentaje = porcentaje / actividades.size();
+        System.out.println("dividiendo....."+porcentaje);
         proyecto.setEtapa(porcentaje);
         proyectoDao.modificar(proyecto);
     }
