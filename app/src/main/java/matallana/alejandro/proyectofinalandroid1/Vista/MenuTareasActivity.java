@@ -21,7 +21,6 @@ public class MenuTareasActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
-        //tarea = null;
     }
 
     public void verDatos(View view) {

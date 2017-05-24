@@ -25,4 +25,11 @@
         android:id="@+id/button15"
         android:layout_gravity="center_horizontal"
         android:onClick="tareasActividad" />
+
+    <Button
+        android:id="@+id/listado"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Ver Listado de Recursos"
+        android:onClick="listadoRecursos"/>
 </LinearLayout>

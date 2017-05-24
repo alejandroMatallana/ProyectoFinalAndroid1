@@ -41,7 +41,12 @@ public class ListaActividadesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //cargarLista();
+        if (MainActivity.usuario.getTipoUsuario().equalsIgnoreCase("Integrante del proyecto")) {
+            crear.setVisibility(View.GONE);
+            cargarListaIntegrante();
+        } else {
+            cargarLista();
+        }
     }
 
     public void cargarLista(){

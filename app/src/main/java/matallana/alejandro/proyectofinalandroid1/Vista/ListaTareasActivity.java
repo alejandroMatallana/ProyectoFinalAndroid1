@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -15,10 +16,12 @@ import java.util.List;
 
 import matallana.alejandro.proyectofinalandroid1.Controlador.ControllerTarea;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Tarea;
+import matallana.alejandro.proyectofinalandroid1.Modelo.Usuario;
 import matallana.alejandro.proyectofinalandroid1.R;
 
 public class ListaTareasActivity extends AppCompatActivity {
 
+    private Button crear;
     private ListView listaTareas;
     private ControllerTarea controllerTarea;
     private EditText nombreTarea;
@@ -29,8 +32,13 @@ public class ListaTareasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_tareas);
         listaTareas = (ListView) findViewById(R.id.listaTareas);
         nombreTarea = (EditText) findViewById(R.id.nombreTarea);
+        crear = (Button) findViewById(R.id.crear);
         controllerTarea = new ControllerTarea(this);
+        if (MainActivity.usuario.getTipoUsuario().equalsIgnoreCase(Usuario.TIPO_INTEGRANTE)) {
+            crear.setVisibility(View.GONE);
+        }
         listar();
+
     }
 
     @Override

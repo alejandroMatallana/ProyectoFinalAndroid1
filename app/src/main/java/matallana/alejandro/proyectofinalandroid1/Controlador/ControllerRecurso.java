@@ -5,6 +5,8 @@ import android.app.Activity;
 import java.util.List;
 
 import matallana.alejandro.proyectofinalandroid1.DAO.RecursoDAO;
+import matallana.alejandro.proyectofinalandroid1.Modelo.Actividad;
+import matallana.alejandro.proyectofinalandroid1.Modelo.Proyecto;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Recurso;
 import matallana.alejandro.proyectofinalandroid1.Vista.MenuProyectosActivity;
 
@@ -46,5 +48,9 @@ public class ControllerRecurso {
 
     public List<Recurso> listar() {
         return recursoDAO.listar(MenuProyectosActivity.proyecto);
+    }
+
+    public List<Recurso> listarRecursosIntegrante(Actividad actividad, Proyecto proyecto, int idUsuario) {
+        return recursoDAO.listarRecursosIntegrante(actividad,proyecto,idUsuario);
     }
 }

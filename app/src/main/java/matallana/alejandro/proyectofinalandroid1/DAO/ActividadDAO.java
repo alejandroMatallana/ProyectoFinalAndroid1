@@ -46,7 +46,6 @@ public class ActividadDAO {
         registro.put("descripcion", actividad.getDescripcion());
         //registro.put("idResponsable", actividad.getUsuario().getId());
         registro.put("idResponsable",usuario);
-        System.out.println(usuario);
         registro.put("idProyecto", proyecto.getId());
         //registro.put("usuario",usuario);
         //registro.put("proyecto", proyecto);

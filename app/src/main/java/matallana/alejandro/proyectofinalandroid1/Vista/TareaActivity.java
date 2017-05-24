@@ -15,6 +15,7 @@ import java.util.Calendar;
 
 import matallana.alejandro.proyectofinalandroid1.Controlador.ControllerTarea;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Tarea;
+import matallana.alejandro.proyectofinalandroid1.Modelo.Usuario;
 import matallana.alejandro.proyectofinalandroid1.R;
 
 public class TareaActivity extends AppCompatActivity {
@@ -46,6 +47,11 @@ public class TareaActivity extends AppCompatActivity {
         }
         if (TareaActivity.tarea != null) {
             cargar();
+        }
+        if (MainActivity.usuario.getTipoUsuario().equalsIgnoreCase(Usuario.TIPO_INTEGRANTE)) {
+            fechaIni.setEnabled(false);
+            fechaFin.setEnabled(false);
+            eliminar.setVisibility(View.GONE);
         }
         fechaIni.setOnClickListener(new View.OnClickListener() {
 
@@ -126,7 +132,8 @@ public class TareaActivity extends AppCompatActivity {
             Toast.makeText(this,"Debe ingresar todos los datos",Toast.LENGTH_SHORT).show();
         } else {
             SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
-            Tarea tarea = MenuTareasActivity.tarea;
+            Tarea tarea = this.tarea;
+            System.out.println(tarea.getId());
             try {
                 tarea.setFechaFinal(format.parse(fechaFin.getText().toString()));
                 tarea.setFechaInicio(format.parse(fechaIni.getText().toString()));
@@ -135,18 +142,16 @@ public class TareaActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             String resp = controllerTarea.editar(tarea);
+            Toast.makeText(this,resp,Toast.LENGTH_SHORT).show();
             if (resp.equalsIgnoreCase("Se edito la tarea")) {
-                MenuTareasActivity.tarea = tarea;
-                Toast.makeText(this,resp,Toast.LENGTH_SHORT).show();
+                this.tarea = tarea;
                 finish();
-            } else {
-                Toast.makeText(this,resp,Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     public void eliminar(View view) {
-        if (controllerTarea.eliminar(MenuTareasActivity.tarea)) {
+        if (controllerTarea.eliminar(tarea)) {
             Toast.makeText(this,"Se elimino correctamente",Toast.LENGTH_SHORT).show();
             finish();
         } else {

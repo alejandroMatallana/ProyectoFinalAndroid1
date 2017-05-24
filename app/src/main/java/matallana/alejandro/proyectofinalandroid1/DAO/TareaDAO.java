@@ -30,7 +30,7 @@ public class TareaDAO {
     public boolean crear(Tarea tarea, Actividad actividad) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
         ContentValues registro= new ContentValues();
-        registro.put("nombre", tarea.getNombreTarea());
+        registro.put("nombre", tarea.getNombreTarea().toUpperCase());
         registro.put("porcentajeDesarrollo", tarea.getPorcentaje());
         registro.put("fechaInicio", format.format(tarea.getFechaInicio()));
         registro.put("fechaFinal", format.format(tarea.getFechaFinal()));
@@ -40,7 +40,7 @@ public class TareaDAO {
 
     public boolean editar(Tarea tarea) {
         String tabla = "Tareas";
-        String condicion = "idActividad=" + tarea.getActividad().getId();
+        String condicion = "id=" + tarea.getId();
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
         ContentValues registro = new ContentValues();
         registro.put("nombre", tarea.getNombreTarea());
@@ -51,8 +51,8 @@ public class TareaDAO {
     }
 
     public Tarea buscar(String nombreTarea, Actividad actividad) {
-        String consulta = "SELECT porcentajeDesarrollo,fechaInicio,fechaFinal FROM Tareas " +
-                "WHERE nombre='" + nombreTarea + "' and idActividad=" + actividad.getId();
+        String consulta = "SELECT porcentajeDesarrollo,fechaInicio,fechaFinal,id FROM Tareas " +
+                "WHERE UPPER(nombre)='" + nombreTarea.toUpperCase() + "' and idActividad=" + actividad.getId();
 
         Cursor temp = conexion.search(consulta);
         if (temp.getCount()>0){
@@ -62,9 +62,10 @@ public class TareaDAO {
                 temp.moveToFirst();
                 tarea.setFechaFinal(format.parse(temp.getString(2)));
                 tarea.setFechaInicio(format.parse(temp.getString(1)));
-                tarea.setNombreTarea(nombreTarea);
+                tarea.setNombreTarea(nombreTarea.toUpperCase());
                 tarea.setActividad(actividad);
                 tarea.setPorcentaje(temp.getInt(0));
+                tarea.setId(temp.getInt(3));
                 return tarea;
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -116,8 +117,6 @@ public class TareaDAO {
             temp.moveToFirst();
             int cantidadTareas = temp.getInt(1);
             double sumaProcentajes = temp.getDouble(0);
-            System.out.println("POR AQUIIIIIIIIIIIIIII.... "+temp.getDouble(0));
-            System.out.println("POR AQUIIIIIIIIIIIIIII.... "+temp.getInt(1));
             porcentaje = sumaProcentajes / cantidadTareas;
         }
         return porcentaje;

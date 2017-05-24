@@ -35,8 +35,6 @@ public class ControllerActividad {
             return "Señor usuario ya hay una actividad creada con este nombre";
         } else {
             if (actividad.getNombre() != null) {
-               // System.out.println(proyecto.getNombre() + usuario.getNombres());
-                //System.out.println(proyecto.getId() + usuario.getId());
                 actividadDAO.guardar(actividad,usuario, proyecto);
                 return "La actividad se ha registrado exitosamente";
             } else {

@@ -27,7 +27,7 @@ import matallana.alejandro.proyectofinalandroid1.R;
 
 public class ActividadesActivity extends AppCompatActivity {
 
-    private Button crear;
+    private Button crear,editar,eliminar;
     private EditText txtNomber, txtDescripcion, txtFechaInicio, txtFechaFin;
     private ControllerActividad controllerActividad;
     private ControllerListaIntegrantesActivity controllerListaIntegrantesActivity;
@@ -47,7 +47,19 @@ public class ActividadesActivity extends AppCompatActivity {
         controllerActividad = new ControllerActividad(this);
         controllerListaIntegrantesActivity = new ControllerListaIntegrantesActivity(this);
         responsable = (Spinner) findViewById(R.id.UsuarioRespon);
-
+        crear = (Button) findViewById(R.id.crear);
+        editar = (Button) findViewById(R.id.editar);
+        eliminar = (Button) findViewById(R.id.eliminar);
+        if (MainActivity.usuario.getTipoUsuario().equalsIgnoreCase(Usuario.TIPO_INTEGRANTE)) {
+            crear.setVisibility(View.GONE);
+            editar.setVisibility(View.GONE);
+            eliminar.setVisibility(View.GONE);
+            txtNomber.setEnabled(false);
+            txtDescripcion.setEnabled(false);
+            txtFechaInicio.setEnabled(false);
+            txtFechaFin.setEnabled(false);
+            responsable.setEnabled(false);
+        }
         txtFechaInicio.setOnClickListener(new View.OnClickListener() {
 
             @Override

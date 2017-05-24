@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 import matallana.alejandro.proyectofinalandroid1.Infraestructura.Conexion;
+import matallana.alejandro.proyectofinalandroid1.Modelo.Actividad;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Proyecto;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Recurso;
 import matallana.alejandro.proyectofinalandroid1.Modelo.Tarea;
@@ -77,6 +78,23 @@ public class RecursoDAO {
         List<Recurso> recursos = new ArrayList<>();
         String consulta = "SELECT id,nombre,cantidad,descripcion,ubicacion" +
                 " FROM Recursos WHERE idProyecto=" + proyecto.getId();
+        Cursor temp = conexion.search(consulta);
+        if (temp.moveToFirst()){
+            do {
+                Recurso recurso = new Recurso(temp.getString(1),temp.getInt(2),temp.getString(3),temp.getString(4),proyecto);
+                recurso.setId(temp.getInt(0));
+                recursos.add(recurso);
+            } while (temp.moveToNext());
+        }
+        return recursos;
+    }
+
+    public List<Recurso> listarRecursosIntegrante(Actividad actividad, Proyecto proyecto, int idUsuario) {
+        List<Recurso> recursos = new ArrayList<>();
+        String consulta = "SELECT re.id,re.nombre,re.cantidad,re.descripcion,re.ubicacion" +
+                " FROM Recursos re JOIN TareasRecursos tar ON re.id=tar.idRecurso JOIN Tareas ta ON " +
+                "tar.idTarea=ta.id JOIN Actividades ac ON ta.idActividad=ac.id WHERE " +
+                "ac.id=" + actividad.getId() + " AND ac.idResponsable=" + idUsuario;
         Cursor temp = conexion.search(consulta);
         if (temp.moveToFirst()){
             do {
