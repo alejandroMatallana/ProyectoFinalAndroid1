@@ -1,5 +1,6 @@
 package matallana.alejandro.proyectofinalandroid1.Modelo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -105,9 +106,10 @@ public class Proyecto {
 
     @Override
     public String toString() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
         return "Nombre: "+nombre
-                + "\nInicio: " + fechaInicio
-                + "\nFinalización: " + fechaFin
+                + "\nInicio: " + format.format(fechaInicio)
+                + "\nFinalización: " + format.format(fechaFin)
                 + "\nEstado: " + (etapa)+"%";
     }
 }
