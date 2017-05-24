@@ -35,7 +35,9 @@
         <activity android:name=".Vista.DatosIntegranteProyectoActivity" />
         <activity android:name=".Vista.RecursoActivity" />
         <activity android:name=".Vista.MenuRecursosActivity" />
-        <activity android:name=".Vista.ListaRecursosTareasActivity"></activity>
+        <activity android:name=".Vista.ListaRecursosTareasActivity" />
+        <activity android:name=".Vista.ListaComentariosActivity" />
+        <activity android:name=".Vista.ComentarioActivity"></activity>
     </application>
 
 </manifest>

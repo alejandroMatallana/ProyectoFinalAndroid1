@@ -34,6 +34,7 @@ public class ComentarioDAO {
         ContentValues registro= new ContentValues();
         Date fecha = comentario.getFecha();
         SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+        System.out.println(format.format(fecha));
         registro.put("fecha", format.format(fecha));
         registro.put("titulo", comentario.getTitulo());
         registro.put("comentario", comentario.getComentario());

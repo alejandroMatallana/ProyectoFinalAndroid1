@@ -8,22 +8,24 @@
     tools:context="matallana.alejandro.proyectofinalandroid1.Vista.MenuTareasActivity">
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/datos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Ver Datos"
-        android:onClick="verDatos"/>
+        android:onClick="verDatos"
+        android:text="Ver Datos" />
 
     <Button
-        android:id="@+id/button19"
+        android:id="@+id/agregarComentario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Asignar a la Tarea " />
+        android:text="Agregar comentarios"
+        android:onClick="agregarComentario"/>
 
     <Button
-        android:id="@+id/button20"
+        android:id="@+id/listarComentario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Quitar de la Tarea" />
+        android:text="Ver Comentarios"
+        android:onClick="listarComentarios"/>
 
 </LinearLayout>

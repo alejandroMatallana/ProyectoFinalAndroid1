@@ -76,7 +76,7 @@ public class ListaTareasActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v, int posicion, long id) {
                 TareaActivity.tipo = 1;
                 TareaActivity.tarea = busqueda.get(posicion);
-                Intent intent = new Intent(getApplicationContext(),TareaActivity.class);
+                Intent intent = new Intent(getApplicationContext(),MenuTareasActivity.class);
                 startActivity(intent);
             }
         });
@@ -91,7 +91,7 @@ public class ListaTareasActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View v, int posicion, long id) {
                 TareaActivity.tipo = 1;
                 TareaActivity.tarea = tareas.get(posicion);
-                Intent intent = new Intent(getApplicationContext(), TareaActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MenuTareasActivity.class);
                 startActivity(intent);
             }
         });
