@@ -32,6 +32,7 @@ public class ListaProyectoActivity extends AppCompatActivity {
         txtNombreBuscar = (EditText) findViewById(R.id.txtBuscarProyecto);
         btnCrearNuevoProyecto = (Button) findViewById(R.id.btnCrearNuevoProyecto);
         cargarLista();
+        ocultarBotonCrearProyecto();
     }
 
     @Override
@@ -39,6 +40,7 @@ public class ListaProyectoActivity extends AppCompatActivity {
         super.onResume();
         txtNombreBuscar.setText("");
         cargarLista();
+        ocultarBotonCrearProyecto();
     }
 
     /**

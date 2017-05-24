@@ -36,9 +36,9 @@ public class MenuProyectosActivity extends AppCompatActivity {
             btnVerCargosProyecto.setVisibility(View.VISIBLE);
             btnVerRecurosProyecto.setVisibility(View.VISIBLE);
         } else if (MainActivity.usuario.getTipoUsuario().equalsIgnoreCase(Usuario.TIPO_INTEGRANTE)){
-            btnAbrirIntegrantesActivity.setVisibility(View.INVISIBLE);
-            btnVerCargosProyecto.setVisibility(View.INVISIBLE);
-            btnVerRecurosProyecto.setVisibility(View.INVISIBLE);
+            btnAbrirIntegrantesActivity.setVisibility(View.GONE);
+            btnVerCargosProyecto.setVisibility(View.GONE);
+            btnVerRecurosProyecto.setVisibility(View.GONE);
         }
     }
 

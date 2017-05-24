@@ -92,15 +92,31 @@ public class GestionProyectoActivity extends AppCompatActivity {
             txtFechaFin.setEnabled(true);
             txtFechaFin.setEnabled(true);
         } else if (MainActivity.usuario.getTipoUsuario().equalsIgnoreCase(Usuario.TIPO_INTEGRANTE)){
-            layoutEdicion.setVisibility(View.INVISIBLE);
-            btnCrear.setVisibility(View.INVISIBLE);
-            txtNombre.setEnabled(false);
-            txtFechaFin.setEnabled(false);
-            txtFechaFin.setEnabled(false);
-            txtEstado.setVisibility(View.VISIBLE);
-            txtEstado.setEnabled(false);
-            scrollLiderProyecto.setVisibility(View.VISIBLE);
-            mostrarDatosLiderProyecto();
+            usuarioTipoIntegrante();
+        }
+    }
+
+    /**
+     * metodo para mostrar datos, ocultar componentes cuando se loguee a la aplicación
+     * un usuario tipo Integrante proyecto
+     */
+    public void usuarioTipoIntegrante(){
+        layoutEdicion.setVisibility(View.GONE);
+        btnCrear.setVisibility(View.GONE);
+        txtNombre.setEnabled(false);
+        txtFechaFin.setEnabled(false);
+        txtFechaFin.setEnabled(false);
+        txtEstado.setVisibility(View.VISIBLE);
+        txtEstado.setEnabled(false);
+        scrollLiderProyecto.setVisibility(View.VISIBLE);
+        mostrarDatosLiderProyecto();
+        if(MenuProyectosActivity.proyecto != null) {
+            Proyecto pro = MenuProyectosActivity.proyecto;
+            txtNombre.setText(pro.getNombre());
+            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+            txtFechaFin.setText(format.format(pro.getFechaFin()));
+            txtFechaInicio.setText(format.format(pro.getFechaInicio()));
+            txtEstado.setText(String.valueOf(pro.getEtapa()));
         }
     }
 

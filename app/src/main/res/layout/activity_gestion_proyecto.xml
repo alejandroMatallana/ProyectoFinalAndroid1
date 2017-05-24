@@ -11,7 +11,7 @@
         android:id="@+id/lblTituloProyectos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Gestón de Proyectos" />
+        android:text="Gestón de Proyectos: datos del proyecto" />
 
     <EditText
         android:id="@+id/txtNombreProyecto"
