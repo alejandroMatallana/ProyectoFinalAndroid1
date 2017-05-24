@@ -77,18 +77,18 @@ public class UsuarioDAO {
 
     /**
      * Metodo para buscar un usuario con la colsulta
-     * @param numeroDocumento
+     * @param id
      * @return
      */
-    public Usuario buscar (int numeroDocumento) {
+    public Usuario buscar (int id) {
         String consulta = "select tipoDocumento,nombres,apellidos,fechaNacimiento,pass,usuario," +
-                "correoElectronico,tipoUsuario,id from Usuarios where numeroDocumento=" + numeroDocumento;
+                "correoElectronico,tipoUsuario,numeroDocumento from Usuarios where id=" + id;
 
         Cursor temp = conex.search(consulta);
         if (temp.getCount()>0){
             Usuario usuario = new Usuario();
             temp.moveToFirst();
-            usuario.setId(temp.getInt(8));
+            usuario.setId(id);
             usuario.setTipoDocumento(temp.getString(0));
             usuario.setNombres(temp.getString(1));
             usuario.setApellidos(temp.getString(2));
@@ -102,7 +102,7 @@ public class UsuarioDAO {
             usuario.setUsuario(temp.getString(5));
             usuario.setCorreoElectronico(temp.getString(6));
             usuario.setTipoUsuario(temp.getString(7));
-            usuario.setNumeroDocumento(numeroDocumento);
+            usuario.setNumeroDocumento(temp.getInt(8));
             conex.cerrarConexion();
             return usuario;
         }
@@ -153,7 +153,6 @@ public class UsuarioDAO {
         if (temp.getCount() > 0) {
             temp.moveToFirst();
             conex.cerrarConexion();
-            System.out.println(temp.getInt(1));
             IDUsuarioLogueado = temp.getInt(1);
             return temp.getString(0);
         }

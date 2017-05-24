@@ -127,7 +127,6 @@ public class ActividadesActivity extends AppCompatActivity {
                 ProyectosIntegrantes pi =(ProyectosIntegrantes) responsable.getSelectedItem();
                 Usuario usuario = pi.getIntegrante();
 
-
                 String res =  controllerActividad.guardar(actividad,usuario.getId(), MenuProyectosActivity.proyecto);
                 //if (controllerActividad.guardar(actividad, MainActivity.usuario, MenuProyectosActivity.proyecto)){
                     Toast.makeText(this, res, Toast.LENGTH_SHORT).show();
@@ -219,7 +218,6 @@ public class ActividadesActivity extends AppCompatActivity {
         final List<ProyectosIntegrantes> proyecInte = controllerListaIntegrantesActivity.listarIntegrantesDelProyecto(MenuProyectosActivity.proyecto.getId());
         ArrayAdapter<ProyectosIntegrantes> lista = new ArrayAdapter<ProyectosIntegrantes>(this,android.R.layout.simple_list_item_1,proyecInte);
         responsable.setAdapter(lista);
-
     }
 
 

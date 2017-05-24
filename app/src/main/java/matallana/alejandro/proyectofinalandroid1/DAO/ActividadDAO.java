@@ -46,6 +46,7 @@ public class ActividadDAO {
         registro.put("descripcion", actividad.getDescripcion());
         //registro.put("idResponsable", actividad.getUsuario().getId());
         registro.put("idResponsable",usuario);
+        System.out.println(usuario);
         registro.put("idProyecto", proyecto.getId());
         //registro.put("usuario",usuario);
         //registro.put("proyecto", proyecto);
@@ -178,9 +179,27 @@ public class ActividadDAO {
 
     }
 
-
-
-
-
-
+    public List<Actividad> listaActividadesIntegrante(Proyecto proyecto, int idUsuario) {
+        ArrayList<Actividad> lista = new ArrayList<>();
+        String consulta ="select id, nombre, descripcion, fechaInicio,fechaFinal from Actividades " +
+                " WHERE idProyecto=" + proyecto.getId() + " AND idResponsable=" + idUsuario;
+        Cursor temp = conex.search(consulta);
+        if (temp.moveToFirst()){
+            do {
+                Date fechaInicio = null;
+                Date fechaFin = null;
+                SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+                try {
+                    fechaInicio = format.parse(temp.getString(3));
+                    fechaFin = format.parse(temp.getString(4));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Actividad a = new Actividad(temp.getString(1), temp.getString(2), fechaInicio, fechaFin, new Usuario(), proyecto);
+                a.setId(temp.getInt(0));
+                lista.add(a);
+            } while (temp.moveToNext());
+        }
+        return lista;
+    }
 }

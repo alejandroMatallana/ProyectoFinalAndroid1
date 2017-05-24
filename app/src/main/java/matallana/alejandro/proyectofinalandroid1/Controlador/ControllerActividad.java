@@ -93,4 +93,7 @@ public class ControllerActividad {
         return  actividadDAO.listaActividades(proyecto);
     }
 
+    public List<Actividad> listarIntengrante(Proyecto proyecto, int idUsuario) {
+        return actividadDAO.listaActividadesIntegrante(proyecto, idUsuario);
+    }
 }

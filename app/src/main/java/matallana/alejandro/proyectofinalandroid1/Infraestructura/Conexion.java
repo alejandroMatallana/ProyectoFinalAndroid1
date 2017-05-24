@@ -71,7 +71,9 @@ public class Conexion extends SQLiteOpenHelper {
                 " \"idUsuario\" INTEGER REFERENCES Usuarios ON DELETE CASCADE)");
         db.execSQL("CREATE TABLE \"TareasRecursos\" (\"id\" INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
                 " \"idTarea\" INTEGER REFERENCES Tareas ON DELETE CASCADE, \"idRecurso\" INTEGER REFERENCES Recursos ON DELETE CASCADE)");
-
+        db.execSQL("CREATE TABLE ComentarioTareas (id INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ," +
+                " fecha DATETIME NOT NULL , titulo VARCHAR NOT NULL, comentario VARCHAR NOT NULL," +
+                " idTarea INTEGER REFERENCES Tareas ON DELETE CASCADE)");
         db.execSQL("INSERT INTO Cargos (nombre,descripcion) VALUES ('Lider','Lider de Proyecto')");
 
         //db.execSQL("INSERT INTO Usuarios VALUES ('Cedula',123456789,'alejandro','mata', '2017/05/10', '1234')");
