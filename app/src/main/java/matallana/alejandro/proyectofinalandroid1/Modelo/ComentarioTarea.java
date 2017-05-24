@@ -1,5 +1,6 @@
 package matallana.alejandro.proyectofinalandroid1.Modelo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -97,7 +98,8 @@ public class ComentarioTarea {
 
     @Override
     public String toString() {
-        return "Fecha de publicación: " + fecha
+        SimpleDateFormat format =  new SimpleDateFormat("yyyy/MM/dd");
+        return "Fecha de publicación: " + format.format(fecha)
                 + "\nTitulo: "+ titulo
                 + "\nComentario: "+ comentario;
     }

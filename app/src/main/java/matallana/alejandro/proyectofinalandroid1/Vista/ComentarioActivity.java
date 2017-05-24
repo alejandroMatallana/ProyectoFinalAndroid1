@@ -48,8 +48,6 @@ public class ComentarioActivity extends AppCompatActivity {
         } else {
             ComentarioTarea comentarioTarea = new ComentarioTarea();
             comentarioTarea.setComentario(comentarios.getText().toString());
-            Date fecha = new Date();
-            SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
             comentarioTarea.setFecha(new Date());
             comentarioTarea.setTitulo(titulo.getText().toString());
             comentarioTarea.setTarea(TareaActivity.tarea);
